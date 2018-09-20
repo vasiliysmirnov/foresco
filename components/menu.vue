@@ -3,6 +3,7 @@
         <div class="menu" v-show='showNav'>
             <ul>
                 <li><router-link to="/contacts"><span @click="changeNavState">Контакты</span></router-link></li>
+                <li><router-link to="/projects"><span @click="changeNavState">Проекты</span></router-link></li>
             </ul>
         </div>
     </transition>
@@ -24,9 +25,13 @@
     display flex
     align-items center
     justify-content flex-start
+    @media(max-width 500px)
+        justify-content center
     ul
         list-style none
         padding 0 0 0 160px
+        @media(max-width 500px)
+            padding 0
         li
             a
                 font-family: 'montserratmedium'
@@ -39,6 +44,8 @@
                 text-decoration none
                 text-transform uppercase
                 transition color .2s ease
+                @media(max-width 500px)
+                    font-size: 35px
                 &:hover
                     color: #e19d45
 </style>

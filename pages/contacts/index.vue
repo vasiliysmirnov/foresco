@@ -44,8 +44,6 @@ import AppHeader from '~/components/header.vue'
 import AppMenu from '~/components/menu.vue'
 import AppFooter from '~/components/footer.vue'
 
-import {mapActions} from 'vuex'
-
 export default {
     components: {
         AppHeader,
@@ -63,7 +61,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" >
+<style lang="stylus" scoped>
 .contacts
     &__inner
         display flex

@@ -12,11 +12,6 @@
 import {mapActions} from 'vuex'
 
 export default {
-    computed: {
-        contacts() {
-            return this.$store.state.contacts
-        }
-    },
     methods:{
         ...mapActions({
             getContacts: 'getContacts'

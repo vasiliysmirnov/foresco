@@ -16,7 +16,8 @@ const store = () => new Vuex.Store({
   state: {
     noScroll: false,
     showNav: false,
-    contacts: []
+    contacts: [],
+    projects: []
   },
   mutations: {
     toggleNav (state) {
@@ -25,6 +26,9 @@ const store = () => new Vuex.Store({
     },
     setContacts (state, contacts) {
       state.contacts = contacts
+    },
+    setProjects (state, projects) {
+      state.projects = projects
     }
   },
   getters: {
@@ -33,9 +37,14 @@ const store = () => new Vuex.Store({
     }
   },
   actions: {
+    // TODO: replace with fetch
     async getContacts({commit}) {
       const res = await client.getItems('kontacts')
       commit('setContacts', res.data)
+    },
+    async getProjects({commit}) {
+      const res = await client.getItems('projects')
+      commit('setProjects', res.data)
     }
   }
   
