@@ -38,9 +38,13 @@ module.exports = {
     },
     vendor: ['directus-sdk-javascript']
   },
-  plugins: ['~plugins/directus-sdk-javascript'],
+  plugins: [
+    { src: '~plugins/directus-sdk-javascript' },
+    { src: '~/plugins/swiper.js', ssr: false },
+  ],
   css: [
-    'assets/main.styl'
+    'assets/main.styl',
+    'swiper/dist/css/swiper.css'
   ]
 
 }

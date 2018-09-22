@@ -106,3 +106,62 @@ html {
     background: rgba(255, 255, 255, 0.05)
     border-color: #e19d45
     color #e19d45
+
+
+// swiper styles
+.project
+  &__prev,
+  &__next
+      position: absolute
+      top calc(50% - 40px)
+      width: 50px
+      height: 80px
+      z-index: 10
+      cursor: pointer
+      background-position: center
+      background-repeat: no-repeat
+      outline none
+      transition transform .2s ease
+  &__prev
+      background-image: url('~/static/img/prev-btn.svg')
+      left: -10px
+      right: auto
+      &:hover
+          transform: translateX(-5px)
+  &__next
+      background-image: url('~/static/img/next-btn.svg')
+      right: -10px
+      left: auto
+      &:hover
+          transform: translateX(5px)
+
+  .project__pagination
+    border-bottom 1px solid rgba(255, 255, 255, .1)
+    position: absolute
+    text-align: center
+    transition: 300ms opacity
+    transform: translate3d(0, 0, 0)
+    z-index: 10
+    bottom: 0
+    left: 0
+    width: 100%
+    .project__pagination-bullet
+      width: 1px
+      height 50px
+      max-height: 25px
+      display: inline-block
+      border-radius: 0
+      background: #ffffff
+      opacity: 0.5
+      margin-right 90px
+      cursor pointer
+      outline: none
+      position: relative
+      bottom: -5px
+      transition: all .3s ease
+      &:last-child
+          margin-right 0
+    .project__pagination-bullet.swiper-pagination-bullet-active
+      max-height 50px
+      opacity 1
+      width: 2px

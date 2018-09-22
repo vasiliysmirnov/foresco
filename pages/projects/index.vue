@@ -6,16 +6,26 @@
             <div class="content">
                 <div class="projects__inner">
                     <div class="project">
-                        <div class="project__item" v-for="project in projects" :key="project.id">
-                            <div class="project__img">
-                                <div class="project__platform">{{project.platform}}</div>
-                                <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`" :alt="project.name">
+                        <div v-swiper:mySwiper="swiperOption">
+                            <div class="swiper-wrapper">
+                                <!-- <div class="swiper-slide" v-for="project in projects" :key="project.id">
+                                    <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`">
+                                </div> -->
+                                <div class="project__item swiper-slide" v-for="project in projects" :key="project.id">
+                                    <div class="project__img">
+                                        <div class="project__platform">{{project.platform}}</div>
+                                        <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`" :alt="project.name">
+                                    </div>
+                                    <div class="project__text">
+                                        <div class="project__title">{{project.name}}</div>
+                                        <div class="project__desc">{{project.description}}</div>
+                                        <a href="#" class="btn btn__more">Смотреть кейс</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project__text">
-                                <div class="project__title">{{project.name}}</div>
-                                <div class="project__desc">{{project.description}}</div>
-                                <a href="#" class="btn btn__more">Смотреть кейс</a>
-                            </div>
+                            <div class="project__prev"></div>
+                            <div class="project__next"></div>
+                            <div class="project__pagination"></div>
                         </div>
                     </div>
                 </div>
@@ -25,11 +35,22 @@
     </section>
 </template>
 <style lang="stylus" scoped>
+.projects
+    // fix for content, to display elements by center
+    .content
+        display: flex
+        flex-direction: column
+        flex-grow: initial
+    .projects__inner
+        width 100%
+        max-width: 1200px
+        margin: 0 auto
 .project
     &__item
         display flex
         align-items center
         justify-content center
+        margin: 0 0 20px 0
     &__img
         position relative
         margin-right 100px
@@ -99,6 +120,35 @@
         computed: {
             projects() {
                 return this.$store.state.projects
+            }
+        },
+        data () {
+            return {
+                swiperOption: {
+                    loop: true,
+                    slidesPerView: 1,
+                    centeredSlides: true,
+                    spaceBetween: 0,
+                    pagination: {
+                        el: '.project__pagination',
+                        clickable: true,
+                        renderBullet(index, className) {
+                            return `<span class="project__pagination-bullet ${className}"></span>`
+                        }
+                    },
+                    navigation: {
+                        nextEl: '.project__next',
+                        prevEl: '.project__prev'
+                    },
+                    on: {
+                        slideChange() {
+                        // console.log('onSlideChangeEnd', this);
+                        },
+                        tap() {
+                        // console.log('onTap', this);
+                        }
+                    }
+                }
             }
         }
     }
