@@ -12,7 +12,7 @@
       </div>
       
       <div class="pressBtn">
-        зажми
+        <router-link to="/projects">зажми</router-link>
       </div>
     </div>
   </div>
@@ -22,7 +22,6 @@
 import $ from 'jquery'
 import TweenMax from "gsap"
 // import Draggable from "gsap/Draggable"
-
 // import * as THREE from 'three'
 
 export default {
@@ -155,5 +154,9 @@ export default {
       bottom 50px
       cursor pointer
       z-index 2
+      a
+        text-decoration none
+        color #ffffff
+        display: block
 </style>
 
