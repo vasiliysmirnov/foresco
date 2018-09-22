@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="logo">
-            <router-link to="/"><img src="~/static/ic-foresco-white.svg" alt="logo"></router-link>
+            <router-link to="/"><img src="~/static/img/ic-foresco-white.svg" alt="logo"></router-link>
         </div>    
         <div v-for="contact in contacts" :key="contact.id" class="phone">{{ contact.phone }}</div>
         <app-nav/>
