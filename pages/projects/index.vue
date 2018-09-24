@@ -8,9 +8,6 @@
                     <div class="project">
                         <div v-swiper:mySwiper="swiperOption">
                             <div class="swiper-wrapper">
-                                <!-- <div class="swiper-slide" v-for="project in projects" :key="project.id">
-                                    <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`">
-                                </div> -->
                                 <div class="project__item swiper-slide" v-for="project in projects" :key="project.id">
                                     <div class="project__img">
                                         <div class="project__platform">{{project.platform}}</div>
@@ -23,9 +20,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="project__prev"></div>
-                            <div class="project__next"></div>
-                            <div class="project__pagination"></div>
+                            <div class="project__prev" slot="button-prev"></div>
+                            <div class="project__next" slot="button-next"></div>
+                            <div class="project__pagination" slot="pagination"></div>
                         </div>
                     </div>
                 </div>
@@ -116,6 +113,7 @@
         },
         mounted() {
             this.getProjects()
+            console.log('app init', this)
         },
         computed: {
             projects() {
@@ -127,7 +125,7 @@
                 swiperOption: {
                     loop: true,
                     slidesPerView: 1,
-                    centeredSlides: true,
+                    // centeredSlides: true,
                     spaceBetween: 0,
                     pagination: {
                         el: '.project__pagination',
