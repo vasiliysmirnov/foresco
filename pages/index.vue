@@ -2,6 +2,7 @@
   <div class="mainPage">
     <div class="mainPage__inner">
       <div class="background">
+        <canvas id="canvas"></canvas>
         <div class="background__img"></div>
       </div>
       <div class="animateBlock">
@@ -76,7 +77,7 @@ export default {
       var radius = Math.sqrt(Math.pow(tiltx,2) + Math.pow(tilty,2));
       var degree = (radius * 20);
       // animate text
-      TweenLite.to("#logoBig", 2, {
+      TweenLite.to("#logoBig", 3, {
         transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(120px)', ease: Power2.easeOut
       });
       TweenLite.to(".text", 1, {
@@ -88,12 +89,157 @@ export default {
       cx = window.innerWidth / 2;
       cy = window.innerHeight / 2;
     });
+
+    $(function () {
+    var W, H,
+        canvas, ctx, //ctx stands for context and is the "curso" of our canvas element.
+        particleCount = 700,
+        particles = []; //this is an array which will hold our particles Object/Class
+
+    W = window.innerWidth ;
+    H = window.innerHeight ;
+    
+    canvas = $("#canvas").get(0);
+
+    canvas.width = W;
+    canvas.height = H;
+
+    ctx = canvas.getContext("2d");
+    ctx.globalCompositeOperation = "lighter";
+    
+  
+    function randomNorm(mean, stdev) {
+      
+      return Math.abs(Math.round((Math.random()*2-1)+(Math.random()*2-1)+(Math.random()*2-1))*stdev)+mean;
+    }
+
+    //Setup particle class
+    function Particle() {
+        //using hsl is easier when we need particles with similar colors
+        this.h=parseInt(358);
+        this.s = 100
+        this.l = 99
+        this.a=0.5*Math.random() ;
+      
+        this.color = "hsla("+ this.h +","+ this.s +"%,"+ this.l +"%,"+(this.a)+")";
+        
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.direction = {
+            "x": -1 + Math.random() * 2,
+            "y": -1 + Math.random() * 2
+        };
+        
+        this.radius = randomNorm(0,1);
+        this.rotation=Math.PI/4*Math.random();
+      
+        this.vx = (2 * Math.random() + 4)*.01*this.radius;
+        this.vy = (2 * Math.random() + 4)*.01*this.radius;
+        
+        this.valpha = 0.01*Math.random()-0.02;
+        
+        this.move = function () {
+            this.x += this.vx * this.direction.x ;
+            this.y += this.vy * this.direction.y ;
+            // this.rotation+=this.valpha;
+        };
+        
+        this.changeDirection = function (axis) {
+            this.direction[axis] *= -1;
+            this.valpha *= -1;
+        };
+
+        this.draw = function () {
+            ctx.save();
+            ctx.translate(this.x + this.radius, this.y + this.radius);
+            ctx.rotate(this.rotation);
+            this.grad=ctx.createRadialGradient( 0, 0, this.radius, 0, 0, 0 );
+            this.grad.addColorStop(1,this.color);
+            ctx.beginPath();
+            ctx.fillStyle = this.grad;
+            ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.restore();
+        };
+
+        this.boundaryCheck = function () {
+            if (this.x >= W*1.2) {
+                this.x = W*1.2;
+                this.changeDirection("x");
+            } else if (this.x <= -W*0.2) {
+                this.x = -W*0.2;
+                this.changeDirection("x");
+            }
+            if (this.y >= H*1.2) {
+                this.y = H*1.2;
+                this.changeDirection("y");
+            } else if (this.y <= -H*0.2) {
+                this.y = -H*0.2;
+                this.changeDirection("y");
+            }
+        };
+    } //end particle class
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, W, H);
+    }
+
+    function createParticles() {
+        for (var i = particleCount - 1; i >= 0; i--) {
+            var p = new Particle();
+            particles.push(p);
+        }
+    } // end createParticles
+
+    function drawParticles() {
+        for (var i = particleCount - 1; i >= 0; i--) {
+            var p = particles[i];
+            p.draw();
+        }
+    } //end drawParticles
+
+    function updateParticles() {
+        for (var i = particles.length - 1; i >= 0; i--) {
+            var p = particles[i];
+            p.move();
+            p.boundaryCheck();
+
+        }
+    } //end updateParticles
+
+    function initParticleSystem() {
+        createParticles();
+        drawParticles();
+    }
+
+    function animateParticles() {
+        clearCanvas();
+        update();
+        drawParticles();
+        updateParticles();
+        requestAnimationFrame(animateParticles);
+    }
+  
+    initParticleSystem();
+    requestAnimationFrame(animateParticles);
+  
+    function update() {
+  
+};
+});
     
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+#canvas
+  width 100%
+  height 100%
+  position absolute
+  z-index 1
+  top 0
+  left 0
 .mainPage
   height: 100vh
   width 100%
@@ -133,7 +279,7 @@ export default {
         z-index: 1;
         top: 0;
         left: 0;
-        background: url('~/static/img/wallpaper2you_228177.jpg') no-repeat center;          
+        // background: url('~/static/img/wallpaper2you_228177.jpg') no-repeat center;          
         background-size: cover;
         transform: translateZ(30px);
         -moz-transform: translateZ(30px);
@@ -161,7 +307,7 @@ export default {
       letter-spacing: 4px
       color: #eeeeee
       text-transform uppercase
-      transform: translateZ(60px)
+      transform: translateZ(40px)
       // @media(max-width 600px)
       //   transform: translateZ(10px)
     .pressBtn
