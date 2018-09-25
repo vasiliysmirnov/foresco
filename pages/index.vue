@@ -76,11 +76,11 @@ export default {
       var radius = Math.sqrt(Math.pow(tiltx,2) + Math.pow(tilty,2));
       var degree = (radius * 20);
       // animate text
-      TweenLite.to("#logoBig", 1, {
-        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(120px)', ease:Power1.easeOut
+      TweenLite.to("#logoBig", 2, {
+        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(120px)', ease: Power2.easeOut
       });
       TweenLite.to(".text", 1, {
-        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(60px)', ease:Power2.easeOut
+        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(40px)', ease:Power2.easeOut
       });
     }
     
