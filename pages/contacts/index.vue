@@ -1,8 +1,8 @@
 <template>
     <section class="contacts">
         <div class="container">
-            <app-menu/>
             <app-header/>
+            <app-menu/>
             <div class="content">
                 <div class="contacts__inner">
                     <div class="map">
@@ -63,9 +63,17 @@ export default {
 
 <style lang="stylus" scoped>
 .contacts
+    // fix for content, to display elements by center
+    .content
+        display: flex
+        flex-direction: column
+        flex-grow: initial
     &__inner
         display flex
         align-items flex-start
+        width 100%
+        max-width: 1200px
+        margin: 0 auto
         .map
             width 50%
             margin 0 60px 0 0
