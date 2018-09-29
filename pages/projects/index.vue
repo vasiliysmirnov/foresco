@@ -16,7 +16,7 @@
                                     <div class="project__text">
                                         <div class="project__title">{{project.name}}</div>
                                         <div class="project__desc">{{project.description}}</div>
-                                        <a href="#" class="btn btn__more">Смотреть кейс</a>
+                                        <a :href="`projects/${project.link}`" class="btn btn__more">Смотреть кейс</a>
                                     </div>
                                 </div>
                             </div>
