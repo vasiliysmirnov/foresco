@@ -10,7 +10,7 @@ body{
   color: #FFF;
 }
 .container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -151,16 +151,26 @@ html {
       max-height: 25px
       display: inline-block
       border-radius: 0
-      background: #ffffff
+      background: transparent
       opacity: 0.5
-      margin 0 90px 0 0
+      margin 0 70px 0 0
+      padding: 0 10px
       cursor pointer
       outline: none
       position: relative
       bottom: -5px
       transition: all .3s ease
+      &:before
+        content: ''
+        position: absolute
+        top 0
+        left 50%
+        width 1px
+        height 100%
+        background: #ffffff
+
       &:last-child
-          margin 0
+        margin 0
     .project__pagination-bullet.swiper-pagination-bullet-active
       max-height 50px
       opacity 1
