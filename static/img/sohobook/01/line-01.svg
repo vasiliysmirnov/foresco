@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="617" height="1121" viewBox="0 0 617 1121">
+    <g fill="none" fill-rule="evenodd" stroke="#979797" transform="translate(1 1)">
+        <path stroke-dasharray="10,12,10,12" d="M9.15 18v461.314C5.913 555.49 55.163 593.579 156.9 593.579h268.953C545.951 595.356 606 634.165 606 710.006V1103"/>
+        <circle cx="9" cy="9" r="9"/>
+        <circle cx="606" cy="1110" r="9"/>
+    </g>
+</svg>
