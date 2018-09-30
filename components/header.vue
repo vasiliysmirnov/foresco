@@ -40,6 +40,19 @@
     .logo
         img
             max-width 100%
+
+// for sohobook page
+.sohobook
+    .logo
+        position relative
+        z-index 2
+        svg
+            path
+                fill #272625
+    .phone
+        color #272625
+        position relative
+        z-index 2
 </style>
 <script>
 import AppNav from '~/components/nav.vue'

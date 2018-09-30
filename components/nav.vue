@@ -7,6 +7,11 @@
     </div>
 </template>
 <style lang="stylus" scoped>
+// for sohobook page
+.sohobook
+    .nav
+        span
+            background: #272625
 .nav
     &__btn
         width: 50px
@@ -18,6 +23,7 @@
         z-index 100
         &.active
             span
+                background: #eeeeee
                 transform: rotate(45deg)
                 left: 0px
                 top: 6px
@@ -34,6 +40,8 @@
             margin: 0 auto 10px
             position relative
             transition all .2s ease
+
+
 </style>
 <script>
 export default {
@@ -46,6 +54,13 @@ export default {
         changeNavState () {
             this.$store.commit('toggleNav')
         }
-    }
+    },
+    head () {
+        return {
+            bodyAttrs: {
+                class: this.$store.state.showNav ? 'noScroll' : ''
+            }
+        }
+    },
 }
 </script>
