@@ -2,7 +2,7 @@
   <div class="mainPage">
     <div class="mainPage__inner">
       <div class="background">
-        <canvas id="canvas"></canvas>
+        <div id="canvas"></div>
         <div class="background__img"></div>
       </div>
       <div class="animateBlock">
@@ -17,8 +17,8 @@
         <div class="text">digital  design  studio</div>
       </div>
       
-      <div class="pressBtn">
-        <router-link to="/projects">зажми</router-link>
+      <div class="pressBtn" >
+        зажми
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
 import $ from 'jquery'
 import TweenMax from "gsap"
 // import Draggable from "gsap/Draggable"
-// import * as THREE from 'three'
+import * as THREE from 'three'
 
 export default {
   beforeCreate() {
@@ -36,6 +36,7 @@ export default {
   },
   
   mounted () {
+
     //fps stats
     var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);
     
@@ -75,143 +76,88 @@ export default {
       cy = window.innerHeight / 2;
     });
 
-    $(function () {
-    var W, H,
-        canvas, ctx, //ctx stands for context and is the "curso" of our canvas element.
-        particleCount = 700,
-        particles = []; //this is an array which will hold our particles Object/Class
-
-    W = window.innerWidth ;
-    H = window.innerHeight ;
     
+//Declare three.js variables
+var camera, scene, renderer,sphere, stars=[];
+//assign three.js objects to each variable
+function init(){
+    //camera
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 5;
+    //scene
+    scene = new THREE.Scene();
+    //renderer
+    renderer = new THREE.WebGLRenderer();
+    //set the size of the renderer
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    //add the renderer to the html document body
+    var canvas;
     canvas = $("#canvas").get(0);
+    canvas.appendChild( renderer.domElement );
+}
+function addSphere(){
+    // The loop will move from z position of -1000 to z position 1000, adding a random particle at each position. 
+    for ( var z= -1000; z < 1000; z+=8 ) {
+      // Make a sphere (exactly the same as before). 
+      var geometry   = new THREE.SphereGeometry(0.5, 32, 32)
+      var material = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+      sphere = new THREE.Mesh(geometry, material);
+      // This time we give the sphere random x and y positions between -500 and 500
+      sphere.position.x = Math.random() * 1000 - 500;
+      sphere.position.y = Math.random() * 1000 - 500;
+      // Then set the z position to where it is in the loop (distance of camera)
+      sphere.position.z = z;
+      // scale it up a bit
+      sphere.scale.x = sphere.scale.y = 1;
+      //add the sphere to the scene
+      scene.add( sphere );
+      //finally push it to the stars array 
+      stars.push(sphere);
+    }
+}
 
-    canvas.width = W;
-    canvas.height = H;
-
-    ctx = canvas.getContext("2d");
-    ctx.globalCompositeOperation = "lighter";
+function animateStars() { 
+  // loop through each star
+  for(var i=0; i<stars.length; i++) {
     
-  
-    function randomNorm(mean, stdev) {
-      
-      return Math.abs(Math.round((Math.random()*2-1)+(Math.random()*2-1)+(Math.random()*2-1))*stdev)+mean;
-    }
+    var star = stars[i];
+    // and move it forward dependent on the mouseY position.
+    star.position.z +=  i/10;
+    // if the particle is too close move it to the back
+    if(star.position.z>1000) star.position.z-=2000;   
+  }
+}
+function render() {
+    //get the frame
+    requestAnimationFrame( render );
+    //render the scene
+    renderer.render( scene, camera );
+    animateStars();
+}
 
-    //Setup particle class
-    function Particle() {
-        //using hsl is easier when we need particles with similar colors
-        this.h=parseInt(358);
-        this.s = 100
-        this.l = 99
-        this.a=0.5*Math.random() ;
-      
-        this.color = "hsla("+ this.h +","+ this.s +"%,"+ this.l +"%,"+(this.a)+")";
-        
-        this.x = Math.random() * W;
-        this.y = Math.random() * H;
-        this.direction = {
-            "x": -1 + Math.random() * 2,
-            "y": -1 + Math.random() * 2
-        };
-        
-        this.radius = randomNorm(0,1);
-        this.rotation=Math.PI/4*Math.random();
-      
-        this.vx = (2 * Math.random() + 4)*.01*this.radius;
-        this.vy = (2 * Math.random() + 4)*.01*this.radius;
-        
-        this.valpha = 0.01*Math.random()-0.02;
-        
-        this.move = function () {
-            this.x += this.vx * this.direction.x ;
-            this.y += this.vy * this.direction.y ;
-            // this.rotation+=this.valpha;
-        };
-        
-        this.changeDirection = function (axis) {
-            this.direction[axis] *= -1;
-            this.valpha *= -1;
-        };
+init();
+addSphere();
+renderer.render( scene, camera );
 
-        this.draw = function () {
-            ctx.save();
-            ctx.translate(this.x + this.radius, this.y + this.radius);
-            ctx.rotate(this.rotation);
-            this.grad=ctx.createRadialGradient( 0, 0, this.radius, 0, 0, 0 );
-            this.grad.addColorStop(1,this.color);
-            ctx.beginPath();
-            ctx.fillStyle = this.grad;
-            ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
-            ctx.fill();
-            ctx.restore();
-        };
-
-        this.boundaryCheck = function () {
-            if (this.x >= W*1.2) {
-                this.x = W*1.2;
-                this.changeDirection("x");
-            } else if (this.x <= -W*0.2) {
-                this.x = -W*0.2;
-                this.changeDirection("x");
-            }
-            if (this.y >= H*1.2) {
-                this.y = H*1.2;
-                this.changeDirection("y");
-            } else if (this.y <= -H*0.2) {
-                this.y = -H*0.2;
-                this.changeDirection("y");
-            }
-        };
-    } //end particle class
-
-    function clearCanvas() {
-        ctx.clearRect(0, 0, W, H);
-    }
-
-    function createParticles() {
-        for (var i = particleCount - 1; i >= 0; i--) {
-            var p = new Particle();
-            particles.push(p);
-        }
-    } // end createParticles
-
-    function drawParticles() {
-        for (var i = particleCount - 1; i >= 0; i--) {
-            var p = particles[i];
-            p.draw();
-        }
-    } //end drawParticles
-
-    function updateParticles() {
-        for (var i = particles.length - 1; i >= 0; i--) {
-            var p = particles[i];
-            p.move();
-            p.boundaryCheck();
-
-        }
-    } //end updateParticles
-
-    function initParticleSystem() {
-        createParticles();
-        drawParticles();
-    }
-
-    function animateParticles() {
-        clearCanvas();
-        update();
-        drawParticles();
-        updateParticles();
-        requestAnimationFrame(animateParticles);
-    }
-  
-    initParticleSystem();
-    requestAnimationFrame(animateParticles);
-  
-    function update() {
-  
-};
-});
+$('.pressBtn')
+  .mouseup(function() {
+    console.log('up')
+    $nuxt.$router.push('projects')
+  })
+  .mousedown(function() {
+    // start the animation
+    render();
+    TweenLite.to("#logoBig", 3, {
+      transform:'scale(0)', ease: Power2.easeIn, force3D:false,
+      opacity: 0
+    });
+    TweenLite.to(".text", 2, {
+      transform:'scale(0)', ease: Power2.easeIn, force3D:false,
+      opacity: 0
+    });
+    setTimeout(function() { $nuxt.$router.push('projects') }, 3000);
+    console.log('down')
+  });
     
   }
 }
@@ -249,7 +195,7 @@ export default {
       -webkit-transform: translateZ(0px)
       position relative
       z-index 2
-      perspective: 300px
+      perspective: 500px
     .background
       width 100%
       height 100%
@@ -285,7 +231,7 @@ export default {
         overflow visible
         backface-visibility: hidden
         -webkit-backface-visibility: hidden
-        perspective 300px
+        // perspective 300px
         transform: translateZ(120px)
 
     .text
