@@ -719,7 +719,7 @@ export default {
             .color-4
                 text-align center
                 .txt
-                    margin-top 32px
+                    margin-top 62px
                 .ball
                     margin 0 auto
                     width: 200px
