@@ -1,7 +1,7 @@
 <template>
     <transition name="bounce">
     <div class="sohobook">
-        <div class="goBack">
+        <div class="goBack" v-if="qwe">
             <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link>
         </div>
         <div class="container">
@@ -73,6 +73,9 @@
                                 <img src="~static/img/sohobook/01/footprint.png" alt="">
                             </div>
                         </div>
+                        <div class="next-step-2">
+                            <img src="~static/img/sohobook/02/line.svg" alt="">
+                        </div>
                     </div>
                 </section>
 
@@ -88,6 +91,67 @@
                                 <img src="~static/img/sohobook/03/one-month.png" alt="">
                             </div>
                         </div>
+                        <div class="bg">
+                            <div class="bg__inner">
+                                <div class="light-1"><img src="~static/img/sohobook/03/light-1.svg" alt=""></div>
+                                <div class="light-2"><img src="~static/img/sohobook/03/light-2.svg" alt=""></div>
+                                <div class="text-1">
+                                    Добавляйте <br> фотографии
+                                    <div class="arrow"></div>
+                                </div>
+                                <div class="img-main">
+                                    <img src="~static/img/sohobook/03/screen-shot.png" alt="">
+                                </div>
+                                <div class="text-2">
+                                    <div class="arrow"></div>
+                                    Выбирайте <br> шаблон по вкусу
+                                </div>
+                                <div class="photo-cards"><img src="~static/img/sohobook/03/photo-cards.svg" alt=""></div>
+                                <div class="polaroid"><img src="~static/img/sohobook/03/polaroid.svg" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sohobook-04">
+                    <div class="inner">
+                        <div class="title">
+                            <span>Цвета и шрифты</span>
+                            <div class="number">04</div>
+                        </div>
+                        <div class="font">
+                            <img src="~static/img/sohobook/04/sf-pro-text.svg" alt="">
+                        </div>
+                        <ul class="font-list">
+                            <li><img src="~static/img/sohobook/04/regular.svg" alt=""></li>
+                            <li><img src="~static/img/sohobook/04/medium.svg" alt=""></li>
+                            <li><img src="~static/img/sohobook/04/semibold.svg" alt=""></li>
+                            <li><img src="~static/img/sohobook/04/bold.svg" alt=""></li>
+                        </ul>
+                        <div class="color-pallette">
+                            <div class="color-1"><div class="ball"></div><div class="txt">#008EB7</div></div>
+                            <div class="color-2"><div class="ball"></div><div class="txt">#161515</div></div>
+                            <div class="color-3"><div class="ball"></div><div class="txt">#008EB7</div></div>
+                            <div class="color-4"><div class="ball"></div><div class="txt">#E75B4E</div></div>
+                            <div class="color-5"><div class="ball"></div><div class="txt">#008EB7</div></div>
+                            <div class="color-6"><div class="ball"></div><div class="txt">#29ACD2</div></div>
+                            <div class="color-7"><div class="ball"></div><div class="txt">#32A6C8</div></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sohobook-05">
+                    <div class="title">
+                        <span>Экраны приложения</span>
+                        <div class="number">05</div>
+                    </div>
+                    <div class="bg">
+                    </div>
+                    <div class="thank-you"><img src="~static/img/sohobook/05/thank-you.png" alt=""></div>
+                    <div class="sps">Спасибо за просмотр</div>
+                    <div class="line"><img src="~static/img/sohobook/05/line.svg" alt=""></div>
+                    <div class="app-store">
+                        <a href="#"><img src="~static/img/sohobook/05/app-store.png" alt=""></a>
                     </div>
                 </section>
             </div>
@@ -105,7 +169,11 @@ import AppFooter from '~/components/footer.vue'
 import {mapActions} from 'vuex'
 
 export default {
-    
+    data () {
+        return{
+            qwe: false
+        }
+    },
     components: {
         AppHeader,
         AppMenu,
@@ -119,6 +187,16 @@ export default {
     },
     mounted() {
         this.getSohobook()
+        window.addEventListener('wheel', function(e) {
+            if (e.deltaY < 0) {
+                console.log('scrolling up');
+                return this.qwe = true
+            }
+            if (e.deltaY > 0) {
+                console.log('scrolling down');
+            }
+        })
+
     },
     computed: {
         sohobook() {
@@ -289,7 +367,7 @@ export default {
             flex-wrap wrap
             align-items center
             justify-content center
-            max-width: 1200px
+            max-width: 1440px
             margin: 0 auto
         .title
             font-size: 80px
@@ -322,33 +400,39 @@ export default {
             max-width 50%
             position relative
             img
-                max-width 100%
                 position relative
                 z-index 2
+                max-width 432px
             .img-01
                 position: absolute
-                bottom: 0
+                bottom: -70px
                 z-index: 1
-                width: 450px
-                right: -180px
+                width: 516px
+                right: -220px
                 transform rotate(-12deg)
+                img
+                    max-width 100%
             .img-02
                 position: absolute
-                bottom: 0
+                bottom: -50px
                 z-index: 1
                 width: 360px
-                left: -130px
+                left: -140px
+                img
+                    max-width 100%
             .img-03
                 position: absolute
-                bottom: -230px
+                bottom: -320px
                 z-index: 1
-                width: 315px
-                right: -120px
+                width: 384px
+                right: -180px
+                img
+                    max-width 100%
         .next-step-1
             position absolute
             width 615px
             left calc(50% - 307px)
-            bottom: -600px
+            bottom: -710px
         .footprint-1
             position: absolute
             height: 190px
@@ -367,6 +451,7 @@ export default {
             justify-content center
             max-width: 1200px
             margin: 0 auto
+            position relative
         .title
             font-size: 80px
             font-family: 'yeseva_oneregular'
@@ -398,21 +483,25 @@ export default {
             max-width 50%
             position relative
             img
-                max-width 100%
                 position relative
                 z-index 2
+                max-width 432px
             .img-01
                 position: absolute
-                top: 410px
+                top: 290px
                 z-index: 1
-                width: 390px
-                left: -130px
+                width: 262px
+                left: -80px
+                img
+                    max-width 100%
             .img-02
                 position: absolute
-                bottom: -180px
+                bottom: -160px
                 z-index: 1
-                width: 670px
+                width: 582px
                 right: -220px
+                img
+                    max-width 100%
         .footprint-1
             position: absolute
             height: 190px
@@ -420,6 +509,10 @@ export default {
             right: 130px
             img
                 max-height 100%
+        .next-step-2
+            position absolute
+            bottom -520px
+            left 50%
     
     .sohobook-03
         padding 450px 0 150px 0
@@ -435,7 +528,7 @@ export default {
             max-width: 880px
             position: relative
             text-align: center
-            margin: 0 auto
+            margin: 0 auto 100px
             span
                 position relative
                 z-index 2
@@ -462,8 +555,277 @@ export default {
             .one-month-1
                 position: absolute
                 top: -370px
-                right: -90px
+                right: -70px
                 width: 250px
                 img
                     max-width 100%
+        .bg
+            background #928d8d
+            .bg__inner
+                max-width: 1440px
+                margin: 0 auto
+                position relative
+            .light-1
+                position absolute
+                top 0
+                right 280px
+            .light-2
+                position: absolute
+                top: 0
+                right: 160px
+            .img-main
+                text-align center
+                padding 80px 0
+                position: relative
+                z-index: 2
+                img
+                    max-width 432px
+            .text-1
+                font-family: 'yeseva_oneregular'
+                font-size: 40px
+                font-weight: normal
+                font-style: normal
+                font-stretch: normal
+                line-height: normal
+                letter-spacing: normal
+                text-align: center
+                color: #ffffff
+                position: absolute
+                bottom: 290px
+                left: 150px
+                .arrow
+                    width: 50px
+                    height: 138px
+                    position: absolute
+                    background url('~static/img/sohobook/03/arrow.svg') no-repeat center
+                    bottom: -120px
+                    right: -80px
+                    transform: rotate(160deg)
+            .text-2
+                font-family: 'yeseva_oneregular'
+                font-size: 40px
+                font-weight: normal
+                font-style: normal
+                font-stretch: normal
+                line-height: normal
+                letter-spacing: normal
+                text-align: center
+                color: #ffffff
+                position: absolute
+                bottom: 380px
+                right: 80px
+                .arrow
+                    width: 50px
+                    height: 138px
+                    position: absolute
+                    background url('~static/img/sohobook/03/arrow.svg') no-repeat center
+                    top: -120px
+                    left: -10px
+                    transform: rotate(-30deg)
+            .photo-cards
+                top 255px
+                left 220px
+                position absolute
+            .polaroid
+                bottom 50px
+                right 300px
+                position absolute
+
+    .sohobook-04
+        padding: 380px 0 232px 0
+        .inner
+            max-width 1440px
+            margin 0 auto
+        .title
+            font-size: 80px
+            font-family: 'yeseva_oneregular'
+            font-weight: normal
+            font-style: normal
+            font-stretch: normal
+            line-height: normal
+            letter-spacing: normal
+            color: #524941
+            max-width: 880px
+            position: relative
+            text-align: center
+            margin: 0 auto 40px
+            span
+                position relative
+                z-index 2
+            .number
+                z-index 1
+                opacity: 0.1
+                font-family: 'montserratmedium'
+                font-size: 350px
+                font-style: normal
+                font-stretch: normal
+                line-height: normal
+                letter-spacing: normal
+                color: #e5bd98
+                position absolute
+                top: -270px
+                left: calc(50% - 215px)
+        .font
+            width: 417px
+            height: 125px
+            border: solid 5px #524941
+            text-align center
+            margin: 0 auto 80px
+            padding: 38px 0 0 0
+            img
+                max-width 100%
+        .font-list
+            margin-bottom 110px
+            display flex
+            align-items center
+            justify-content space-around
+            list-style none
+        .color-pallette
+            display flex
+            align-items center
+            justify-content space-around
+            .color-1
+                text-align center
+                .txt
+                    margin-top 72px
+                .ball
+                    margin 0 auto
+                    width: 50px
+                    height: 50px
+                    opacity: 0.2
+                    background-color: #b2b2b2
+                    border-radius 50%
+            .color-2
+                text-align center
+                .txt
+                    margin-top 68px
+                .ball
+                    margin 0 auto
+                    width: 100px
+                    height: 100px
+                    opacity: 0.8
+                    background-color: #161515
+                    border-radius 50%
+            .color-3
+                text-align center
+                .txt
+                    margin-top 64px
+                .ball
+                    margin 0 auto
+                    border-radius 50%
+                    width: 150px
+                    height: 150px
+                    background-color: #f47539
+            .color-4
+                text-align center
+                .txt
+                    margin-top 32px
+                .ball
+                    margin 0 auto
+                    width: 200px
+                    height: 200px
+                    background-color: #e75b4e
+                    position relative
+                    border-radius 50%
+                    &:before
+                        content ''
+                        position absolute
+                        background rgba(210, 210, 210, .2)
+                        width 260px
+                        height 260px
+                        top -30px
+                        left -30px
+                        border-radius 50%
+            .color-5
+                text-align center
+                .txt
+                    margin-top 64px
+                .ball
+                    margin 0 auto
+                    width: 150px
+                    height: 150px
+                    background-color: #008eb7
+                    border-radius 50%
+            .color-6
+                text-align center
+                .txt
+                    margin-top 67px
+                .ball
+                    margin 0 auto
+                    width: 100px
+                    height: 100px
+                    background-color: #29acd2
+                    border-radius 50%
+            .color-7
+                text-align center
+                .txt
+                    margin-top 62px
+                .ball
+                    margin 0 auto
+                    width: 50px
+                    height: 50px
+                    opacity: 0.7
+                    background-color: #008eb7
+                    border-radius 50%
+    .sohobook-05
+        padding 346px 0 287px 0
+        background #f0f0f0
+        position relative
+        .title
+            font-size: 80px
+            font-family: 'yeseva_oneregular'
+            font-weight: normal
+            font-style: normal
+            font-stretch: normal
+            line-height: normal
+            letter-spacing: normal
+            color: #524941
+            max-width: 880px
+            position: relative
+            text-align: center
+            margin: 0 auto 40px
+            span
+                position relative
+                z-index 2
+            .number
+                z-index 1
+                opacity: 0.1
+                font-family: 'montserratmedium'
+                font-size: 350px
+                font-style: normal
+                font-stretch: normal
+                line-height: normal
+                letter-spacing: normal
+                color: #e5bd98
+                position absolute
+                top: -260px
+                left: calc(50% - 215px)
+        .bg
+            background url('~static/img/sohobook/05/main-img.png') no-repeat center
+            width 100%
+            height 1634px
+            background-size cover
+        .thank-you
+            text-align center
+            margin-bottom 35px
+            img
+                max-width 256px
+        .sps
+            font-family: 'yeseva_oneregular'
+            font-size: 50px
+            font-weight: normal
+            font-style: normal
+            font-stretch: normal
+            line-height: normal
+            letter-spacing: normal
+            text-align: center
+            color: #524941
+            margin-bottom 75px
+        .line
+            text-align center
+            margin-bottom 10px
+        .app-store
+            text-align center
+            img
+                max-width 140px
 </style>
