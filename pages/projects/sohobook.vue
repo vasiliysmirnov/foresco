@@ -1,9 +1,11 @@
 <template>
     <transition name="bounce">
     <div class="sohobook">
-        <div class="goBack" v-if="qwe">
-            <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link>
-        </div>
+        <transition name="slide-fade">
+            <div class="goBack" v-if="show">
+                <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link>
+            </div>
+        </transition>
         <div class="container">
             <app-header/>
             <app-menu/>
@@ -171,7 +173,7 @@ import {mapActions} from 'vuex'
 export default {
     data () {
         return{
-            qwe: false
+            show: false
         }
     },
     components: {
@@ -187,13 +189,12 @@ export default {
     },
     mounted() {
         this.getSohobook()
-        window.addEventListener('wheel', function(e) {
+        window.addEventListener('wheel', (e) => {
             if (e.deltaY < 0) {
-                console.log('scrolling up');
-                return this.qwe = true
+                this.show = true
             }
             if (e.deltaY > 0) {
-                console.log('scrolling down');
+                this.show = false
             }
         })
 
@@ -210,21 +211,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.bounce-enter-active {
-  animation: bounce-in .8s;
+.slide-fade-enter-active {
+    transition: all .3s ease;
 }
-.bounce-leave-active {
-  animation: bounce-out .5s;
+.slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-@keyframes bounce-in {
-  0% { transform: scale(0) }
-  50% { transform: scale(1.5) }
-  100% { transform: scale(1) }
-}
-@keyframes bounce-out {
-  0% { transform: scale(1) }
-  50% { transform: scale(1.5) }
-  100% { transform: scale(0) }
+.slide-fade-enter, .slide-fade-leave-to{
+    transform: translateY(10px);
+    opacity: 0;
 }
 .sohobook
     background #ffffff
