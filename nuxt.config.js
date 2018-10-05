@@ -36,11 +36,11 @@ module.exports = {
         })
       }
     },
-    vendor: ['directus-sdk-javascript', 'scrollmagic']
+    vendor: ['directus-sdk-javascript', 'vue-parallax-js']
   },
   plugins: [
     { src: '~plugins/directus-sdk-javascript' },
-    { src: '~/plugins/scrollmagic.js', ssr: false },
+    { src: '~/plugins/vue-parallax-js.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
   ],
   css: [
