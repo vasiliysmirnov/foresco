@@ -83,8 +83,8 @@
 
                 <section class="sohobook-03">
                     <div class="inner">
-                        <div class="title">
-                            <span>Редактируйте их и создавайте коллажи</span>
+                        <div class="title" id="trigger1">
+                            <span id="animate1">Редактируйте их и создавайте коллажи</span>
                             <div class="number">03</div>
                             <div class="footprint-1">
                                 <img src="~static/img/sohobook/01/footprint.png" alt="">
@@ -168,6 +168,11 @@ import AppHeader from '~/components/header.vue'
 import AppMenu from '~/components/menu.vue'
 import AppFooter from '~/components/footer.vue'
 
+let scrollmagic
+if (process.browser) {
+    scrollmagic = require('scrollmagic')
+}
+
 import {mapActions} from 'vuex'
 
 export default {
@@ -197,6 +202,18 @@ export default {
                 this.show = false
             }
         })
+        var controller = new scrollmagic.Controller();
+        var animateEl = document.getElementById('animate1');
+        var scene = new scrollmagic.Scene({
+                triggerElement: "#trigger1"
+            })
+            .on('enter', function() {
+                animateEl.style.background = 'red'
+            })
+            .on('leave', function(){
+                animateEl.style.background = ''
+            })
+            .addTo(controller);
 
     },
     computed: {

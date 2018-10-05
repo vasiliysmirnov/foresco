@@ -36,10 +36,11 @@ module.exports = {
         })
       }
     },
-    vendor: ['directus-sdk-javascript']
+    vendor: ['directus-sdk-javascript', 'scrollmagic']
   },
   plugins: [
     { src: '~plugins/directus-sdk-javascript' },
+    { src: '~/plugins/scrollmagic.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
   ],
   css: [
