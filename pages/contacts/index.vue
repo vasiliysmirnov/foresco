@@ -75,9 +75,14 @@ export default {
         width 100%
         max-width: 1200px
         margin: 0 auto
+        @media(max-width 768px)
+            flex-direction: column-reverse
         .map
             width 50%
             margin 0 60px 0 0
+            @media(max-width 768px)
+                width 100%
+                margin 0
             img
                 max-width 100%
             .address
@@ -92,6 +97,9 @@ export default {
         .form
             width 50%
             text-align center
+            @media(max-width 768px)
+                width 100%
+                margin-bottom 50px
             input[type=text],
             input[type=phone]
                 font-family: 'montserratregular'
@@ -116,7 +124,8 @@ export default {
                 margin 0 0 30px 0
                 outline none
             input[type='submit']
-                width: 321px
+                width: 100%
+                max-width: 321px
                 height: 48px
                 border-radius: 24px
                 background-color: #e19d45
@@ -147,6 +156,9 @@ export default {
                     display inline-block
                     width calc(33% - 10px)
                     margin-right 15px
+                    @media(max-width 425px)
+                        width 100%
+                        margin 0 0 15px 0
                     &:last-child
                         margin 0
                     input[type="radio"]
