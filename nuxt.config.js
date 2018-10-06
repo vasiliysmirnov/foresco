@@ -36,9 +36,10 @@ module.exports = {
         })
       }
     },
-    vendor: ['directus-sdk-javascript', 'vue-parallax-js']
+    vendor: ['directus-sdk-javascript', 'vue-parallax-js', 'vue-in-viewport-directive']
   },
   plugins: [
+    '~/plugins/vue-in-viewport-directive.js',
     { src: '~plugins/directus-sdk-javascript' },
     { src: '~/plugins/vue-parallax-js.js', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
