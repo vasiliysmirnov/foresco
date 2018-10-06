@@ -33,6 +33,8 @@
 </template>
 <style lang="stylus" scoped>
 .projects
+    background-image: radial-gradient(circle at 68% 31%, #2d6271, #1e3c44)
+    // background-image: radial-gradient(circle at 68% 31%, #823f89, #400945)
     // fix for content, to display elements by center
     .content
         display: flex

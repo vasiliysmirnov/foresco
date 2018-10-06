@@ -39,19 +39,22 @@
 
                 <section class="sohobook-01">
                     <div class="inner">
+                        <div class="leafs" v-parallax="-0.08">
+                            <img src="~static/img/sohobook/01/leafs.png" alt="">
+                        </div>
                         <div class="title">
-                            <span>Coздайте <br>книгу своей мечты</span>
+                            <span v-in-viewport>Coздайте <br>книгу своей мечты</span>
                             <div class="number" v-parallax.absY="0.1">01</div>
-                            <div class="footprint-1">
+                            <div class="footprint-1" v-in-viewport>
                                 <img src="~static/img/sohobook/01/footprint.png" alt="">
                             </div>
                         </div>
                         <div class="img">
-                            <img src="~static/img/sohobook/01/01.png" alt="">
+                            <img src="~static/img/sohobook/01/01.png" alt="" v-in-viewport>
 
-                            <div class="img-01"><img src="~static/img/sohobook/01/01-01.png" alt=""></div>
-                            <div class="img-02"><img src="~static/img/sohobook/01/01-02.png" alt=""></div>
-                            <div class="img-03"><img src="~static/img/sohobook/01/love-you.png" alt=""></div>
+                            <div class="img-01" v-in-viewport><img src="~static/img/sohobook/01/01-01.png" alt=""></div>
+                            <div class="img-02" v-in-viewport><img src="~static/img/sohobook/01/01-02.png" alt=""></div>
+                            <div class="img-03" v-in-viewport><img src="~static/img/sohobook/01/love-you.png" alt=""></div>
                         </div>
                     </div>
                     <div class="next-step-1">
@@ -62,6 +65,9 @@
                 
                 <section class="sohobook-02">
                     <div class="inner">
+                        <div class="leafs" v-parallax="-0.08">
+                            <img src="~static/img/sohobook/01/leafs.png" alt="">
+                        </div>
                         <div class="img">
                             <img src="~static/img/sohobook/02/02.png" alt="">
 
@@ -69,9 +75,9 @@
                             <div class="img-02"><img src="~static/img/sohobook/02/02-02.png" alt=""></div>
                         </div>
                         <div class="title">
-                            <span>Выбирайте любимые фотографии</span>
-                            <div class="number">02</div>
-                            <div class="footprint-1">
+                            <span v-in-viewport>Выбирайте любимые фотографии</span>
+                            <div class="number" v-parallax="0.1">02</div>
+                            <div class="footprint-1" v-in-viewport>
                                 <img src="~static/img/sohobook/01/footprint.png" alt="">
                             </div>
                         </div>
@@ -85,18 +91,22 @@
                     <div class="inner">
                         <div class="title" id="trigger1">
                             <span id="animate1">Редактируйте их и создавайте коллажи</span>
-                            <div class="number">03</div>
-                            <div class="footprint-1">
+                            <div class="number" v-parallax="0.1">03</div>
+                            <div class="footprint-1" v-in-viewport>
                                 <img src="~static/img/sohobook/01/footprint.png" alt="">
                             </div>
-                            <div class="one-month-1">
+                            <div class="one-month-1" v-in-viewport>
                                 <img src="~static/img/sohobook/03/one-month.png" alt="">
                             </div>
                         </div>
                         <div class="bg">
                             <div class="bg__inner">
-                                <div class="light-1"><img src="~static/img/sohobook/03/light-1.svg" alt=""></div>
-                                <div class="light-2"><img src="~static/img/sohobook/03/light-2.svg" alt=""></div>
+                                <div class="leafs" v-parallax.absY="0.08">
+                                    <img src="~static/img/sohobook/01/leafs.png" alt="" style="transform: scale(-1, 1);">
+                                    <img src="~static/img/sohobook/01/leafs.png" alt="">
+                                </div>
+                                <div class="light-1" v-in-viewport><img src="~static/img/sohobook/03/light-1.svg" alt=""></div>
+                                <div class="light-2" v-in-viewport><img src="~static/img/sohobook/03/light-2.svg" alt=""></div>
                                 <div class="text-1">
                                     Добавляйте <br> фотографии
                                     <div class="arrow"></div>
@@ -119,7 +129,7 @@
                     <div class="inner">
                         <div class="title">
                             <span>Цвета и шрифты</span>
-                            <div class="number">04</div>
+                            <div class="number" v-parallax="0.1">04</div>
                         </div>
                         <div class="font">
                             <img src="~static/img/sohobook/04/sf-pro-text.svg" alt="">
@@ -145,7 +155,7 @@
                 <section class="sohobook-05">
                     <div class="title">
                         <span>Экраны приложения</span>
-                        <div class="number">05</div>
+                        <div class="number" v-parallax.absY="0.02">05</div>
                     </div>
                     <div class="bg">
                     </div>
@@ -363,6 +373,15 @@ export default {
             justify-content center
             max-width: 1440px
             margin: 0 auto
+            position relative
+        .leafs
+            position absolute
+            top 100px
+            left calc(50% - 315px)
+            z-index 3
+            max-width 630px
+            img
+                max-width 100%
         .title
             font-size: 80px
             font-family: 'yeseva_oneregular'
@@ -375,8 +394,15 @@ export default {
             max-width 600px
             position relative
             span
+                display: block
                 position relative
                 z-index 2
+                opacity 0
+                transform translateX(-50px)
+                transition all .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
+                    transform: translateX(0px)
             .number
                 font-size: 350px;
                 font-family: 'montserratmedium'
@@ -397,41 +423,69 @@ export default {
                 position relative
                 z-index 2
                 max-width 432px
+                opacity 0
+                transition opacity .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
             .img-01
                 position: absolute
                 bottom: -70px
                 z-index: 1
                 width: 516px
                 right: -220px
-                transform rotate(-12deg)
+                opacity: 0
+                transform rotate(0deg) translateX(-50px)
+                transition all .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
+                    transform: rotate(-12deg) translateX(0px)
                 img
                     max-width 100%
+                    opacity 1
             .img-02
                 position: absolute
                 bottom: -50px
                 z-index: 1
                 width: 360px
                 left: -140px
+                opacity: 0
+                transform translateX(-50px)
+                transition all .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
+                    transform: translateX(0px)
                 img
                     max-width 100%
+                    opacity 1
             .img-03
                 position: absolute
                 bottom: -320px
                 z-index: 1
                 width: 384px
                 right: -180px
+                opacity: 0
+                transition opacity .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
                 img
                     max-width 100%
+                    opacity 1
         .next-step-1
-            position absolute
-            width 615px
-            left calc(50% - 307px)
-            bottom: -710px
+            position: absolute
+            width: 500px
+            left: calc(50% - 307px)
+            bottom: -540px
+            img
+                max-width 100%
         .footprint-1
             position: absolute
             height: 190px
             bottom: -400px
             left: 40px
+            opacity: 0
+            transition opacity .4s ease 0.5s
+            &.in-viewport
+                opacity: 1
             img
                 max-height 100%
 
@@ -446,6 +500,14 @@ export default {
             max-width: 1200px
             margin: 0 auto
             position relative
+        .leafs
+            position absolute
+            top 100px
+            left calc(50% - 315px)
+            z-index 3
+            max-width 630px
+            img
+                max-width 100%
         .title
             font-size: 80px
             font-family: 'yeseva_oneregular'
@@ -458,8 +520,15 @@ export default {
             max-width 600px
             position relative
             span
+                display block
                 position relative
                 z-index 2
+                opacity: 0
+                transform translateX(50px)
+                transition all .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
+                    transform: translateX(0px)
             .number
                 font-size: 350px;
                 font-family: 'montserratmedium'
@@ -469,7 +538,7 @@ export default {
                 letter-spacing: normal;
                 color: #e5bd98;
                 position absolute
-                top: -190px
+                top: -400px
                 left: 80px
                 z-index: 1
                 opacity: .1
@@ -499,8 +568,12 @@ export default {
         .footprint-1
             position: absolute
             height: 190px
-            top: -520px
+            top: -330px
             right: 130px
+            opacity: 0
+            transition opacity .4s ease 0.5s
+            &.in-viewport
+                opacity: 1
             img
                 max-height 100%
         .next-step-2
@@ -544,6 +617,10 @@ export default {
                 position absolute
                 top: -310px
                 left: 300px
+                opacity: 0
+                transition opacity .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
                 img
                     max-height 100%
             .one-month-1
@@ -551,22 +628,59 @@ export default {
                 top: -370px
                 right: -70px
                 width: 250px
+                opacity: 0
+                transition opacity .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
                 img
                     max-width 100%
         .bg
-            background #928d8d
+            background url('~static/img/sohobook/03/doski.jpg')
+            background-size cover
+            position relative
+            background-attachment fixed
+            &:before
+                position absolute
+                content ''
+                top 0
+                left 0
+                width 100%
+                height 100%
+                background rgba(0,0,0,0.4)
+                z-index 1
             .bg__inner
                 max-width: 1440px
                 margin: 0 auto
                 position relative
+                z-index 2
+            .leafs
+                position absolute
+                top -300px
+                left calc(50% - 315px)
+                z-index 3
+                max-width 630px
+                img
+                    max-width 100%
             .light-1
                 position absolute
                 top 0
                 right 280px
+                opacity: 0
+                transform translateY(-100px)
+                transition all .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
+                    transform translateY(0)
             .light-2
                 position: absolute
                 top: 0
                 right: 160px
+                opacity: 0
+                transform translateY(-100px)
+                transition all .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
+                    transform translateY(0)
             .img-main
                 text-align center
                 padding 80px 0
@@ -763,7 +877,8 @@ export default {
                     border-radius 50%
     .sohobook-05
         padding 346px 0 287px 0
-        background #f0f0f0
+        background url('~static/img/sohobook/05/section-5-bg.svg') no-repeat top
+        background-size cover
         position relative
         .title
             font-size: 80px
