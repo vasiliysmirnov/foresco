@@ -64,10 +64,10 @@ export default {
       var degree = (radius * 20);
       // animate text
       TweenLite.to("#logoBig", 3, {
-        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(120px)', ease: Power2.easeOut, force3D:false
+        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(60px)', ease: Power2.easeOut, force3D:false
       });
-      TweenLite.to(".text", 1, {
-        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(40px)', ease:Power2.easeOut
+      TweenLite.to(".text", 3, {
+        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) translateZ(60px)', ease:Power2.easeOut, force3D:false
       });
     }
     
@@ -147,16 +147,15 @@ $('.pressBtn')
   .mousedown(function() {
     // start the animation
     render();
-    TweenLite.to("#logoBig", 3, {
-      transform:'scale(0)', ease: Power2.easeIn, force3D:false,
-      opacity: 0
+    TweenLite.to("#logoBig", 4.5, {
+      transform:'scale(8)', ease: Power2.easeIn, force3D:false,
+      // opacity: 0
     });
     TweenLite.to(".text", 2, {
       transform:'scale(0)', ease: Power2.easeIn, force3D:false,
       opacity: 0
     });
-    setTimeout(function() { $nuxt.$router.push('projects') }, 3000);
-    console.log('down')
+    setTimeout(function() { $nuxt.$router.push('projects') }, 6000);
   });
     
   }
@@ -220,19 +219,19 @@ $('.pressBtn')
       margin 0 auto
       // perspective: 300px
       @media(max-width 900px)
-        transform: translateZ(70px)
+        // transform: translateZ(70px)
       @media(max-width 700px)
-        transform: translateZ(50px)
+        // transform: translateZ(50px)
       @media(max-width 600px)
         padding 0 20px
-        transform: translateZ(20px)
+        // transform: translateZ(20px)
       svg
         max-width 100%
         overflow visible
         backface-visibility: hidden
         -webkit-backface-visibility: hidden
         // perspective 300px
-        transform: translateZ(120px)
+        // transform: translateZ(120px)
 
     .text
       font-size: 14px
@@ -243,7 +242,7 @@ $('.pressBtn')
       letter-spacing: 4px
       color: #eeeeee
       text-transform uppercase
-      transform: translateZ(40px)
+      // transform: translateZ(120px)
       // @media(max-width 600px)
       //   transform: translateZ(10px)
     .pressBtn
