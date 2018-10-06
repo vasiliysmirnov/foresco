@@ -6,10 +6,19 @@
             </transition>
 
             <transition name="fadeMenu">
-                <ul v-show='showNav'>
-                    <li><router-link to="/contacts"><span @click="changeNavState">Контакты</span></router-link></li>
-                    <li><router-link to="/projects"><span @click="changeNavState">Проекты</span></router-link></li>
+                <div class="nav-wrapper" v-show='showNav'>
+                <ul>
+                    <li data-color="#e19d45">
+                        <router-link to="/contacts"><span @click="changeNavState">Контакты</span></router-link>
+                    </li>
+                    <li data-color="#4597e1">
+                        <router-link to="/projects"><span @click="changeNavState">Проекты</span></router-link>
+                    </li>
                 </ul>
+                <div class="line">
+                    <span id="lineItem"></span>
+                </div>
+                </div>
             </transition>
         </div>
     </transition>
@@ -49,19 +58,31 @@
         z-index: 1;
         top: 0;
         right: 0
-        // opacity 0
-        // transform translate(100%,0)
-        // animation menuOpen .8s ease
-        // animation-fill-mode forwards
-        // will-change: transform
-        // -webkit-backface-visibility: hidden
-        // backface-visibility: hidden
-        
+    .nav-wrapper
+        position relative
+        z-index 2
+        overflow hidden
+        height 100%
+        display flex
+        align-items center
+        justify-content flex-start
+        .line
+            position absolute
+            top 0
+            right 0
+            width 1px
+            height 100%
+            background rgba(255, 255, 255, 0.2)
+            span
+                position absolute
+                bottom: 100%
+                left: 0px
+                height: 100%
+                width: 100%
+                transition: all 0.4s linear
     ul
         list-style none
         padding 0 0 0 160px
-        position relative
-        z-index 2
         @media(max-width 500px)
             padding 0
         li
@@ -78,8 +99,14 @@
                 transition color .2s ease
                 @media(max-width 500px)
                     font-size: 35px
-                &:hover
-                    color: #e19d45
+            &:hover
+                &:nth-child(1)
+                    a
+                        color: #e19d45
+                &:nth-child(2)
+                    a
+                        color: #4597e1
+
 
 @keyframes menuOpen {
     0%{
@@ -104,16 +131,33 @@
 </style>
 
 <script>
+import $ from 'jquery'
+import TweenMax from "gsap"
 export default {
     computed: {
         showNav () {
             return this.$store.state.showNav
         }
     },
+    mounted () {
+        var navLinks = $('.nav-wrapper li');
+        var line = document.getElementById('lineItem');
+        navLinks.on("mouseenter", function() {
+            onLinkHover($(this))
+        });
+        var onLinkHover = function(item) {
+            var color = item.data("color");
+            item.addClass('active');
+            var posY = 0;
+            posY = item.position().top + item.outerHeight();
+
+            var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+        }
+    },
     methods: {
         changeNavState () {
             this.$store.commit('toggleNav')
-        }
+        },
     }
 }
 </script>
