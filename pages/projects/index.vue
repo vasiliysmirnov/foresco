@@ -50,9 +50,24 @@
         align-items center
         justify-content center
         margin: 0 0 20px 0
+        @media(max-width 768px)
+            text-align: center
+            min-height: 470px
+        @media(max-width 425px)
+            min-height: 330px;
     &__img
         position relative
         margin-right 100px
+        @media(max-width 768px)
+            width 100%
+            position: absolute
+            z-index: -1
+            opacity: .3
+            top: 0
+            margin: 0
+        img
+            @media(max-width 768px)
+                max-width 100%
     &__platform
         position absolute
         top 5px
@@ -68,6 +83,8 @@
         writing-mode: tb-rl
         transform: rotate(-180deg)
         text-transform: uppercase
+        @media(max-width 768px)
+            left 0
     &__text
         max-width 340px
     &__title
@@ -79,6 +96,8 @@
         color: #eeeeee
         font-family: 'montserratsemibold'
         margin-bottom 15px
+        @media(max-width 425px)
+            font-size: 30px
     &__desc
         opacity: 0.5
         font-size: 16px
@@ -89,6 +108,8 @@
         letter-spacing: 0.2px
         color: #eeeeee
         margin-bottom 50px
+        @media(max-width 425px)
+            font-size: 14px
 
 </style>
 <script>
