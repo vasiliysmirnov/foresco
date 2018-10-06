@@ -1,21 +1,33 @@
 <template>
-    <transition name="fadeMenu">
-    <div class="menu" v-show='showNav'>
-        <div class="menuBg"></div>
-        
-            <ul>
-                <li><router-link to="/contacts"><span @click="changeNavState">Контакты</span></router-link></li>
-                <li><router-link to="/projects"><span @click="changeNavState">Проекты</span></router-link></li>
-            </ul>
-        
-    </div>
+    <transition :duration="1000">
+        <div class="menu" v-show='showNav'>
+            <transition name="menuBgAn">
+                <div class="menuBg" v-show='showNav'></div>
+            </transition>
+
+            <transition name="fadeMenu">
+                <ul v-show='showNav'>
+                    <li><router-link to="/contacts"><span @click="changeNavState">Контакты</span></router-link></li>
+                    <li><router-link to="/projects"><span @click="changeNavState">Проекты</span></router-link></li>
+                </ul>
+            </transition>
+        </div>
     </transition>
 </template>
 <style lang="stylus" scoped>
-.fadeMenu-enter-active, .fadeMenu-leave-active
-    transition: opacity .5s
+.fadeMenu-enter-active
+    transition: all .5s ease .3s
+.fadeMenu-leave-active
+    transition: all .2s
 .fadeMenu-enter, .fadeMenu-leave-to
-  opacity: 0
+    transform: translateX(50px)
+    opacity: 0
+.menuBgAn-enter-active, .menuBgAn-leave-active
+    transition: all .6s ease
+.menuBgAn-enter
+    transform: translateX(100%)
+.menuBgAn-leave-to
+    transform: translateX(-100%)
 
 .menu
     position: absolute
@@ -30,20 +42,20 @@
     @media(max-width 500px)
         justify-content center
     .menuBg
-        width: 50px;
-        height: 50px;
+        width: 100%
+        height: 100%
         position: absolute;
         background: #000;
         z-index: 1;
-        top: 50px;
-        right: 50px;
-        border-radius: 50%;
-        opacity 0
-        animation menuOpen .8s ease
-        animation-fill-mode forwards
-        will-change: transform
-        -webkit-backface-visibility: hidden
-        backface-visibility: hidden
+        top: 0;
+        right: 0
+        // opacity 0
+        // transform translate(100%,0)
+        // animation menuOpen .8s ease
+        // animation-fill-mode forwards
+        // will-change: transform
+        // -webkit-backface-visibility: hidden
+        // backface-visibility: hidden
         
     ul
         list-style none
@@ -71,12 +83,22 @@
 
 @keyframes menuOpen {
     0%{
-        opacity 1
-        transform: scale(1)
+        opacity 0
+        transform translate(100%,0)
     }
     100%{
-        transform: scale(50)
+        transform translate(0,0)
         opacity 1
+    }
+}
+@keyframes menuClose {
+    0%{
+        opacity 1
+        transform translate(0,0)
+    }
+    100%{
+        transform translate(100%,0)
+        opacity 0
     }
 }
 </style>
