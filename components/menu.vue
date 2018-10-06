@@ -66,6 +66,7 @@
         display flex
         align-items center
         justify-content flex-start
+        padding-right 60px
         .line
             position absolute
             top 0

@@ -5,6 +5,35 @@
   opacity: 0;
 }
 
+// animation for contacts page
+.contacts-enter-active {
+  animation: contactsOpen .4s;
+}
+.contacts-leave-active {
+  animation: contactsClose .4s;
+}
+@keyframes contactsOpen {
+  0%{
+      opacity 0
+      transform translate(100%,0)
+  }
+  100%{
+      transform translate(0,0)
+      opacity 1
+  }
+}
+@keyframes contactsClose {
+  0%{
+        opacity 1
+        transform translate(0,0)
+    }
+    100%{
+        transform translate(-100%,0)
+        opacity 0
+    }
+}
+// end animation for contacts page
+
 body{
   background: #000;
   color: #FFF;

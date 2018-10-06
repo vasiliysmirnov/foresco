@@ -45,6 +45,7 @@ import AppMenu from '~/components/menu.vue'
 import AppFooter from '~/components/footer.vue'
 
 export default {
+    transition: 'contacts',
     components: {
         AppHeader,
         AppMenu,
