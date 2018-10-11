@@ -16,7 +16,7 @@
                                     <div class="project__text">
                                         <div class="project__title">{{project.name}}</div>
                                         <div class="project__desc">{{project.description}}</div>
-                                        <a @click="goToSohobook" class="btn btn__more">Смотреть кейс</a>
+                                        <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
             ...mapActions({
                 getProjects: 'getProjects'
             }),
-            goToSohobook(){
+            goToSohobook(link){
                 TweenMax.to($('.projects'), 0.5, {
                     scale: 0.9,
                     ease: Power2.easeInOut,
@@ -168,7 +168,7 @@
                             y: '-100%',
                             ease: Power2.easeInOut,
                             onComplete: function() {
-                                $nuxt.$router.push('/projects/sohobook')
+                                $nuxt.$router.push('/projects/'+ link)
                             }
                         })
                     }

@@ -69,10 +69,10 @@
                             <img src="~static/img/sohobook/01/leafs.png" alt="">
                         </div>
                         <div class="img">
-                            <img src="~static/img/sohobook/02/02.png" alt="">
+                            <img src="~static/img/sohobook/02/02.png" alt="" v-in-viewport>
 
-                            <div class="img-01"><img src="~static/img/sohobook/02/02-01.png" alt=""></div>
-                            <div class="img-02"><img src="~static/img/sohobook/02/02-02.png" alt=""></div>
+                            <div class="img-01" v-in-viewport><img src="~static/img/sohobook/02/02-01.png" alt=""></div>
+                            <div class="img-02" v-in-viewport><img src="~static/img/sohobook/02/02-02.png" alt=""></div>
                         </div>
                         <div class="title">
                             <span v-in-viewport>Выбирайте любимые фотографии</span>
@@ -107,19 +107,19 @@
                                 </div>
                                 <div class="light-1" v-in-viewport><img src="~static/img/sohobook/03/light-1.svg" alt=""></div>
                                 <div class="light-2" v-in-viewport><img src="~static/img/sohobook/03/light-2.svg" alt=""></div>
-                                <div class="text-1">
+                                <div class="text-1" v-in-viewport>
                                     Добавляйте <br> фотографии
                                     <div class="arrow"></div>
                                 </div>
                                 <div class="img-main">
                                     <img src="~static/img/sohobook/03/screen-shot.png" alt="">
                                 </div>
-                                <div class="text-2">
+                                <div class="text-2" v-in-viewport>
                                     <div class="arrow"></div>
                                     Выбирайте <br> шаблон по вкусу
                                 </div>
-                                <div class="photo-cards"><img src="~static/img/sohobook/03/photo-cards.svg" alt=""></div>
-                                <div class="polaroid"><img src="~static/img/sohobook/03/polaroid.svg" alt=""></div>
+                                <div class="photo-cards" v-in-viewport><img src="~static/img/sohobook/03/photo-cards.svg" alt=""></div>
+                                <div class="polaroid" v-in-viewport><img src="~static/img/sohobook/03/polaroid.svg" alt=""></div>
                             </div>
                         </div>
                     </div>
@@ -584,26 +584,44 @@ export default {
         .img
             max-width 50%
             position relative
-            img
+            &>img
                 position relative
                 z-index 2
                 max-width 432px
+                opacity 0
+                transform translateX(-50px)
+                transition all .4s ease 0.5s
+                &.in-viewport
+                    opacity 1
+                    transform: translateX(0px)
             .img-01
                 position: absolute
                 top: 290px
                 z-index: 1
                 width: 262px
                 left: -80px
+                transform: rotate(-10deg);
+                opacity 0
+                transition all .4s ease 0.5s
                 img
                     max-width 100%
+                &.in-viewport
+                    opacity 1
+                    transform: rotate(0)
             .img-02
                 position: absolute
                 bottom: -160px
                 z-index: 1
                 width: 582px
                 right: -220px
+                transform: rotate(50deg);
+                opacity 0
+                transition all .4s ease 0.5s
                 img
                     max-width 100%
+                &.in-viewport
+                    opacity 1
+                    transform: rotate(0)
         .footprint-1
             position: absolute
             height: 190px
@@ -740,6 +758,10 @@ export default {
                 position: absolute
                 bottom: 290px
                 left: 150px
+                opacity: 0
+                transition opacity .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
                 .arrow
                     width: 50px
                     height: 138px
@@ -761,6 +783,10 @@ export default {
                 position: absolute
                 bottom: 380px
                 right: 80px
+                opacity: 0
+                transition opacity .4s ease 0.5s
+                &.in-viewport
+                    opacity: 1
                 .arrow
                     width: 50px
                     height: 138px
@@ -773,10 +799,22 @@ export default {
                 top 255px
                 left 220px
                 position absolute
+                opacity 0
+                transform: translateX(320px)
+                transition all .4s ease
+                &.in-viewport
+                    opacity 1
+                    transform: translateX(0px)
             .polaroid
                 bottom 50px
                 right 300px
                 position absolute
+                opacity 0
+                transform: translate(-320px, -100px);
+                transition all .4s ease
+                &.in-viewport
+                    opacity 1
+                    transform: translate(0px, 0px)
 
     .sohobook-04
         padding: 380px 0 232px 0
