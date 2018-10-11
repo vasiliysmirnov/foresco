@@ -2,7 +2,8 @@
     <div class="sohobook">
         <transition name="slide-fade">
             <div class="goBack" v-if="show">
-                <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link>
+                <!-- <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link> -->
+                <a @click="goToProjects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></a>
             </div>
         </transition>
         <div class="container">
@@ -217,7 +218,22 @@ export default {
     methods:{
         ...mapActions({
             getSohobook: 'getSohobook'
-        })
+        }),
+        goToProjects(){
+            TweenMax.to($('.sohobook'), 1, {
+                scale: 0.9,
+                ease: Power2.easeInOut,
+                onComplete: function() {
+                    TweenMax.to($('.sohobook'), 1, {
+                        y: '100%',
+                        ease: Power2.easeInOut,
+                        onComplete: function() {
+                            $nuxt.$router.push('/projects')
+                        }
+                    })
+                }
+            })
+        }
     },
     mounted() {
         this.getSohobook()

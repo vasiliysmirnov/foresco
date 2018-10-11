@@ -130,6 +130,30 @@
         head: {
             title: 'Проекты'
         },
+        transition: {
+            name: 'projects',
+            // appear: true, // if we wanna to show animation on page load and reload
+            css: false,
+            beforeEnter(el){
+                el.style.transform = "scale(0.9) translateY(-100%)"
+            },
+            enter(el, done){
+                TweenMax.to($('.projects'), 0.8, {
+                    y: 0,
+                    ease: Power2.easeInOut,
+                    onComplete: function() {
+                        TweenMax.to($('.projects'), 1, {
+                            scale: 1,
+                            ease: Power2.easeInOut,
+                            onComplete: function() {
+
+                            }, clearProps: 'all'
+                        })
+                    }
+                })
+                done()
+            }
+        },
         // get projects from api
         methods:{
             ...mapActions({
@@ -144,7 +168,7 @@
                             y: '-100%',
                             ease: Power2.easeInOut,
                             onComplete: function() {
-                                $nuxt._router.push('/projects/sohobook')
+                                $nuxt.$router.push('/projects/sohobook')
                             }
                         })
                     }
