@@ -16,7 +16,7 @@
                                     <div class="project__text">
                                         <div class="project__title">{{project.name}}</div>
                                         <div class="project__desc">{{project.description}}</div>
-                                        <a :href="`projects/${project.link}`" class="btn btn__more">Смотреть кейс</a>
+                                        <a @click="goToSohobook" class="btn btn__more">Смотреть кейс</a>
                                     </div>
                                 </div>
                             </div>
@@ -117,6 +117,8 @@
     import AppMenu from '~/components/menu.vue'
     import AppFooter from '~/components/footer.vue'
 
+    import $ from 'jquery'
+
     import {mapActions} from 'vuex'
 
     export default {
@@ -132,11 +134,25 @@
         methods:{
             ...mapActions({
                 getProjects: 'getProjects'
-            })
+            }),
+            goToSohobook(){
+                TweenMax.to($('.projects'), 0.5, {
+                    scale: 0.9,
+                    ease: Power2.easeInOut,
+                    onComplete: function() {
+                        TweenMax.to($('.projects'), 1, {
+                            y: '-100%',
+                            ease: Power2.easeInOut,
+                            onComplete: function() {
+                                $nuxt._router.push('/projects/sohobook')
+                            }
+                        })
+                    }
+                })
+            }
         },
         mounted() {
             this.getProjects()
-            console.log('app init', this)
         },
         computed: {
             projects() {

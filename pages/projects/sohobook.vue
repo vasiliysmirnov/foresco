@@ -1,5 +1,4 @@
 <template>
-    <transition name="bounce">
     <div class="sohobook">
         <transition name="slide-fade">
             <div class="goBack" v-if="show">
@@ -170,20 +169,43 @@
             
         </div>
     </div>
-    </transition>
 </template>
 
 <script>
 import AppHeader from '~/components/header.vue'
 import AppMenu from '~/components/menu.vue'
 import AppFooter from '~/components/footer.vue'
-
+import $ from 'jquery'
 import {mapActions} from 'vuex'
 
 export default {
     data () {
         return{
             show: false
+        }
+    },
+    transition: {
+        name: 'sohobook',
+        // appear: true, // if we wanna to show animation on page load and reload
+        css: false,
+        beforeEnter(el){
+            el.style.transform = "scale(0.9) translateY(150%)"
+        },
+        enter(el, done){
+            TweenMax.to($('.sohobook'), 1, {
+                y: 0,
+                ease: Power2.easeInOut,
+                onComplete: function() {
+                    TweenMax.to($('.sohobook'), 1, {
+                        scale: 1,
+                        ease: Power2.easeInOut,
+                        onComplete: function() {
+
+                        }, clearProps: 'all'
+                    })
+                }
+            })
+            done()
         }
     },
     components: {
@@ -199,6 +221,7 @@ export default {
     },
     mounted() {
         this.getSohobook()
+        
         window.addEventListener('wheel', (e) => {
             if (e.deltaY < 0) {
                 this.show = true
