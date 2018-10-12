@@ -93,6 +93,7 @@
         @media(max-width 500px)
             padding 0
         li
+            color #ffffff
             a
                 font-family: 'montserratmedium'
                 font-size: 45px
@@ -100,7 +101,7 @@
                 font-stretch: normal
                 line-height: 2.13
                 letter-spacing: 10px
-                color: #ffffff
+                color: inherit
                 text-decoration none
                 cursor pointer
                 text-transform uppercase
@@ -112,16 +113,16 @@
                     font-size: 30px
                 @media(max-width 320px)
                     font-size: 20px
-            &:hover
-                &:nth-child(1)
-                    a
-                        color: #e19d45
-                &:nth-child(2)
-                    a
-                        color #bade38
-                &:nth-child(3)
-                    a
-                        color: #4597e1
+            // &:hover
+            //     &:nth-child(1)
+            //         a
+            //             color: #e19d45
+            //     &:nth-child(2)
+            //         a
+            //             color #bade38
+            //     &:nth-child(3)
+            //         a
+            //             color: #4597e1
 
 
 @keyframes menuOpen {
@@ -161,9 +162,11 @@ export default {
         var line = document.getElementById('lineItem');
         navLinks.on("mouseenter", function() {
             onLinkHover($(this))
+            $(this).css({'color': $(this).data("color")})
         });
         navLinks.on("mouseleave", function() {
             onLinkLeave($(this))
+            $(this).css({'color': '#fff'})
         });
         var onLinkHover = function(item) {
             var color = item.data("color");
