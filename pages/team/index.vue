@@ -7,10 +7,10 @@
                 <div class="team__inner">
                     <div class="team__item" v-for="item in team" :key="item.id">
                         <div class="img"><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name"></div>
-                        <div class="text">
+                        <div class="description">
                             <div class="name">{{item.name}}</div>
                             <div class="position">{{item.position}}</div>
-                            <div class="description">{{item.description}}</div>
+                            <div class="txt">{{item.description}}</div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         top: 50%
                         left: 50%
                         transform: translate(-50%,-50%) scale(0.5)
-            .text
+            .description
                 text-align right
                 width 50%
                 @media(max-width 620px)
@@ -134,7 +134,7 @@
                         width 100%
                         height 1px
                         background #FFF
-                .description
+                .txt
                     font-size: 10px
                     font-weight: normal
                     font-style: normal
