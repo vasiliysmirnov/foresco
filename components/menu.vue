@@ -9,10 +9,13 @@
                 <div class="nav-wrapper" v-show='showNav'>
                 <ul>
                     <li data-color="#e19d45">
-                        <router-link to="/contacts"><span @click="changeNavState">Контакты</span></router-link>
+                        <a v-on:click="changeNavStateContacts($event)"><span>Контакты</span></a>
                     </li>
-                    <li data-color="#4597e1">
-                        <router-link to="/projects"><span @click="changeNavState">Проекты</span></router-link>
+                    <!-- <li data-color="#bade38">
+                        <a @click="changeNavStateTeam"><span>Команда</span></a>
+                    </li> -->
+                    <li data-color="#4597e1" data-last="true">
+                        <a @click="changeNavStateProjects"><span>Проекты</span></a>
                     </li>
                 </ul>
                 <div class="line">
@@ -36,7 +39,8 @@
 .menuBgAn-enter
     transform: translateX(100%)
 .menuBgAn-leave-to
-    transform: translateX(-100%)
+    // transform: translateX(-100%)
+    opacity: 0
 
 .menu
     position: absolute
@@ -48,6 +52,7 @@
     display flex
     align-items center
     justify-content flex-start
+    overflow hidden
     @media(max-width 500px)
         justify-content center
     .menuBg
@@ -61,12 +66,13 @@
     .nav-wrapper
         position relative
         z-index 2
-        overflow hidden
         height 100%
         display flex
         align-items center
         justify-content flex-start
         padding-right 60px
+        @media(max-width 455px)
+            padding 0 20px 0 0
         .line
             position absolute
             top 0
@@ -96,15 +102,24 @@
                 letter-spacing: 10px
                 color: #ffffff
                 text-decoration none
+                cursor pointer
                 text-transform uppercase
+                display: block
                 transition color .2s ease
                 @media(max-width 500px)
                     font-size: 35px
+                @media(max-width 410px)
+                    font-size: 30px
+                @media(max-width 320px)
+                    font-size: 20px
             &:hover
                 &:nth-child(1)
                     a
                         color: #e19d45
                 &:nth-child(2)
+                    a
+                        color #bade38
+                &:nth-child(3)
                     a
                         color: #4597e1
 
@@ -134,6 +149,7 @@
 <script>
 import $ from 'jquery'
 import TweenMax from "gsap"
+
 export default {
     computed: {
         showNav () {
@@ -141,23 +157,59 @@ export default {
         }
     },
     mounted () {
-        var navLinks = $('.nav-wrapper li');
+        var navLinks = $('.nav-wrapper ul li');
         var line = document.getElementById('lineItem');
         navLinks.on("mouseenter", function() {
             onLinkHover($(this))
         });
+        navLinks.on("mouseleave", function() {
+            onLinkLeave($(this))
+        });
         var onLinkHover = function(item) {
             var color = item.data("color");
-            item.addClass('active');
+            // item.addClass('active');
             var posY = 0;
             posY = item.position().top + item.outerHeight();
-
-            var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
-        }
+            if(item.data('last'))
+                var tween = TweenLite.to(line, 0.1, {transform: 'translateY(100%)', background: color});
+            else
+                var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+        };
+        var onLinkLeave = function(item) {
+            var posY = 0;
+            var tween = TweenLite.to(line, 0.1, {transform: 'translateY(0px)', background: 'transparent'});
+        };
+        
     },
     methods: {
-        changeNavState () {
-            this.$store.commit('toggleNav')
+        animationClickToLinkMenu: function(event, link){
+            var line = document.getElementById('lineItem');
+            var target = event.currentTarget
+            var tween = TweenLite.to(line, 0.1, {
+                height: 0,
+                onComplete: function() {
+                    TweenMax.to(target, 0.3, {
+                        transform: 'translateX(-50px)',
+                        onComplete: function() {
+                            $nuxt.$router.push(link)
+                        }
+                    })
+                }
+            })
+            // this.$store.commit('toggleNav')
+        },
+        changeNavStateContacts: function(event){
+            this.animationClickToLinkMenu(event, '/contacts')
+            setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+        },
+        changeNavStateTeam: function(event){
+            this.animationClickToLinkMenu(event, '/team')
+            setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+            
+        },
+        changeNavStateProjects: function(event){
+            this.animationClickToLinkMenu(event, '/projects')
+            setTimeout(() => {this.$store.commit('toggleNav')}, 500)
         },
     }
 }
