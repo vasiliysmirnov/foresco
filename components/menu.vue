@@ -11,9 +11,9 @@
                     <li data-color="#e19d45">
                         <a v-on:click="changeNavStateContacts($event)"><span>Контакты</span></a>
                     </li>
-                    <!-- <li data-color="#bade38">
+                    <li data-color="#bade38">
                         <a @click="changeNavStateTeam"><span>Команда</span></a>
-                    </li> -->
+                    </li>
                     <li data-color="#4597e1" data-last="true">
                         <a @click="changeNavStateProjects"><span>Проекты</span></a>
                     </li>
