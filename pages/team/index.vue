@@ -63,6 +63,9 @@
         display flex
         overflow-x scroll
         flex-direction row
+        width: 100%
+        max-width: 1200px
+        margin: 0 auto
         .team__item
             display flex
             align-items center
