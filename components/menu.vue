@@ -8,14 +8,14 @@
             <transition name="fadeMenu">
                 <div class="nav-wrapper" v-show='showNav'>
                 <ul>
-                    <li data-color="#e19d45">
-                        <a v-on:click="changeNavStateContacts($event)"><span>Контакты</span></a>
+                    <li data-color="#4597e1" @click="changeNavStateProjects" data-link="/projects">
+                        <a><span>Проекты</span></a>
                     </li>
-                    <li data-color="#bade38">
-                        <a @click="changeNavStateTeam"><span>Команда</span></a>
+                    <li data-color="#bade38" @click="changeNavStateTeam" data-link="/team">
+                        <a><span>Команда</span></a>
                     </li>
-                    <li data-color="#4597e1" data-last="true">
-                        <a @click="changeNavStateProjects"><span>Проекты</span></a>
+                    <li data-color="#e19d45" data-link="/contacts" data-last="true" @click="changeNavStateContacts">
+                        <a><span>Контакты</span></a>
                     </li>
                 </ul>
                 <div class="line">
@@ -160,6 +160,7 @@ export default {
     mounted () {
         var navLinks = $('.nav-wrapper ul li');
         var line = document.getElementById('lineItem');
+
         navLinks.on("mouseenter", function() {
             onLinkHover($(this))
             $(this).css({'color': $(this).data("color")})
@@ -168,9 +169,9 @@ export default {
             onLinkLeave($(this))
             $(this).css({'color': '#fff'})
         });
+
         var onLinkHover = function(item) {
             var color = item.data("color");
-            // item.addClass('active');
             var posY = 0;
             posY = item.position().top + item.outerHeight();
             if(item.data('last'))
@@ -182,6 +183,12 @@ export default {
             var posY = 0;
             var tween = TweenLite.to(line, 0.1, {transform: 'translateY(0px)', background: 'transparent'});
         };
+        // color for active link
+        navLinks.each(function(index, value){
+            if($nuxt.$route.path == $(value).data('link')){
+                $(this).css({'color': $(this).data("color")})
+            }
+        })
         
     },
     methods: {
