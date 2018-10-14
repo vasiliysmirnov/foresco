@@ -228,7 +228,7 @@ export default {
                         y: '100%',
                         ease: Power2.easeInOut,
                         onComplete: function() {
-                            $nuxt.$router.push('/projects')
+                            $nuxt.$router.back()
                         }
                     })
                 }
