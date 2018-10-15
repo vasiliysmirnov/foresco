@@ -101,7 +101,8 @@ export default {
     },
     methods:{
         checkForm: function (e) {
-            if (this.name && this.phone) {
+            
+            if (this.name && this.phone && this.typeProject) {
                 return true;
             }
 
@@ -122,6 +123,7 @@ export default {
             }
 
             e.preventDefault();
+
         },
         validPhone: function(phone){
             var re = /^(\+{0,1})([0-9]{1})( |\-)?([0-9]{3})( |\-)?([0-9]{3})( |\-)?([0-9]{2})( |\-)?([0-9]{2})\b/;
