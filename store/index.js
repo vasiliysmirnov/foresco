@@ -55,10 +55,6 @@ const store = () => new Vuex.Store({
       const res = await client.getItems('projects')
       commit('setProjects', res.data)
     },
-    async getSohobook({commit}) {
-      const res = await client.getItems('sohobook')
-      commit('setSohobook', res.data)
-    },
   }
   
 })

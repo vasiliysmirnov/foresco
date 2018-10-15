@@ -60,11 +60,20 @@
         head: {
             title: 'Команда'
         },
+        transition: {
+            name: 'team',
+            appear: true,
+            beforeEnter(el){
+                el.style.transition = "all 0.3s"
+                el.style.opacity = "0"
+            },
+            enter(el, done){
+                el.style.opacity = "1"
+            }
+        },
         // get the data
         async fetch ({ store, params }) {
             let { data } = await client.getItems('team')
-            console.log(data);
-            
             store.commit('setTeam', data)
         },
         

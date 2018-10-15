@@ -20,7 +20,8 @@
                                 <div class="project__text">
                                     <div class="project__title">{{project.name}}</div>
                                     <div class="project__desc">{{project.description}}</div>
-                                    <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a>
+                                    <!-- <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a> -->
+                                    <nuxt-link class="btn btn__more" :to="`/projects/${project.link}`">Смотреть кейс</nuxt-link>
                                 </div>
                             </div>
                         </div>
@@ -148,6 +149,27 @@
         head: {
             title: 'Проекты'
         },
+        // animation leave fo this page (animation works only if we going to sohobook)
+        beforeRouteLeave (to, from, next) {
+            console.log(to);
+            if(to.path == "/projects/sohobook"){
+                TweenMax.to($('.projects'), 0.5, {
+                    scale: 0.9,
+                    ease: Power2.easeInOut,
+                    onComplete: function() {
+                        TweenMax.to($('.projects'), 1, {
+                            y: '-100%',
+                            ease: Power2.easeInOut,
+                            onComplete: function() {
+                                next()
+                            }
+                        })
+                    }
+                })
+            }else{
+                next()
+            }
+        },
         transition: {
             name: 'projects',
             // appear: true, // if we wanna to show animation on page load and reload
@@ -177,22 +199,6 @@
             ...mapActions({
                 getProjects: 'getProjects'
             }),
-            // animation to go to sohobook
-            goToSohobook(link){
-                TweenMax.to($('.projects'), 0.5, {
-                    scale: 0.9,
-                    ease: Power2.easeInOut,
-                    onComplete: function() {
-                        TweenMax.to($('.projects'), 1, {
-                            y: '-100%',
-                            ease: Power2.easeInOut,
-                            onComplete: function() {
-                                $nuxt.$router.push('/projects/'+ link)
-                            }
-                        })
-                    }
-                })
-            },
             // next animation for slider
             slideNextTo: function(event){
                 this.nextSlide()

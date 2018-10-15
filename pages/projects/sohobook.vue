@@ -178,6 +178,7 @@ import AppMenu from '~/components/menu.vue'
 import AppFooter from '~/components/footer.vue'
 import $ from 'jquery'
 import {mapActions} from 'vuex'
+import {client} from '~/store'
 
 export default {
     data () {
@@ -185,12 +186,17 @@ export default {
             show: false
         }
     },
+    // get the data
+    async fetch ({ store, params }) {
+        let { data } = await client.getItems('sohobook')
+        store.commit('setSohobook', data)
+    },
     transition: {
         name: 'sohobook',
         // appear: true, // if we wanna to show animation on page load and reload
         css: false,
         beforeEnter(el){
-            el.style.transform = "scale(0.9) translateY(150%)"
+            el.style.transform = "scale(0.9) translateY(100%)"
         },
         enter(el, done){
             TweenMax.to($('.sohobook'), 1, {
@@ -209,16 +215,30 @@ export default {
             done()
         }
     },
+    // beforeRouteUpdate (to, from, next) {
+    //     console.log('qwe');
+        
+    //     TweenMax.to($('.sohobook'), 1, {
+    //         y: 0,
+    //         ease: Power2.easeInOut,
+    //         onComplete: function() {
+    //             TweenMax.to($('.sohobook'), 1, {
+    //                 scale: 1,
+    //                 ease: Power2.easeInOut,
+    //                 onComplete: function() {
+    //                     next()
+    //                 }
+    //             })
+    //         }
+    //     })
+        
+    // },
     components: {
         AppHeader,
         AppMenu,
         AppFooter
     },
-    // get sohobook from api
     methods:{
-        ...mapActions({
-            getSohobook: 'getSohobook'
-        }),
         goToProjects(){
             TweenMax.to($('.sohobook'), 1, {
                 scale: 0.9,
@@ -236,8 +256,7 @@ export default {
         }
     },
     mounted() {
-        this.getSohobook()
-        
+        // check when scroll is up to show the 'back' button
         window.addEventListener('wheel', (e) => {
             if (e.deltaY < 0) {
                 this.show = true
