@@ -7,20 +7,20 @@
 
             <transition name="fadeMenu">
                 <div class="nav-wrapper" v-show='showNav'>
-                <ul>
-                    <li data-color="#4597e1" @click="changeNavStateProjects" data-link="/projects">
-                        <a><span>Проекты</span></a>
-                    </li>
-                    <li data-color="#bade38" @click="changeNavStateTeam" data-link="/team">
-                        <a><span>Команда</span></a>
-                    </li>
-                    <li data-color="#e19d45" data-link="/contacts" data-last="true" @click="changeNavStateContacts">
-                        <a><span>Контакты</span></a>
-                    </li>
-                </ul>
-                <div class="line">
-                    <span id="lineItem"></span>
-                </div>
+                    <ul>
+                        <li data-color="#4597e1" @click="changeNavStateProjects" data-link="/projects">
+                            <a><span>Проекты</span></a>
+                        </li>
+                        <li data-color="#bade38" @click="changeNavStateTeam" data-link="/team">
+                            <a><span>Команда</span></a>
+                        </li>
+                        <li data-color="#e19d45" data-link="/contacts" data-last="true" @click="changeNavStateContacts">
+                            <a><span>Контакты</span></a>
+                        </li>
+                    </ul>
+                    <div class="line">
+                        <span id="lineItem"></span>
+                    </div>
                 </div>
             </transition>
         </div>
@@ -113,17 +113,6 @@
                     font-size: 30px
                 @media(max-width 320px)
                     font-size: 20px
-            // &:hover
-            //     &:nth-child(1)
-            //         a
-            //             color: #e19d45
-            //     &:nth-child(2)
-            //         a
-            //             color #bade38
-            //     &:nth-child(3)
-            //         a
-            //             color: #4597e1
-
 
 @keyframes menuOpen {
     0%{
@@ -163,10 +152,12 @@ export default {
 
         navLinks.on("mouseenter", function() {
             onLinkHover($(this))
+            // change color of the menu item
             $(this).css({'color': $(this).data("color")})
         });
         navLinks.on("mouseleave", function() {
             onLinkLeave($(this))
+            // change color back to white
             $(this).css({'color': '#fff'})
         });
 
@@ -183,14 +174,29 @@ export default {
             var posY = 0;
             var tween = TweenLite.to(line, 0.1, {transform: 'translateY(0px)', background: 'transparent'});
         };
-        // color for active link
-        navLinks.each(function(index, value){
-            if($nuxt.$route.path == $(value).data('link')){
-                $(this).css({'color': $(this).data("color")})
-                // console.log($(value)["0"].clientHeight + $(value)["0"].offsetTop)
-            }
-        })
         
+    },
+    updated: function () {
+        // well, it's not the code i proud of, but it's work
+        var navLinks = $('.nav-wrapper ul li');
+        var line = document.getElementById('lineItem');
+        var onLinkHover = function(item) {
+            var color = item.data("color");
+            var posY = 0;
+            posY = item.position().top + item.outerHeight();
+            if(item.data('last'))
+                var tween = TweenLite.to(line, 0.1, {transform: 'translateY(100%)', background: color});
+            else
+                var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+        };
+        for (let index = 0; index < navLinks.length; index++) {
+            const element = navLinks[index];
+            if($nuxt.$route.path == $(element).data('link')){
+                $(element).css({'color': $(element).data("color")})
+                onLinkHover($(element))
+            }
+        }
+        // the end of this 
     },
     methods: {
         animationClickToLinkMenu: function(event, link){
@@ -210,17 +216,32 @@ export default {
             // this.$store.commit('toggleNav')
         },
         changeNavStateContacts: function(event){
-            this.animationClickToLinkMenu(event, '/contacts')
-            setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+            if ($nuxt.$route.path == '/contacts') {
+                this.$store.commit('toggleNav')
+            } else {
+                this.animationClickToLinkMenu(event, '/contacts')
+                setTimeout(() => {this.$store.commit('toggleNav')}, 500)    
+            }
+            
         },
         changeNavStateTeam: function(event){
-            this.animationClickToLinkMenu(event, '/team')
-            setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+            if ($nuxt.$route.path == '/team') {
+                this.$store.commit('toggleNav')
+            } else {
+                this.animationClickToLinkMenu(event, '/team')
+                setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+            }
+            
             
         },
         changeNavStateProjects: function(event){
-            this.animationClickToLinkMenu(event, '/projects')
-            setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+            if ($nuxt.$route.path == '/projects') {
+                this.$store.commit('toggleNav')
+            } else {
+                this.animationClickToLinkMenu(event, '/projects')
+                setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+            }
+            
         },
     }
 }
