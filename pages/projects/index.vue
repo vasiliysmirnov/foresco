@@ -130,6 +130,8 @@
     import AppHeader from '~/components/header.vue'
     import AppMenu from '~/components/menu.vue'
     import AppFooter from '~/components/footer.vue'
+
+    import {client} from '~/store'
     
     // import slick from '~/plugins/slick-carousel'
     if (process.browser) {
@@ -149,56 +151,78 @@
         head: {
             title: 'Проекты'
         },
-        // animation leave fo this page (animation works only if we going to sohobook)
-        beforeRouteLeave (to, from, next) {
-            // console.log(to);
-            if(to.path == "/projects/sohobook"){
-                TweenMax.to($('.projects'), 0.5, {
-                    scale: 0.9,
-                    ease: Power2.easeInOut,
-                    onComplete: function() {
-                        TweenMax.to($('.projects'), 1, {
-                            y: '-100%',
-                            ease: Power2.easeInOut,
+        // get the data
+        async fetch ({ store, params }) {
+            let { data } = await client.getItems('projects')
+            store.commit('setProjects', data)
+        },
+        beforeRouteEnter (to, from, next) {
+            switch (from.path) {
+                // from main page
+                case '/':
+                    next(vm => {
+                        TweenMax.to(vm.$el, 0.1, {
+                            opacity: 0,
                             onComplete: function() {
-                                next()
+                                TweenMax.to(vm.$el, 1, {
+                                    opacity: 1,
+                                    ease: Power2.easeInOut,
+                                })
                             }
                         })
-                    }
-                })
-            }else{
-                next()
+                    })
+                    break;
+                // from sohobook page
+                case '/projects/sohobook':
+                    next(vm => {
+                        vm.$el.style.transform = "scale(0.9) translateY(-100%)"
+                        TweenMax.to(vm.$el, 0.8, {
+                            y: 0,
+                            ease: Power2.easeInOut,
+                            onComplete: function() {
+                                TweenMax.to(vm.$el, 1, {
+                                    scale: 1,
+                                    ease: Power2.easeInOut,
+                                    onComplete: function() {
+
+                                    }, clearProps: 'all'
+                                })
+                            }
+                        })
+                    })
+                    break;
+                default:
+                    next()
+                }
+        },
+        // animation leave fo this page (animation works only if we going to sohobook)
+        beforeRouteLeave (to, from, next) {
+            switch (to.path) {
+                case "/projects/sohobook":
+                    TweenMax.to($('.projects'), 0.5, {
+                        scale: 0.9,
+                        ease: Power2.easeInOut,
+                        onComplete: function() {
+                            TweenMax.to($('.projects'), 1, {
+                                y: '-100%',
+                                ease: Power2.easeInOut,
+                                onComplete: function() {
+                                    next()
+                                }
+                            })
+                        }
+                    })
+                    break;
+                default:
+                    next()
             }
         },
         transition: {
             name: 'projects',
             // appear: true, // if we wanna to show animation on page load and reload
             css: false,
-            beforeEnter(el){
-                el.style.transform = "scale(0.9) translateY(-100%)"
-            },
-            enter(el, done){
-                TweenMax.to($('.projects'), 0.8, {
-                    y: 0,
-                    ease: Power2.easeInOut,
-                    onComplete: function() {
-                        TweenMax.to($('.projects'), 1, {
-                            scale: 1,
-                            ease: Power2.easeInOut,
-                            onComplete: function() {
-
-                            }, clearProps: 'all'
-                        })
-                    }
-                })
-                done()
-            }
         },
-        // get projects from api
         methods:{
-            ...mapActions({
-                getProjects: 'getProjects'
-            }),
             // next animation for slider
             slideNextTo: function(event){
                 this.nextSlide()
@@ -234,8 +258,22 @@
             },
         },
         mounted() {
-            this.getProjects()
+            // init slick carousel
+            $('.project').slick({
+                infinite: true,
+                slidesToShow: 1,
+                dots: true,
+                arrows: false,
+                dotsClass: 'project__pagination',
+                responsive: [
+                    {
+                        breakpoint: 480,
+                        settings: {
 
+                        }
+                    }
+                ]
+            });
             $('.project').on('afterChange', function(event, slick, currentSlide){
                 TweenMax.to($('.slick-slide .project__img'), 0.8, {
                     x: '0',
@@ -282,26 +320,6 @@
                 //     ease: Power2.easeInOut
                 // })
             });
-        },
-        updated: function () {
-            this.$nextTick(function () {
-                // carousel init when the page is render (can't find the way to do this right)
-                $('.project').slick({
-                    infinite: true,
-                    slidesToShow: 1,
-                    dots: true,
-                    arrows: false,
-                    dotsClass: 'project__pagination',
-                    responsive: [
-                        {
-                            breakpoint: 480,
-                            settings: {
-
-                            }
-                        }
-                    ]
-                });
-            })
         },
         computed: {
             projects() {
