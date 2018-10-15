@@ -195,7 +195,7 @@
                     next()
                 }
         },
-        // animation leave fo this page (animation works only if we going to sohobook)
+        // animation LEAVE from this page
         beforeRouteLeave (to, from, next) {
             switch (to.path) {
                 case "/projects/sohobook":
@@ -210,6 +210,22 @@
                                     next()
                                 }
                             })
+                        }
+                    })
+                    break;
+                case "/team":
+                    TweenMax.to($('.projects'), 0.5, {
+                        opacity: 0, ease: Power2.easeInOut,
+                        onComplete: function() {
+                            next()
+                        }
+                    })
+                    break;
+                case "/contacts":
+                    TweenMax.to($('.projects'), 0.5, {
+                        opacity: 0, ease: Power2.easeInOut,
+                        onComplete: function() {
+                            next()
                         }
                     })
                     break;
