@@ -5,11 +5,12 @@ import { RemoteInstance } from 'directus-sdk-javascript'
 Vue.use(Vuex, RemoteInstance)
 
 // get data
-const client = new RemoteInstance({
+export const client = new RemoteInstance({
     url: 'http://u2859.green.elastictech.org/',
     version: '1.1',
     accessToken: []
 })
+
 
 const store = () => new Vuex.Store({
 
@@ -58,10 +59,6 @@ const store = () => new Vuex.Store({
       const res = await client.getItems('sohobook')
       commit('setSohobook', res.data)
     },
-    async getTeam({commit}) {
-      const res = await client.getItems('team')
-      commit('setTeam', res.data)
-    }
   }
   
 })

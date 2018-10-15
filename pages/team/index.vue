@@ -49,11 +49,9 @@
     import $ from 'jquery'
 
     import {mapActions} from 'vuex'
+    import {client} from '~/store'
 
     export default {
-        // async fetch ({ store, params }) {
-        //     await store.dispatch('getTeam');
-        // },
         components: {
             AppHeader,
             AppMenu,
@@ -62,14 +60,15 @@
         head: {
             title: 'Команда'
         },
-        methods: {
-            ...mapActions({
-                getTeam: 'getTeam'
-            }),
+        // get the data
+        async fetch ({ store, params }) {
+            let { data } = await client.getItems('team')
+            console.log(data);
+            
+            store.commit('setTeam', data)
         },
         
         mounted() {
-            // this.getTeam().then(gallery.init())
 
             var tools = {
                 init: function(params) {
@@ -241,7 +240,7 @@
                 }
             };
 
-            this.getTeam().then(gallery.init())
+            gallery.init()
             
         },
         computed: {
