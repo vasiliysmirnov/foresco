@@ -187,6 +187,7 @@ export default {
         navLinks.each(function(index, value){
             if($nuxt.$route.path == $(value).data('link')){
                 $(this).css({'color': $(this).data("color")})
+                // console.log($(value)["0"].clientHeight + $(value)["0"].offsetTop)
             }
         })
         
