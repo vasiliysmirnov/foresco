@@ -9,9 +9,7 @@
 .contacts-enter-active {
   animation: contactsOpen .5s;
 }
-.contacts-leave-active {
-  animation: contactsClose .5s;
-}
+
 @keyframes contactsOpen {
   0%{
       opacity 0
@@ -21,16 +19,6 @@
       transform translate(0,0)
       opacity 1
   }
-}
-@keyframes contactsClose {
-  0%{
-        opacity 1
-        transform translate(0,0)
-    }
-    100%{
-        transform translate(-100%,0)
-        opacity 0
-    }
 }
 // end animation for contacts page
 
@@ -168,6 +156,8 @@ html {
       transition transform .2s ease
       @media(max-width 425px)
         display none
+    // .swiper-button-disabled
+    //   opacity 0
   &__prev
       background-image: url('~/static/img/prev-btn.svg')
       left: -10px
@@ -191,33 +181,46 @@ html {
     bottom: 0
     left: 0
     width: 100%
-    .project__pagination-bullet
-      width: 1px
-      height 50px
-      max-height: 25px
-      display: inline-block
-      border-radius: 0
-      background: transparent
-      opacity: 0.5
-      margin 0 70px 0 0
-      padding: 0 10px
-      cursor pointer
-      outline: none
-      position: relative
-      bottom: -5px
-      transition: all .3s ease
-      &:before
-        content: ''
-        position: absolute
-        top 0
-        left 50%
-        width 1px
-        height 100%
-        background: #ffffff
+    padding: 0
+    list-style none
+    display: flex
+    align-items: flex-end
+    justify-content: center
+    li
+      display inline-block
+      button
+        width: 1px
+        height 50px
+        max-height: 25px
+        display: inline-block
+        border-radius: 0
+        border 0
+        background: transparent
+        opacity: 0.5
+        margin 0 70px 0 0
+        padding: 0 10px
+        cursor pointer
+        outline: none
+        position: relative
+        bottom: -5px
+        overflow: hidden
+        text-indent: 99px
+        transition: all .3s ease
+        &:before
+          content: ''
+          position: absolute
+          top 0
+          left 50%
+          width 1px
+          height 100%
+          background: #ffffff
 
       &:last-child
-        margin 0
-    .project__pagination-bullet.swiper-pagination-bullet-active
-      max-height 50px
-      opacity 1
-      width: 2px
+        button
+          margin 0
+    li.slick-active
+      button
+        max-height 50px
+        opacity 1
+        width: 2px
+  

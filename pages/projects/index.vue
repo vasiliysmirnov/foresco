@@ -5,8 +5,10 @@
             <app-menu/>
             <div class="content">
                 <div class="projects__inner">
+                    <div class="project__prev" @click="slidePrevTo"></div>
+                    <div class="project__next" @click="slideNextTo"></div>
                     <div class="project">
-                        <div v-swiper:mySwiper="swiperOption">
+                        <!-- <div v-swiper:mySwiper="swiperOption">
                             <div class="swiper-wrapper">
                                 <div class="project__item swiper-slide" v-for="project in projects" :key="project.id">
                                     <div class="project__img">
@@ -20,9 +22,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="project__prev" slot="button-prev"></div>
-                            <div class="project__next" slot="button-next"></div>
+                            
                             <div class="project__pagination" slot="pagination"></div>
+                        </div> -->
+                        <div v-for="project in projects" :key="project.id">
+                        <div class="project__item" >
+                            <div class="project__img">
+                                <div class="project__platform">{{project.platform}}</div>
+                                <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`" :alt="project.name">
+                            </div>
+                            <div class="project__text">
+                                <div class="project__title">{{project.name}}</div>
+                                <div class="project__desc">{{project.description}}</div>
+                                <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -44,12 +58,16 @@
         width 100%
         max-width: 1200px
         margin: 0 auto
+        position relative
 .project
+    max-height 600px // dirty hack for animation
+    overflow hidden // dirty hack for animation
     &__item
         display flex
         align-items center
         justify-content center
         margin: 0 0 20px 0
+        // opacity 0
         @media(max-width 768px)
             text-align: center
             min-height: 470px
@@ -58,6 +76,7 @@
     &__img
         position relative
         margin-right 100px
+        // opacity 0
         @media(max-width 768px)
             width 100%
             position: absolute
@@ -87,6 +106,7 @@
             left 0
     &__text
         max-width 340px
+        // opacity 0
     &__title
         font-size: 50px
         font-style: normal
@@ -110,12 +130,21 @@
         margin-bottom 50px
         @media(max-width 425px)
             font-size: 14px
+    .swiper-slide-active
+        .project__img,
+        .project__text
+            opacity 1
 
 </style>
 <script>
     import AppHeader from '~/components/header.vue'
     import AppMenu from '~/components/menu.vue'
     import AppFooter from '~/components/footer.vue'
+    
+    // import slick from '~/plugins/slick-carousel'
+    if (process.browser) {
+        require('~/plugins/slick-carousel')
+    }
 
     import $ from 'jquery'
 
@@ -125,7 +154,7 @@
         components: {
             AppHeader,
             AppMenu,
-            AppFooter
+            AppFooter,
         },
         head: {
             title: 'Проекты'
@@ -159,6 +188,7 @@
             ...mapActions({
                 getProjects: 'getProjects'
             }),
+            // animation to go to sohobook
             goToSohobook(link){
                 TweenMax.to($('.projects'), 0.5, {
                     scale: 0.9,
@@ -173,40 +203,133 @@
                         })
                     }
                 })
-            }
+            },
+            // next animation for slider
+            slideNextTo: function(event){
+                this.nextSlide()
+                setTimeout( () => {$('.project').slick('slickNext')}, 900)
+            },
+            nextSlide: (event) => {
+                TweenMax.to($('.slick-current .project__img'), 0.8, {
+                    x: '-200px',
+                    opacity: 0
+                })
+                TweenMax.to($('.slick-current .project__text'), 0.9, {
+                    x: '-200px',
+                    opacity: 0,
+                    ease: Power2.easeInOut
+                })
+                
+            },
+            // prev animation for slider
+            slidePrevTo: function(event){
+                this.prevSlide()
+                setTimeout( () => {$('.project').slick('slickPrev')}, 900)
+            },
+            prevSlide: (event) => {
+                TweenMax.to($('.slick-current .project__img'), 0.8, {
+                    x: '200px',
+                    opacity: 0
+                })
+                TweenMax.to($('.slick-current .project__text'), 0.9, {
+                    x: '200px',
+                    opacity: 0,
+                    ease: Power2.easeInOut
+                })
+            },
         },
         mounted() {
             this.getProjects()
+
+            $('.project').on('afterChange', function(event, slick, currentSlide){
+                TweenMax.to($('.slick-slide .project__img'), 0.8, {
+                    x: '0',
+                    opacity: 1
+                })
+                TweenMax.to($('.slick-slide .project__text'), 0.9, {
+                    x: '0',
+                    opacity: 1,
+                    ease: Power2.easeInOut
+                })
+            });
+            
+            $('.project').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+                $('.slick-slide').each(function(index, el){
+                    // if(currentSlide > nextSlide){
+                    //     TweenMax.to($(el).find('.project__img'), 0.8, {
+                    //         x: '-200px',
+                    //         opacity: 0
+                    //     })
+                    //     TweenMax.to($(el).find('.project__text'), 0.9, {
+                    //         x: '-200px',
+                    //         opacity: 0,
+                    //         ease: Power2.easeInOut
+                    //     })
+                    // } else {
+                    //     TweenMax.to($(el).find('.project__img'), 0.8, {
+                    //         x: '200px',
+                    //         opacity: 0
+                    //     })
+                    //     TweenMax.to($(el).find('.project__text'), 0.9, {
+                    //         x: '200px',
+                    //         opacity: 0,
+                    //         ease: Power2.easeInOut
+                    //     })
+                    // }
+                })
+                // TweenMax.to($('.slick-slide .project__img'), 0.8, {
+                //     x: '100px',
+                //     opacity: 1
+                // })
+                // TweenMax.to($('.slick-slide .project__text'), 0.9, {
+                //     x: '100px',
+                //     opacity: 1,
+                //     ease: Power2.easeInOut
+                // })
+            });
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                // carousel
+                $('.project').slick({
+                    infinite: true,
+                    slidesToShow: 1,
+                    dots: true,
+                    arrows: false,
+                    dotsClass: 'project__pagination',
+                });
+            })
         },
         computed: {
             projects() {
                 return this.$store.state.projects
-            }
+            },
         },
         data () {
             return {
                 swiperOption: {
-                    loop: true,
-                    slidesPerView: 1,
-                    // centeredSlides: true,
-                    spaceBetween: 0,
-                    pagination: {
-                        el: '.project__pagination',
-                        clickable: true,
-                        renderBullet(index, className) {
-                            return `<span class="project__pagination-bullet ${className}"></span>`
-                        }
-                    },
-                    navigation: {
-                        nextEl: '.project__next',
-                        prevEl: '.project__prev'
-                    },
                     on: {
-                        slideChange() {
-                        // console.log('onSlideChangeEnd', this);
+                        slidePrevTransitionEnd(){
+                            TweenMax.to($('.swiper-slide-active .project__img'), 0.8, {
+                                x: '0',
+                                opacity: 1
+                            })
+                            TweenMax.to($('.swiper-slide-active .project__text'), 0.9, {
+                                x: '0',
+                                opacity: 1,
+                                ease: Power2.easeInOut
+                            })
                         },
-                        tap() {
-                        // console.log('onTap', this);
+                        slideNextTransitionEnd() {
+                            TweenMax.to($('.swiper-slide-active .project__img'), 0.8, {
+                                x: '0',
+                                opacity: 1
+                            })
+                            TweenMax.to($('.swiper-slide-active .project__text'), 0.9, {
+                                x: '0',
+                                opacity: 1,
+                                ease: Power2.easeInOut
+                            })
                         }
                     }
                 }
