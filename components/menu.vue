@@ -177,26 +177,28 @@ export default {
         
     },
     updated: function () {
-        // well, it's not the code i proud of, but it's work
-        var navLinks = $('.nav-wrapper ul li');
-        var line = document.getElementById('lineItem');
-        var onLinkHover = function(item) {
-            var color = item.data("color");
-            var posY = 0;
-            posY = item.position().top + item.outerHeight();
-            if(item.data('last'))
-                var tween = TweenLite.to(line, 0.1, {transform: 'translateY(100%)', background: color});
-            else
-                var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
-        };
-        for (let index = 0; index < navLinks.length; index++) {
-            const element = navLinks[index];
-            if($nuxt.$route.path == $(element).data('link')){
-                $(element).css({'color': $(element).data("color")})
-                onLinkHover($(element))
+        this.$nextTick(function () {
+            // well, it's not the code i proud of, but it's work
+            var navLinks = $('.nav-wrapper ul li');
+            var line = document.getElementById('lineItem');
+            var onLinkHover = function(item) {
+                var color = item.data("color");
+                var posY = 0;
+                posY = item.position().top + item.outerHeight();
+                if(item.data('last'))
+                    var tween = TweenLite.to(line, 0.1, {transform: 'translateY(100%)', background: color});
+                else
+                    var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+            };
+            for (let index = 0; index < navLinks.length; index++) {
+                const element = navLinks[index];
+                if($nuxt.$route.path == $(element).data('link')){
+                    $(element).css({'color': $(element).data("color")})
+                    onLinkHover($(element))
+                }
             }
-        }
-        // the end of this 
+            // the end of this 
+        })
     },
     methods: {
         animationClickToLinkMenu: function(event, link){

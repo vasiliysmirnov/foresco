@@ -5,38 +5,24 @@
             <app-menu/>
             <div class="content">
                 <div class="projects__inner">
-                    <div class="project__prev" @click="slidePrevTo"></div>
-                    <div class="project__next" @click="slideNextTo"></div>
+                    <div class="project__wrapper">
+                        <div class="project__prev" @click="slidePrevTo"></div>
+                        <div class="project__next" @click="slideNextTo"></div>
+                    </div>
+                    
                     <div class="project">
-                        <!-- <div v-swiper:mySwiper="swiperOption">
-                            <div class="swiper-wrapper">
-                                <div class="project__item swiper-slide" v-for="project in projects" :key="project.id">
-                                    <div class="project__img">
-                                        <div class="project__platform">{{project.platform}}</div>
-                                        <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`" :alt="project.name">
-                                    </div>
-                                    <div class="project__text">
-                                        <div class="project__title">{{project.name}}</div>
-                                        <div class="project__desc">{{project.description}}</div>
-                                        <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a>
-                                    </div>
+                        <div v-for="project in projects" :key="project.id">
+                            <div class="project__item" >
+                                <div class="project__img">
+                                    <div class="project__platform">{{project.platform}}</div>
+                                    <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`" :alt="project.name">
+                                </div>
+                                <div class="project__text">
+                                    <div class="project__title">{{project.name}}</div>
+                                    <div class="project__desc">{{project.description}}</div>
+                                    <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a>
                                 </div>
                             </div>
-                            
-                            <div class="project__pagination" slot="pagination"></div>
-                        </div> -->
-                        <div v-for="project in projects" :key="project.id">
-                        <div class="project__item" >
-                            <div class="project__img">
-                                <div class="project__platform">{{project.platform}}</div>
-                                <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`" :alt="project.name">
-                            </div>
-                            <div class="project__text">
-                                <div class="project__title">{{project.name}}</div>
-                                <div class="project__desc">{{project.description}}</div>
-                                <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -54,14 +40,17 @@
         display: flex
         flex-direction: column
         flex-grow: initial
+        padding 0
     .projects__inner
         width 100%
-        max-width: 1200px
-        margin: 0 auto
-        position relative
+        
 .project
     max-height 600px // dirty hack for animation
     overflow hidden // dirty hack for animation
+    &__wrapper
+        max-width: 1200px
+        margin: 0 auto
+        position relative
     &__item
         display flex
         align-items center
@@ -78,10 +67,10 @@
         margin-right 100px
         // opacity 0
         @media(max-width 768px)
-            width 100%
+            // width 100%
             position: absolute
             z-index: -1
-            opacity: .3
+            opacity: .3!important
             top: 0
             margin: 0
         img
@@ -290,13 +279,21 @@
         },
         updated: function () {
             this.$nextTick(function () {
-                // carousel
+                // carousel init when the page is render (can't find the way to do this right)
                 $('.project').slick({
                     infinite: true,
                     slidesToShow: 1,
                     dots: true,
                     arrows: false,
                     dotsClass: 'project__pagination',
+                    responsive: [
+                        {
+                            breakpoint: 480,
+                            settings: {
+
+                            }
+                        }
+                    ]
                 });
             })
         },
@@ -307,32 +304,6 @@
         },
         data () {
             return {
-                swiperOption: {
-                    on: {
-                        slidePrevTransitionEnd(){
-                            TweenMax.to($('.swiper-slide-active .project__img'), 0.8, {
-                                x: '0',
-                                opacity: 1
-                            })
-                            TweenMax.to($('.swiper-slide-active .project__text'), 0.9, {
-                                x: '0',
-                                opacity: 1,
-                                ease: Power2.easeInOut
-                            })
-                        },
-                        slideNextTransitionEnd() {
-                            TweenMax.to($('.swiper-slide-active .project__img'), 0.8, {
-                                x: '0',
-                                opacity: 1
-                            })
-                            TweenMax.to($('.swiper-slide-active .project__text'), 0.9, {
-                                x: '0',
-                                opacity: 1,
-                                ease: Power2.easeInOut
-                            })
-                        }
-                    }
-                }
             }
         }
     }
