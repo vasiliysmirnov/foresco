@@ -152,13 +152,23 @@ export default {
 
         navLinks.on("mouseenter", function() {
             onLinkHover($(this))
-            // change color of the menu item
+            // all links are white
+            navLinks.css({'color': '#fff'})
+            // change color of the hover menu item 
             $(this).css({'color': $(this).data("color")})
         });
         navLinks.on("mouseleave", function() {
             onLinkLeave($(this))
             // change color back to white
             $(this).css({'color': '#fff'})
+            // return active link color
+            for (let index = 0; index < navLinks.length; index++) {
+                const element = navLinks[index];
+                if($nuxt.$route.path == $(element).data('link')){
+                    $(element).css({'color': $(element).data("color")})
+                    onLinkHover($(element))
+                }
+            }
         });
 
         var onLinkHover = function(item) {
@@ -215,8 +225,8 @@ export default {
                     })
                 }
             })
-            // this.$store.commit('toggleNav')
         },
+
         changeNavStateContacts: function(event){
             if ($nuxt.$route.path == '/contacts') {
                 this.$store.commit('toggleNav')

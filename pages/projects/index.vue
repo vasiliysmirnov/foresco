@@ -151,7 +151,7 @@
         },
         // animation leave fo this page (animation works only if we going to sohobook)
         beforeRouteLeave (to, from, next) {
-            console.log(to);
+            // console.log(to);
             if(to.path == "/projects/sohobook"){
                 TweenMax.to($('.projects'), 0.5, {
                     scale: 0.9,
