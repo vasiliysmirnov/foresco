@@ -148,11 +148,11 @@ $('.pressBtn')
     // start the animation
     render();
     TweenLite.to("#logoBig", 4.5, {
-      transform:'scale(35) translate(35px, 12px)', ease: Power2.easeIn, force3D:false,
+      transform:'scale(35) translate(35px, 12px)', ease: Power4.easeIn, force3D:false,
       // opacity: 0
     });
     // TweenLite.to("#f", 4.5, {
-    //   transform:'scale(8)', ease: Power2.easeIn, force3D:false,
+    //   transform:'scale(8)', ease: Power4.easeIn, force3D:false,
     // });
     // TweenLite.to("#oresco", 4.5, {
     //   transform:'scale(8)', ease: Power2.easeIn, force3D:false,
