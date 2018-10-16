@@ -195,6 +195,14 @@ export default {
         let { data } = await client.getItems('sohobook')
         store.commit('setSohobook', data)
     },
+    beforeRouteLeave (to, from, next) {
+        TweenMax.to($('.sohobook'), 0.1, {
+            opacity: 0, ease: Power2.easeInOut,
+            onComplete: function() {
+                next()
+            }
+        })
+    },
     // transition: {
     //     name: 'sohobook',
     //     // appear: true, // if we wanna to show animation on page load and reload
@@ -211,15 +219,6 @@ export default {
     //                     scale: 1,
     //                     ease: Power2.easeInOut,
     //                     onComplete: function() {
-    beforeRouteLeave (to, from, next) {
-        TweenMax.to($('.sohobook'), 0.1, {
-            opacity: 0, ease: Power2.easeInOut,
-            onComplete: function() {
-                next()
-            }
-        })
-    },
-
     //                     }, clearProps: 'all'
     //                 })
     //             }
