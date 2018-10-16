@@ -3,7 +3,8 @@
         <transition name="slide-fade">
             <div class="goBack" v-if="show">
                 <!-- <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link> -->
-                <a @click="goToProjects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></a>
+                <!-- <a @click="goToProjects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></a> -->
+                <a @click="$emit('back')">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></a>
             </div>
         </transition>
         <div class="container">
@@ -191,30 +192,30 @@ export default {
         let { data } = await client.getItems('sohobook')
         store.commit('setSohobook', data)
     },
-    transition: {
-        name: 'sohobook',
-        // appear: true, // if we wanna to show animation on page load and reload
-        css: false,
-        beforeEnter(el){
-            el.style.transform = "scale(0.9) translateY(100%)"
-        },
-        enter(el, done){
-            TweenMax.to($('.sohobook'), 1, {
-                y: 0,
-                ease: Power2.easeInOut,
-                onComplete: function() {
-                    TweenMax.to($('.sohobook'), 1, {
-                        scale: 1,
-                        ease: Power2.easeInOut,
-                        onComplete: function() {
+    // transition: {
+    //     name: 'sohobook',
+    //     // appear: true, // if we wanna to show animation on page load and reload
+    //     css: false,
+    //     beforeEnter(el){
+    //         el.style.transform = "scale(0.9) translateY(100%)"
+    //     },
+    //     enter(el, done){
+    //         TweenMax.to($('.sohobook'), 1, {
+    //             y: 0,
+    //             ease: Power2.easeInOut,
+    //             onComplete: function() {
+    //                 TweenMax.to($('.sohobook'), 1, {
+    //                     scale: 1,
+    //                     ease: Power2.easeInOut,
+    //                     onComplete: function() {
 
-                        }, clearProps: 'all'
-                    })
-                }
-            })
-            done()
-        }
-    },
+    //                     }, clearProps: 'all'
+    //                 })
+    //             }
+    //         })
+    //         done()
+    //     }
+    // },
     components: {
         AppHeader,
         AppMenu,

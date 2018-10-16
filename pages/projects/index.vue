@@ -1,4 +1,5 @@
 <template>
+<div>
     <section class="projects">
         <div class="container">
             <app-header/>
@@ -20,19 +21,28 @@
                                 <div class="project__text">
                                     <div class="project__title">{{project.name}}</div>
                                     <div class="project__desc">{{project.description}}</div>
-                                    <!-- <a @click="goToSohobook(project.link)" class="btn btn__more">Смотреть кейс</a> -->
-                                    <nuxt-link class="btn btn__more" :to="`/projects/${project.link}`">Смотреть кейс</nuxt-link>
+                                    <a @click="goToSohobook()" class="btn btn__more">Смотреть кейс</a>
+                                    <!-- <nuxt-link class="btn btn__more" :to="`/projects/${project.link}`">Смотреть кейс</nuxt-link> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <app-footer/>
         </div>
     </section>
+    <!-- <transition v-on:before-enter="beforeEnterSohobook" > -->
+        <SohobookPage v-if="showSohobook" v-on:back="goBackToProjects"/>
+    <!-- </transition> -->
+</div>
 </template>
 <style lang="stylus" scoped>
+.sohobook
+    position absolute!important
+    top 100%
+    width 100%
 .projects
     background-image: radial-gradient(circle at 68% 31%, #2d6271, #1e3c44)
     // background-image: radial-gradient(circle at 68% 31%, #823f89, #400945)
@@ -57,7 +67,6 @@
         align-items center
         justify-content center
         margin: 0 0 20px 0
-        // opacity 0
         @media(max-width 768px)
             text-align: center
             min-height: 470px
@@ -66,7 +75,6 @@
     &__img
         position relative
         margin-right 100px
-        // opacity 0
         @media(max-width 768px)
             // width 100%
             position: absolute
@@ -131,6 +139,8 @@
     import AppMenu from '~/components/menu.vue'
     import AppFooter from '~/components/footer.vue'
 
+    import SohobookPage from '~/pages/projects/sohobook.vue'
+
     import {client} from '~/store'
     
     // import slick from '~/plugins/slick-carousel'
@@ -140,28 +150,35 @@
 
     import $ from 'jquery'
 
-    import {mapActions} from 'vuex'
-
     export default {
         components: {
             AppHeader,
             AppMenu,
             AppFooter,
+            SohobookPage,
+        },
+        data () {
+            return {
+                showSohobook: false
+            }
         },
         head: {
             title: 'Проекты'
         },
         // get the data
         async fetch ({ store, params }) {
-            let { data } = await client.getItems('projects')
-            store.commit('setProjects', data)
+            let projects = await client.getItems('projects')
+            store.commit('setProjects', projects.data)
+            let sohobook = await client.getItems('sohobook')
+            store.commit('setSohobook', sohobook.data)
         },
+        
         beforeRouteEnter (to, from, next) {
             switch (from.path) {
                 // from main page
                 case '/':
                     next(vm => {
-                        TweenMax.to(vm.$el, 0.1, {
+                        TweenMax.to(vm.$el, 0, {
                             opacity: 0,
                             onComplete: function() {
                                 TweenMax.to(vm.$el, 1, {
@@ -236,9 +253,77 @@
         transition: {
             name: 'projects',
             // appear: true, // if we wanna to show animation on page load and reload
-            css: false,
         },
         methods:{
+            // slide to sohobook
+            // beforeEnterSohobook: function (el) {
+            //     el.style.transform = "translateY(20%)"
+            // },
+            // enterSohobook: function (el, done){
+            //     TweenMax.to($('.sohobook'), 1, {
+            //         y: 0,
+            //         ease: Power2.easeInOut,
+            //         onComplete: function() {
+            //             TweenMax.to($('.sohobook'), 1, {
+            //                 scale: 1,
+            //                 ease: Power2.easeInOut,
+            //                 onComplete: function() {
+
+            //                 }, clearProps: 'all'
+            //             })
+            //         }
+            //     })
+            //     done()
+            // },
+
+            // slide TO sohobook
+            goToSohobook: function(event){
+                TweenMax.to($('.projects'), 0.5, {
+                    scale: 0.9,
+                    ease: Power2.easeInOut,
+                    onComplete: () => {
+                        TweenMax.to($('.projects'), 1, {
+                            yPercent: -50, ease: Power2.easeInOut,
+                            onComplete: function() {
+                                TweenMax.to($('.sohobook'), 1, {
+                                    top: 0, scale: 1, ease: Power2.easeInOut,
+                                    onComplete: function() {}, clearProps: 'transform'
+                                })
+                                TweenMax.to($('.projects'), 1, {
+                                    yPercent: -100, ease: Power2.easeInOut,
+                                    onComplete: function(){ TweenMax.to($('.projects'), 1, {display: 'none',}) }
+                                }, 0)
+                            }
+                        })
+                        this.showSohobook = true
+                        TweenMax.to($('.sohobook'), 1, {
+                            top: 50, scale: 0.9, ease: Power2.easeInOut
+                        }, 0)
+                    }
+                })
+            },
+            // slide FROM sohobook
+            goBackToProjects: function(event){
+                TweenMax.to($('.sohobook'), 1, {
+                    scale: 0.9,
+                    top: 50,
+                    ease: Power2.easeInOut,
+                    onComplete: () => {
+                        TweenMax.to($('.sohobook'), 1, {
+                            top: '100%', ease: Power2.easeInOut,
+                            onComplete: () => {this.showSohobook = false}
+                        })
+                    }
+                })
+                TweenMax.to($('.projects'), 1, {
+                    yPercent: -50, scale: 0.9, display: 'block', ease: Power2.easeInOut,
+                    onComplete: function() {
+                        TweenMax.to($('.projects'), 1, {
+                            yPercent: 0, scale: 1, ease: Power2.easeInOut,
+                        })
+                    }
+                }, 0)
+            },
             // next animation for slider
             slideNextTo: function(event){
                 this.nextSlide()
@@ -246,13 +331,10 @@
             },
             nextSlide: (event) => {
                 TweenMax.to($('.slick-current .project__img'), 0.8, {
-                    x: '-200px',
-                    opacity: 0
+                    x: '-200px', opacity: 0
                 })
                 TweenMax.to($('.slick-current .project__text'), 0.9, {
-                    x: '-200px',
-                    opacity: 0,
-                    ease: Power2.easeInOut
+                    x: '-200px', opacity: 0, ease: Power2.easeInOut
                 })
                 
             },
@@ -263,13 +345,10 @@
             },
             prevSlide: (event) => {
                 TweenMax.to($('.slick-current .project__img'), 0.8, {
-                    x: '200px',
-                    opacity: 0
+                    x: '200px', opacity: 0
                 })
                 TweenMax.to($('.slick-current .project__text'), 0.9, {
-                    x: '200px',
-                    opacity: 0,
-                    ease: Power2.easeInOut
+                    x: '200px', opacity: 0, ease: Power2.easeInOut
                 })
             },
         },
@@ -281,24 +360,13 @@
                 dots: true,
                 arrows: false,
                 dotsClass: 'project__pagination',
-                responsive: [
-                    {
-                        breakpoint: 480,
-                        settings: {
-
-                        }
-                    }
-                ]
             });
             $('.project').on('afterChange', function(event, slick, currentSlide){
                 TweenMax.to($('.slick-slide .project__img'), 0.8, {
-                    x: '0',
-                    opacity: 1
+                    x: '0', opacity: 1
                 })
                 TweenMax.to($('.slick-slide .project__text'), 0.9, {
-                    x: '0',
-                    opacity: 1,
-                    ease: Power2.easeInOut
+                    x: '0', opacity: 1, ease: Power2.easeInOut
                 })
             });
             
@@ -341,10 +409,10 @@
             projects() {
                 return this.$store.state.projects
             },
+            sohobook() {
+                return this.$store.state.sohobook
+            },
         },
-        data () {
-            return {
-            }
-        }
+        
     }
 </script>
