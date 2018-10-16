@@ -1,5 +1,5 @@
 <template>
-    <transition :duration="1000">
+    <transition :duration="500">
         <div class="menu" v-show='showNav'>
             <transition name="menuBgAn">
                 <div class="menuBg" v-show='showNav'></div>
@@ -26,115 +26,6 @@
         </div>
     </transition>
 </template>
-<style lang="stylus" scoped>
-.fadeMenu-enter-active
-    transition: all .5s ease .3s
-.fadeMenu-leave-active
-    transition: all .2s
-.fadeMenu-enter, .fadeMenu-leave-to
-    transform: translateX(50px)
-    opacity: 0
-.menuBgAn-enter-active, .menuBgAn-leave-active
-    transition: all .6s ease
-.menuBgAn-enter
-    transform: translateX(100%)
-.menuBgAn-leave-to
-    // transform: translateX(-100%)
-    opacity: 0
-
-.menu
-    position: absolute
-    z-index 99
-    top 0
-    left 0
-    width 100%
-    height 100vh
-    display flex
-    align-items center
-    justify-content flex-start
-    overflow hidden
-    @media(max-width 500px)
-        justify-content center
-    .menuBg
-        width: 100%
-        height: 100%
-        position: absolute;
-        background: #000;
-        z-index: 1;
-        top: 0;
-        right: 0
-    .nav-wrapper
-        position relative
-        z-index 2
-        height 100%
-        display flex
-        align-items center
-        justify-content flex-start
-        padding-right 60px
-        @media(max-width 455px)
-            padding 0 20px 0 0
-        .line
-            position absolute
-            top 0
-            right 0
-            width 1px
-            height 100%
-            background rgba(255, 255, 255, 0.2)
-            span
-                position absolute
-                bottom: 100%
-                left: 0px
-                height: 100%
-                width: 100%
-                transition: all 0.4s linear
-    ul
-        list-style none
-        padding 0 0 0 160px
-        @media(max-width 500px)
-            padding 0
-        li
-            color #ffffff
-            a
-                font-family: 'montserratmedium'
-                font-size: 45px
-                font-style: normal
-                font-stretch: normal
-                line-height: 2.13
-                letter-spacing: 10px
-                color: inherit
-                text-decoration none
-                cursor pointer
-                text-transform uppercase
-                display: block
-                transition color .2s ease
-                @media(max-width 500px)
-                    font-size: 35px
-                @media(max-width 410px)
-                    font-size: 30px
-                @media(max-width 320px)
-                    font-size: 20px
-
-@keyframes menuOpen {
-    0%{
-        opacity 0
-        transform translate(100%,0)
-    }
-    100%{
-        transform translate(0,0)
-        opacity 1
-    }
-}
-@keyframes menuClose {
-    0%{
-        opacity 1
-        transform translate(0,0)
-    }
-    100%{
-        transform translate(100%,0)
-        opacity 0
-    }
-}
-</style>
 
 <script>
 import $ from 'jquery'
@@ -258,3 +149,113 @@ export default {
     }
 }
 </script>
+
+<style lang="stylus" scoped>
+.fadeMenu-enter-active
+    transition: all .5s ease .3s
+.fadeMenu-leave-active
+    transition: all .2s
+.fadeMenu-enter, .fadeMenu-leave-to
+    transform: translateX(50px)
+    opacity: 0
+.menuBgAn-enter-active, .menuBgAn-leave-active
+    transition: all .6s ease
+.menuBgAn-enter
+    transform: translateX(100%)
+.menuBgAn-leave-to
+    // transform: translateX(-100%)
+    opacity: 0
+
+.menu
+    position: absolute
+    z-index 99
+    top 0
+    left 0
+    width 100%
+    height 100vh
+    display flex
+    align-items center
+    justify-content flex-start
+    overflow hidden
+    @media(max-width 500px)
+        justify-content center
+    .menuBg
+        width: 100%
+        height: 100%
+        position: absolute;
+        background: #000;
+        z-index: 1;
+        top: 0;
+        right: 0
+    .nav-wrapper
+        position relative
+        z-index 2
+        height 100%
+        display flex
+        align-items center
+        justify-content flex-start
+        padding-right 60px
+        @media(max-width 455px)
+            padding 0 20px 0 0
+        .line
+            position absolute
+            top 0
+            right 0
+            width 1px
+            height 100%
+            background rgba(255, 255, 255, 0.2)
+            span
+                position absolute
+                bottom: 100%
+                left: 0px
+                height: 100%
+                width: 100%
+                transition: all 0.4s linear
+    ul
+        list-style none
+        padding 0 0 0 160px
+        @media(max-width 500px)
+            padding 0
+        li
+            color #ffffff
+            a
+                font-family: 'montserratmedium'
+                font-size: 45px
+                font-style: normal
+                font-stretch: normal
+                line-height: 2.13
+                letter-spacing: 10px
+                color: inherit
+                text-decoration none
+                cursor pointer
+                text-transform uppercase
+                display: block
+                transition color .2s ease
+                @media(max-width 500px)
+                    font-size: 35px
+                @media(max-width 410px)
+                    font-size: 30px
+                @media(max-width 320px)
+                    font-size: 20px
+
+@keyframes menuOpen {
+    0%{
+        opacity 0
+        transform translate(100%,0)
+    }
+    100%{
+        transform translate(0,0)
+        opacity 1
+    }
+}
+@keyframes menuClose {
+    0%{
+        opacity 1
+        transform translate(0,0)
+    }
+    100%{
+        transform translate(100%,0)
+        opacity 0
+    }
+}
+</style>

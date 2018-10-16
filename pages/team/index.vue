@@ -59,16 +59,13 @@
         head: {
             title: 'Команда'
         },
-        transition: {
-            name: 'team',
-            appear: true,
-            beforeEnter(el){
-                el.style.transition = "all 0.3s"
-                el.style.opacity = "0"
-            },
-            enter(el, done){
-                el.style.opacity = "1"
-            }
+        beforeRouteLeave (to, from, next) {
+            TweenMax.to($('.team'), 0.1, {
+                opacity: 0, ease: Power2.easeInOut,
+                onComplete: function() {
+                    next()
+                }
+            })
         },
         // get the data
         async fetch ({ store, params }) {

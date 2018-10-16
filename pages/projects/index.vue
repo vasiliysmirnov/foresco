@@ -231,7 +231,7 @@
                     })
                     break;
                 case "/team":
-                    TweenMax.to($('.projects'), 0.5, {
+                    TweenMax.to($('.projects'), 0.1, {
                         opacity: 0, ease: Power2.easeInOut,
                         onComplete: function() {
                             next()
@@ -239,7 +239,7 @@
                     })
                     break;
                 case "/contacts":
-                    TweenMax.to($('.projects'), 0.5, {
+                    TweenMax.to($('.projects'), 0.1, {
                         opacity: 0, ease: Power2.easeInOut,
                         onComplete: function() {
                             next()

@@ -178,10 +178,13 @@ import AppHeader from '~/components/header.vue'
 import AppMenu from '~/components/menu.vue'
 import AppFooter from '~/components/footer.vue'
 import $ from 'jquery'
-import {mapActions} from 'vuex'
+
 import {client} from '~/store'
 
 export default {
+    head: {
+        title: 'sohobook'
+    },
     data () {
         return{
             show: false
@@ -208,6 +211,14 @@ export default {
     //                     scale: 1,
     //                     ease: Power2.easeInOut,
     //                     onComplete: function() {
+    beforeRouteLeave (to, from, next) {
+        TweenMax.to($('.sohobook'), 0.1, {
+            opacity: 0, ease: Power2.easeInOut,
+            onComplete: function() {
+                next()
+            }
+        })
+    },
 
     //                     }, clearProps: 'all'
     //                 })
@@ -254,9 +265,7 @@ export default {
             return this.$store.state.sohobook
         }
     },
-    head: {
-        title: 'sohobook'
-    },
+    
 }
 </script>
 
