@@ -50,10 +50,10 @@
                             </div>
                         </div>
                         <div class="img">
-                            <img src="~static/img/sohobook/01/01.png" alt="" v-in-viewport>
+                            <img src="~static/img/sohobook/01/01.png" alt="" >
 
-                            <div class="img-01" v-in-viewport><img src="~static/img/sohobook/01/01-01.png" alt=""></div>
-                            <div class="img-02" v-in-viewport><img src="~static/img/sohobook/01/01-02.png" alt=""></div>
+                            <div class="img-01" ><img src="~static/img/sohobook/01/01-01.png" alt=""></div>
+                            <div class="img-02" ><img src="~static/img/sohobook/01/01-02.png" alt=""></div>
                             <div class="img-03" v-in-viewport><img src="~static/img/sohobook/01/love-you.png" alt=""></div>
                         </div>
                     </div>
@@ -69,10 +69,10 @@
                             <img src="~static/img/sohobook/01/leafs.png" alt="">
                         </div>
                         <div class="img">
-                            <img src="~static/img/sohobook/02/02.png" alt="" v-in-viewport>
+                            <img src="~static/img/sohobook/02/02.png" alt="" >
 
-                            <div class="img-01" v-in-viewport><img src="~static/img/sohobook/02/02-01.png" alt=""></div>
-                            <div class="img-02" v-in-viewport><img src="~static/img/sohobook/02/02-02.png" alt=""></div>
+                            <div class="img-01" ><img src="~static/img/sohobook/02/02-01.png" alt=""></div>
+                            <div class="img-02" ><img src="~static/img/sohobook/02/02-02.png" alt=""></div>
                         </div>
                         <div class="title">
                             <span v-in-viewport>Выбирайте любимые фотографии</span>
@@ -215,24 +215,6 @@ export default {
             done()
         }
     },
-    // beforeRouteUpdate (to, from, next) {
-    //     console.log('qwe');
-        
-    //     TweenMax.to($('.sohobook'), 1, {
-    //         y: 0,
-    //         ease: Power2.easeInOut,
-    //         onComplete: function() {
-    //             TweenMax.to($('.sohobook'), 1, {
-    //                 scale: 1,
-    //                 ease: Power2.easeInOut,
-    //                 onComplete: function() {
-    //                     next()
-    //                 }
-    //             })
-    //         }
-    //     })
-        
-    // },
     components: {
         AppHeader,
         AppMenu,
@@ -481,53 +463,35 @@ export default {
                 position relative
                 z-index 2
                 max-width 432px
-                opacity 0
-                transition opacity .4s ease 0.5s
-                &.in-viewport
-                    opacity: 1
             .img-01
                 position: absolute
                 bottom: -70px
                 z-index: 1
                 width: 516px
                 right: -220px
-                opacity: 0
-                transform rotate(0deg) translateX(-50px)
-                transition all .4s ease 0.5s
-                &.in-viewport
-                    opacity: 1
-                    transform: rotate(-12deg) translateX(0px)
+                transform rotate(-12deg)
                 img
                     max-width 100%
-                    opacity 1
             .img-02
                 position: absolute
                 bottom: -50px
                 z-index: 1
                 width: 360px
                 left: -140px
-                opacity: 0
-                transform translateX(-50px)
-                transition all .4s ease 0.5s
-                &.in-viewport
-                    opacity: 1
-                    transform: translateX(0px)
                 img
                     max-width 100%
-                    opacity 1
             .img-03
                 position: absolute
                 bottom: -320px
                 z-index: 1
                 width: 384px
                 right: -180px
-                opacity: 0
+                opacity 0
                 transition opacity .4s ease 0.5s
                 &.in-viewport
-                    opacity: 1
+                    opacity 1
                 img
                     max-width 100%
-                    opacity 1
         .next-step-1
             position: absolute
             width: 500px
@@ -607,40 +571,22 @@ export default {
                 position relative
                 z-index 2
                 max-width 432px
-                opacity 0
-                transform translateX(-50px)
-                transition all .4s ease 0.5s
-                &.in-viewport
-                    opacity 1
-                    transform: translateX(0px)
             .img-01
                 position: absolute
                 top: 290px
                 z-index: 1
                 width: 262px
                 left: -80px
-                transform: rotate(-10deg);
-                opacity 0
-                transition all .4s ease 0.5s
                 img
                     max-width 100%
-                &.in-viewport
-                    opacity 1
-                    transform: rotate(0)
             .img-02
                 position: absolute
                 bottom: -160px
                 z-index: 1
                 width: 582px
                 right: -220px
-                transform: rotate(50deg);
-                opacity 0
-                transition all .4s ease 0.5s
                 img
                     max-width 100%
-                &.in-viewport
-                    opacity 1
-                    transform: rotate(0)
         .footprint-1
             position: absolute
             height: 190px
