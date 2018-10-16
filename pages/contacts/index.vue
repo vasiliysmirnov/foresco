@@ -70,11 +70,9 @@ import AppHeader from '~/components/header.vue'
 import AppMenu from '~/components/menu.vue'
 import AppFooter from '~/components/footer.vue'
 
+import $ from 'jquery'
+
 export default {
-    transition: {
-        name: 'contacts',
-        appear: true,
-    },
     components: {
         AppHeader,
         AppMenu,
@@ -82,6 +80,14 @@ export default {
     },
     head: {
         title: 'Контакты'
+    },
+    beforeRouteLeave (to, from, next) {
+        TweenMax.to($('.contacts'), 0.1, {
+            opacity: 0, ease: Power2.easeInOut,
+            onComplete: function() {
+                next()
+            }
+        })
     },
     computed: {
         contacts() {
