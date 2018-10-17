@@ -38,102 +38,7 @@
     <!-- </transition> -->
 </div>
 </template>
-<style lang="stylus" scoped>
-.sohobook
-    position absolute!important
-    top 100%
-    width 100%
-.projects
-    background-image: radial-gradient(circle at 68% 31%, #2d6271, #1e3c44)
-    // background-image: radial-gradient(circle at 68% 31%, #823f89, #400945)
-    // fix for content, to display elements by center
-    .content
-        display: flex
-        flex-direction: column
-        flex-grow: initial
-        padding 0
-    .projects__inner
-        width 100%
-        
-.project
-    max-height 600px // dirty hack for animation
-    overflow hidden // dirty hack for animation
-    &__wrapper
-        max-width: 1200px
-        margin: 0 auto
-        position relative
-    &__item
-        display flex
-        align-items center
-        justify-content center
-        margin: 0 0 20px 0
-        @media(max-width 768px)
-            text-align: center
-            min-height: 470px
-        @media(max-width 425px)
-            min-height: 330px;
-    &__img
-        position relative
-        margin-right 100px
-        @media(max-width 768px)
-            // width 100%
-            position: absolute
-            z-index: -1
-            opacity: .3!important
-            top: 0
-            margin: 0
-        img
-            @media(max-width 768px)
-                max-width 100%
-    &__platform
-        position absolute
-        top 5px
-        left -20px
-        opacity: 0.5
-        font-size: 16px
-        font-weight: normal
-        font-style: normal
-        font-stretch: normal
-        line-height: normal
-        letter-spacing: 0.2px
-        color: #ffffff
-        writing-mode: tb-rl
-        transform: rotate(-180deg)
-        text-transform: uppercase
-        @media(max-width 768px)
-            left 0
-    &__text
-        max-width 340px
-        // opacity 0
-    &__title
-        font-size: 50px
-        font-style: normal
-        font-stretch: normal
-        line-height: normal
-        letter-spacing: 2.5px
-        color: #eeeeee
-        font-family: 'montserratsemibold'
-        margin-bottom 15px
-        @media(max-width 425px)
-            font-size: 30px
-    &__desc
-        opacity: 0.5
-        font-size: 16px
-        font-weight: normal
-        font-style: normal
-        font-stretch: normal
-        line-height: normal
-        letter-spacing: 0.2px
-        color: #eeeeee
-        margin-bottom 50px
-        @media(max-width 425px)
-            font-size: 14px
-    .swiper-slide-active
-        .project__img,
-        .project__text
-            opacity 1
 
-</style>
 <script>
     import AppHeader from '~/components/header.vue'
     import AppMenu from '~/components/menu.vue'
@@ -278,6 +183,7 @@
 
             // slide TO sohobook
             goToSohobook: function(event){
+                this.showSohobook = true
                 TweenMax.to($('.projects'), 0.5, {
                     scale: 0.9,
                     ease: Power2.easeInOut,
@@ -295,12 +201,13 @@
                                 }, 0)
                             }
                         })
-                        this.showSohobook = true
+                        
                         TweenMax.to($('.sohobook'), 1, {
-                            top: 50, scale: 0.9, ease: Power2.easeInOut
+                            scale: 0.9, top: 50, ease: Power2.easeInOut
                         }, 0)
                     }
                 })
+                
             },
             // slide FROM sohobook
             goBackToProjects: function(event){
@@ -354,13 +261,13 @@
         },
         mounted() {
             // init slick carousel
-            $('.project').slick({
-                infinite: true,
-                slidesToShow: 1,
-                dots: true,
-                arrows: false,
-                dotsClass: 'project__pagination',
-            });
+            // $('.project').slick({
+            //     infinite: true,
+            //     slidesToShow: 1,
+            //     dots: true,
+            //     arrows: false,
+            //     dotsClass: 'project__pagination',
+            // });
             $('.project').on('afterChange', function(event, slick, currentSlide){
                 TweenMax.to($('.slick-slide .project__img'), 0.8, {
                     x: '0', opacity: 1
@@ -416,3 +323,100 @@
         
     }
 </script>
+
+<style lang="stylus" scoped>
+.sohobook
+    position absolute!important
+    top 100%
+    width 100%
+.projects
+    background-image: radial-gradient(circle at 68% 31%, #2d6271, #1e3c44)
+    // background-image: radial-gradient(circle at 68% 31%, #823f89, #400945)
+    // fix for content, to display elements by center
+    .content
+        display: flex
+        flex-direction: column
+        flex-grow: initial
+        padding 0
+    .projects__inner
+        width 100%
+        
+.project
+    max-height 600px // dirty hack for animation
+    overflow hidden // dirty hack for animation
+    &__wrapper
+        max-width: 1200px
+        margin: 0 auto
+        position relative
+    &__item
+        display flex
+        align-items center
+        justify-content center
+        margin: 0 0 20px 0
+        @media(max-width 768px)
+            text-align: center
+            min-height: 470px
+        @media(max-width 425px)
+            min-height: 330px;
+    &__img
+        position relative
+        margin-right 100px
+        @media(max-width 768px)
+            // width 100%
+            position: absolute
+            z-index: -1
+            opacity: .3!important
+            top: 0
+            margin: 0
+        img
+            @media(max-width 768px)
+                max-width 100%
+    &__platform
+        position absolute
+        top 5px
+        left -20px
+        opacity: 0.5
+        font-size: 16px
+        font-weight: normal
+        font-style: normal
+        font-stretch: normal
+        line-height: normal
+        letter-spacing: 0.2px
+        color: #ffffff
+        writing-mode: tb-rl
+        transform: rotate(-180deg)
+        text-transform: uppercase
+        @media(max-width 768px)
+            left 0
+    &__text
+        max-width 340px
+        // opacity 0
+    &__title
+        font-size: 50px
+        font-style: normal
+        font-stretch: normal
+        line-height: normal
+        letter-spacing: 2.5px
+        color: #eeeeee
+        font-family: 'montserratsemibold'
+        margin-bottom 15px
+        @media(max-width 425px)
+            font-size: 30px
+    &__desc
+        opacity: 0.5
+        font-size: 16px
+        font-weight: normal
+        font-style: normal
+        font-stretch: normal
+        line-height: normal
+        letter-spacing: 0.2px
+        color: #eeeeee
+        margin-bottom 50px
+        @media(max-width 425px)
+            font-size: 14px
+    .swiper-slide-active
+        .project__img,
+        .project__text
+            opacity 1
+
+</style>
