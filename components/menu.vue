@@ -163,8 +163,8 @@ export default {
 .menuBgAn-enter
     transform: translateX(100%)
 .menuBgAn-leave-to
-    // transform: translateX(-100%)
-    opacity: 0
+    transform: translateX(100%)
+    // opacity: 0
 
 .menu
     position: absolute
