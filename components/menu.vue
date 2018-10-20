@@ -154,17 +154,17 @@ export default {
 .fadeMenu-enter-active
     transition: all .5s ease .3s
 .fadeMenu-leave-active
-    transition: all .2s
+    transition: all .3s ease
 .fadeMenu-enter, .fadeMenu-leave-to
     transform: translateX(50px)
     opacity: 0
 .menuBgAn-enter-active, .menuBgAn-leave-active
-    transition: all .6s ease
+    transition: all .3s ease
 .menuBgAn-enter
     transform: translateX(100%)
 .menuBgAn-leave-to
     transform: translateX(100%)
-    // opacity: 0
+    opacity: 0
 
 .menu
     position: absolute
