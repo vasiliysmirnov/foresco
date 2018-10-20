@@ -275,21 +275,13 @@
         },
         mounted() {
             // init slick carousel
-            $('.project').slick({
-                infinite: true,
-                slidesToShow: 1,
-                dots: true,
-                arrows: false,
-                dotsClass: 'project__pagination',
-                responsive: [
-                    {
-                        breakpoint: 480,
-                        settings: {
-
-                        }
-                    }
-                ]
-            });
+            // $('.project').slick({
+            //     infinite: true,
+            //     slidesToShow: 1,
+            //     dots: true,
+            //     arrows: false,
+            //     dotsClass: 'project__pagination',
+            // });
             $('.project').on('afterChange', function(event, slick, currentSlide){
                 TweenMax.to($('.slick-slide .project__img'), 0.8, {
                     x: '0',
@@ -348,3 +340,10 @@
         }
     }
 </script>
+            $('.project').slick({
+                infinite: true,
+                slidesToShow: 1,
+                dots: true,
+                arrows: false,
+                dotsClass: 'project__pagination',
+            });
