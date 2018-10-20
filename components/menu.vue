@@ -218,6 +218,7 @@ export default {
             padding 0
         li
             color #ffffff
+            text-align right
             a
                 font-family: 'montserratmedium'
                 font-size: 45px
