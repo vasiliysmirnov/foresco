@@ -154,7 +154,7 @@ export default {
 .fadeMenu-enter-active
     transition: all .5s ease .3s
 .fadeMenu-leave-active
-    transition: all .3s ease
+    transition: all .1s ease
 .fadeMenu-enter, .fadeMenu-leave-to
     transform: translateX(50px)
     opacity: 0

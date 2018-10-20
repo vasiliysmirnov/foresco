@@ -8,11 +8,13 @@
                     <div class="team__inner gallery__container">
                         <div class="gallery__draggable gallery__draggable_active" data-gallery>
                             <div class="team__item gallery__item" v-for="item in team" :key="item.id">
-                                <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
-                                <div class="description">
-                                    <div class="name">{{item.name}}</div>
-                                    <div class="position">{{item.position}}</div>
-                                    <div class="txt">{{item.description}}</div>
+                                <div class="team__item-inner">
+                                    <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
+                                    <div class="description">
+                                        <div class="name">{{item.name}}</div>
+                                        <div class="position">{{item.position}}</div>
+                                        <div class="txt">{{item.description}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -179,8 +181,8 @@
                             },
                             setMaxPosition: function(x){
                                 var maxLeft = th.property.halfSize,
-                                    maxRight = -(th.property.halfSize - tools.client.windowW);
-                                    // maxRight = -370;
+                                    // maxRight = -(th.property.halfSize - tools.client.windowW);
+                                    maxRight = 0;
                                 if(x > maxLeft) x = maxLeft;
                                 if(x < maxRight) x = maxRight;
                                 return x;
@@ -188,7 +190,10 @@
                         };
 
 
-                        th.elements.$gallery.css("left", -th.property.halfSize + "px");
+                        th.elements.$gallery.css({
+                            'left': -th.property.halfSize + 'px',
+                            'transform': 'translate3d(' + th.property.halfSize + 'px, 0px, 0px)'
+                        });
                         th.events();
 
                         th.elements.$gallery.addClass("gallery__draggable_active");
@@ -273,10 +278,11 @@
         max-width: 1200px
         margin: 0 auto
         .team__item
-            // display flex
-            // align-items center
-            // justify-content space-between
-            // flex: 1 0 auto
+            .team__item-inner
+                display flex
+                align-items center
+                justify-content space-between
+                flex: 1 0 auto
             width 100%
             max-width 900px
             position relative
@@ -484,7 +490,6 @@
 .gallery {
     width: 100%;
     min-height: 500px;
-    background-color: #141414;
     position: relative;
 }
 .gallery__container {
