@@ -50,15 +50,17 @@
                             </div>
                         </div>
                         <div class="img">
-                            <img src="~static/img/sohobook/01/01.png" alt="" >
+                            <img src="~static/img/sohobook/01/soho_first@2x.png" alt="" >
 
-                            <div class="img-01" ><img src="~static/img/sohobook/01/01-01.png" alt=""></div>
-                            <div class="img-02" ><img src="~static/img/sohobook/01/01-02.png" alt=""></div>
                             <div class="img-03" v-in-viewport><img src="~static/img/sohobook/01/love-you.png" alt=""></div>
                         </div>
                     </div>
+                    <div class="footprint-mobile" v-in-viewport>
+                        <img src="~static/img/sohobook/01/footprint.png" alt="">
+                    </div>
                     <div class="next-step-1">
-                        <img src="~static/img/sohobook/01/line-01.svg" alt="">
+                        <img src="~static/img/sohobook/01/line-01.svg" alt="" class="desktop">
+                        <img src="~static/img/sohobook/05/line.svg" alt="" class="mobile">
                     </div>
                     
                 </section>
@@ -69,10 +71,8 @@
                             <img src="~static/img/sohobook/01/leafs.png" alt="">
                         </div>
                         <div class="img">
-                            <img src="~static/img/sohobook/02/02.png" alt="" >
+                            <img src="~static/img/sohobook/02/soho_second@2x.png" alt="" >
 
-                            <div class="img-01" ><img src="~static/img/sohobook/02/02-01.png" alt=""></div>
-                            <div class="img-02" ><img src="~static/img/sohobook/02/02-02.png" alt=""></div>
                         </div>
                         <div class="title">
                             <span v-in-viewport>Выбирайте любимые фотографии</span>
@@ -82,7 +82,11 @@
                             </div>
                         </div>
                         <div class="next-step-2">
-                            <img src="~static/img/sohobook/02/line.svg" alt="">
+                            <img src="~static/img/sohobook/02/line.svg" alt="" class="desktop">
+                            <img src="~static/img/sohobook/05/line.svg" alt="" class="mobile">
+                        </div>
+                        <div class="footprint-mobile" v-in-viewport>
+                            <img src="~static/img/sohobook/01/footprint.png" alt="">
                         </div>
                     </div>
                 </section>
@@ -107,12 +111,12 @@
                                 </div>
                                 <div class="light-1" v-in-viewport><img src="~static/img/sohobook/03/light-1.svg" alt=""></div>
                                 <div class="light-2" v-in-viewport><img src="~static/img/sohobook/03/light-2.svg" alt=""></div>
+                                <div class="img-main">
+                                    <img src="~static/img/sohobook/03/soho_third@2x.png" alt="">
+                                </div>
                                 <div class="text-1" v-in-viewport>
                                     Добавляйте <br> фотографии
                                     <div class="arrow"></div>
-                                </div>
-                                <div class="img-main">
-                                    <img src="~static/img/sohobook/03/screen-shot.png" alt="">
                                 </div>
                                 <div class="text-2" v-in-viewport>
                                     <div class="arrow"></div>
@@ -337,6 +341,10 @@ export default {
             padding 0 50px
             z-index 2
             position relative
+            @media(max-width 768px)
+                padding 0 40px
+            @media(max-width 320px)
+                padding 0 20px
         #top_bottom_mask
             position absolute
             bottom 0
@@ -348,6 +356,8 @@ export default {
             height: 0
             padding: 0
             padding-bottom: calc(100% * 500 / 1440)
+            // @media(max-width 1100px)
+
         .title
             font-size: 120px
             font-family: 'montserratbold'
@@ -357,6 +367,21 @@ export default {
             letter-spacing: 45px
             color: #524941
             margin-bottom 20px
+            text-align center
+            @media(max-width 1200px)
+                font-size: 100px
+            @media(max-width 1024px)
+                font-size: 80px
+            @media(max-width 900px)
+                font-size: 60px
+            @media(max-width 768px)
+                font-size: 50px
+                letter-spacing: 15px
+            @media(max-width 425px)
+                font-size: 40px
+                letter-spacing: 5px
+            @media(max-width 320px)
+                font-size: 35px
         .desc
             font-size: 24px
             font-family: 'montserratmedium'
@@ -366,22 +391,37 @@ export default {
             letter-spacing: 4px
             color: #524941
             margin-bottom 45px
+            @media(max-width 425px)
+                font-size: 16px
+                letter-spacing: normal
+                text-transform uppercase
+                max-width: 270px
+                margin: 0 auto 30px
         .img
             position relative
             font-size: 18px
             font-family: 'montserratmedium'
             color: #524941
+            @media(max-width 600px)
+                padding 0 30px
+            img
+                @media(max-width 600px)
+                    max-width 100%
             .platform
                 position absolute
                 top 300px
                 left 130px
                 letter-spacing: 6.3px
                 text-transform uppercase
+                @media(max-width 970px)
+                    display none
             .year
                 position absolute
                 top 300px
                 right 160px
                 letter-spacing: 3px
+                @media(max-width 970px)
+                    display none
         .descFull
             font-size: 22px
             font-weight: normal
@@ -397,6 +437,21 @@ export default {
             bottom: 85px
             left: calc(50% - 475px)
             width: 100%
+            @media(max-width 1100px)
+                bottom 0
+            @media(max-width 970px)
+                left 0
+            @media(max-width 770px)
+                font-size: 18px
+                padding: 0 30px
+            @media(max-width 600px)
+                bottom -60px
+            @media(max-width 425px)
+                font-family: 'yeseva_oneregular'
+                font-size: 15px
+                bottom -90px
+            @media(max-width 320px)
+                bottom -140px
             .separator
                 position absolute
                 top -40px
@@ -415,6 +470,8 @@ export default {
     .sohobook-01
         padding 100px 0 250px 0
         position relative
+        @media(max-width 600px)
+            padding 170px 0 250px 0
         .inner
             display flex
             flex-wrap wrap
@@ -423,6 +480,8 @@ export default {
             max-width: 1440px
             margin: 0 auto
             position relative
+            @media(max-width 768px)
+                padding 0 20px
         .leafs
             position absolute
             top 100px
@@ -442,6 +501,10 @@ export default {
             color: #524941
             max-width 600px
             position relative
+            @media(max-width 560px)
+                font-size: 70px
+            @media(max-width 425px)
+                font-size: 50px
             span
                 display: block
                 position relative
@@ -468,27 +531,20 @@ export default {
         .img
             max-width 50%
             position relative
+            @media(max-width 930px)
+                max-width 100%
             img
                 position relative
                 z-index 2
-                max-width 432px
-            .img-01
-                position: absolute
-                bottom: -70px
-                z-index: 1
-                width: 516px
-                right: -220px
-                transform rotate(-12deg)
-                img
-                    max-width 100%
-            .img-02
-                position: absolute
-                bottom: -50px
-                z-index: 1
-                width: 360px
-                left: -140px
-                img
-                    max-width 100%
+                max-width 780px
+                @media(max-width 650px)
+                    transform: translateX(-50%)
+                    left: 50%
+                    max-width: 600px
+                @media(max-width 425px)
+                    transform: translateX(-50%)
+                    left: 40%
+                    max-width: 510px
             .img-03
                 position: absolute
                 bottom: -320px
@@ -497,6 +553,8 @@ export default {
                 right: -180px
                 opacity 0
                 transition opacity .4s ease 0.5s
+                @media(max-width 930px)
+                    display none
                 &.in-viewport
                     opacity 1
                 img
@@ -506,8 +564,18 @@ export default {
             width: 500px
             left: calc(50% - 307px)
             bottom: -540px
-            img
+            @media(max-width 930px)
+                width: 20px
+                left: calc(50% - 10px)
+                bottom: -20px
+            .desktop
                 max-width 100%
+                @media(max-width 930px)
+                    display none
+            .mobile
+                display none
+                @media(max-width 930px)
+                    display block
         .footprint-1
             position: absolute
             height: 190px
@@ -515,6 +583,24 @@ export default {
             left: 40px
             opacity: 0
             transition opacity .4s ease 0.5s
+            @media(max-width 930px)
+                display none
+            &.in-viewport
+                opacity: 1
+            img
+                max-height 100%
+        .footprint-mobile
+            position: absolute
+            height: 190px
+            bottom: -10px
+            left: 30%
+            opacity: 0
+            transition opacity .4s ease 0.5s
+            display none
+            @media(max-width 930px)
+                display block
+            @media(max-width 425px)
+                left 20%
             &.in-viewport
                 opacity: 1
             img
@@ -523,6 +609,10 @@ export default {
 
     .sohobook-02
         padding 400px 0 150px 0
+        @media(max-width 930px)
+            padding 200px 0 150px 0
+        @media(max-width 425px)
+            padding 100px 0 150px 0
         .inner
             display flex
             flex-wrap wrap
@@ -531,6 +621,8 @@ export default {
             max-width: 1200px
             margin: 0 auto
             position relative
+            @media(max-width 768px)
+                padding 0 20px
         .leafs
             position absolute
             top 100px
@@ -550,6 +642,13 @@ export default {
             color: #524941
             max-width 600px
             position relative
+            @media(max-width 1200px)
+                order 1
+                margin-bottom 80px
+            @media(max-width 560px)
+                font-size: 70px
+            @media(max-width 425px)
+                font-size: 50px
             span
                 display block
                 position relative
@@ -576,26 +675,23 @@ export default {
         .img
             max-width 50%
             position relative
+            @media(max-width 1200px)
+                order 2
+            @media(max-width 930px)
+                max-width 100%
             &>img
                 position relative
                 z-index 2
-                max-width 432px
-            .img-01
-                position: absolute
-                top: 290px
-                z-index: 1
-                width: 262px
-                left: -80px
-                img
-                    max-width 100%
-            .img-02
-                position: absolute
-                bottom: -160px
-                z-index: 1
-                width: 582px
-                right: -220px
-                img
-                    max-width 100%
+                max-width: 760px
+                transform: rotate(-9deg)
+                @media(max-width 650px)
+                    transform: translateX(-50%) rotate(-9deg)
+                    left: 50%
+                    max-width: 600px
+                @media(max-width 425px)
+                    transform: translateX(-50%) rotate(-9deg)
+                    left: 60%
+                    max-width: 510px
         .footprint-1
             position: absolute
             height: 190px
@@ -603,6 +699,24 @@ export default {
             right: 130px
             opacity: 0
             transition opacity .4s ease 0.5s
+            @media(max-width 1200px)
+                display none
+            &.in-viewport
+                opacity: 1
+            img
+                max-height 100%
+        .footprint-mobile
+            position: absolute
+            height: 190px
+            bottom: -210px
+            right: 30%
+            opacity: 0
+            transition opacity .4s ease 0.5s
+            display none
+            @media(max-width 930px)
+                display block
+            @media(max-width 425px)
+                right 20%
             &.in-viewport
                 opacity: 1
             img
@@ -611,9 +725,25 @@ export default {
             position absolute
             bottom -520px
             left 50%
+            @media(max-width 930px)
+                width: 20px
+                left: calc(50% - 10px)
+                bottom: -220px
+            .desktop
+                max-width 100%
+                @media(max-width 930px)
+                    display none
+            .mobile
+                display none
+                @media(max-width 930px)
+                    display block
     
     .sohobook-03
         padding 450px 0 150px 0
+        @media(max-width 930px)
+            padding 280px 0 150px 0
+        @media(max-width 425px)
+            padding 210px 0 150px 0
         .title
             font-size: 80px
             font-family: 'yeseva_oneregular'
@@ -627,6 +757,16 @@ export default {
             position: relative
             text-align: center
             margin: 0 auto 100px
+            @media(max-width 1200px)
+                margin-bottom 80px
+            @media(max-width 768px)
+                padding 0 20px
+            @media(max-width 560px)
+                font-size: 70px
+            @media(max-width 425px)
+                font-size: 45px
+            @media(max-width 320px)
+                font-size: 35px
             span
                 position relative
                 z-index 2
@@ -650,6 +790,8 @@ export default {
                 left: 300px
                 opacity: 0
                 transition opacity .4s ease 0.5s
+                @media(max-width 930px)
+                    display none
                 &.in-viewport
                     opacity: 1
                 img
@@ -661,6 +803,8 @@ export default {
                 width: 250px
                 opacity: 0
                 transition opacity .4s ease 0.5s
+                @media(max-width 930px)
+                    display none
                 &.in-viewport
                     opacity: 1
                 img
@@ -699,6 +843,13 @@ export default {
                 opacity: 0
                 transform translateY(-100px)
                 transition all .4s ease 0.5s
+                @media(max-width 1024px)
+                    right 110px
+                @media(max-width 600px)
+                    height 183px
+                    right 90px
+                    img
+                        max-height 100%
                 &.in-viewport
                     opacity: 1
                     transform translateY(0)
@@ -709,6 +860,12 @@ export default {
                 opacity: 0
                 transform translateY(-100px)
                 transition all .4s ease 0.5s
+                @media(max-width 1024px)
+                    right 10px
+                @media(max-width 600px)
+                    height 256px
+                    img
+                        max-height 100%
                 &.in-viewport
                     opacity: 1
                     transform translateY(0)
@@ -717,8 +874,12 @@ export default {
                 padding 80px 0
                 position: relative
                 z-index: 2
+                @media(max-width 980px)
+                    padding 170px 70px 0 70px
                 img
                     max-width 432px
+                    @media(max-width 660px)
+                        max-width 100%
             .text-1
                 font-family: 'yeseva_oneregular'
                 font-size: 40px
@@ -734,6 +895,12 @@ export default {
                 left: 150px
                 opacity: 0
                 transition opacity .4s ease 0.5s
+                @media(max-width 1200px)
+                    left 40px
+                @media(max-width 980px)
+                    position static
+                    text-align center
+                    padding-bottom: 20px
                 &.in-viewport
                     opacity: 1
                 .arrow
@@ -759,6 +926,15 @@ export default {
                 right: 80px
                 opacity: 0
                 transition opacity .4s ease 0.5s
+                @media(max-width 1200px)
+                    right: 40px
+                    text-align right
+                    max-width: 240px
+                @media(max-width 980px)
+                    max-width initial
+                    position static
+                    text-align center
+                    padding-bottom: 70px
                 &.in-viewport
                     opacity: 1
                 .arrow
@@ -776,6 +952,14 @@ export default {
                 opacity 0
                 transform: translateX(320px)
                 transition all .4s ease
+                @media(max-width 1024px)
+                    left 40px
+                @media(max-width 768px)
+                    left -40px
+                @media(max-width 500px)
+                    width 200px
+                    img
+                        max-width 100%
                 &.in-viewport
                     opacity 1
                     transform: translateX(0px)
@@ -786,12 +970,24 @@ export default {
                 opacity 0
                 transform: translate(-320px, -100px);
                 transition all .4s ease
+                @media(max-width 1024px)
+                    right 40px
+                @media(max-width 768px)
+                    right: -40px
+                    bottom: 200px
+                @media(max-width 500px)
+                    width 170px
+                    bottom: 220px
+                    img
+                        max-width 100%
                 &.in-viewport
                     opacity 1
                     transform: translate(0px, 0px)
 
     .sohobook-04
         padding: 380px 0 232px 0
+        @media(max-width 425px)
+            padding: 50px 0 232px 0
         .inner
             max-width 1440px
             margin 0 auto
@@ -808,6 +1004,10 @@ export default {
             position: relative
             text-align: center
             margin: 0 auto 40px
+            @media(max-width 560px)
+                font-size: 70px
+            @media(max-width 425px)
+                font-size: 45px
             span
                 position relative
                 z-index 2

@@ -236,8 +236,13 @@ $('.pressBtn')
         overflow visible
         backface-visibility: hidden
         -webkit-backface-visibility: hidden
-        // perspective 300px
-        // transform: translateZ(120px)
+        #f
+          animation f-letter 5s ease infinite
+          animation-direction: alternate;
+        // #oresco
+        //   animation oresco-letter 5s ease infinite
+        //   animation-direction: alternate
+          
 
     .text
       font-size: 14px
@@ -269,5 +274,22 @@ $('.pressBtn')
         text-decoration none
         color #ffffff
         display: block
+
+@keyframes f-letter {
+  0%{
+    transform: translateX(0px) rotate(0deg);
+  }
+  100%{
+    transform: translateX(-30px) rotate(-5deg);
+  }
+}
+@keyframes oresco-letter {
+  0%{
+    transform: translateX(0px) rotate(0deg);
+  }
+  100%{
+    transform: translateX(0px) rotate(5deg);
+  }
+}
 </style>
 
