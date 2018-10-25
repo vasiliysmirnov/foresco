@@ -528,6 +528,8 @@ export default {
                 left: 180px
                 z-index: 1
                 opacity: .1
+                @media(max-width 600px)
+                    font-size 250px
         .img
             max-width 50%
             position relative
@@ -672,6 +674,8 @@ export default {
                 left: 80px
                 z-index: 1
                 opacity: .1
+                @media(max-width 600px)
+                    font-size 250px
         .img
             max-width 50%
             position relative
@@ -783,6 +787,8 @@ export default {
                 position absolute
                 top: -240px
                 left: calc(50% - 215px)
+                @media(max-width 600px)
+                    font-size 250px
             .footprint-1
                 height 190px
                 position absolute
@@ -814,6 +820,7 @@ export default {
             background-size cover
             position relative
             background-attachment fixed
+            overflow hidden
             &:before
                 position absolute
                 content ''
@@ -987,7 +994,7 @@ export default {
     .sohobook-04
         padding: 380px 0 232px 0
         @media(max-width 425px)
-            padding: 50px 0 232px 0
+            padding: 50px 0 100px 0
         .inner
             max-width 1440px
             margin 0 auto
@@ -1008,6 +1015,7 @@ export default {
                 font-size: 70px
             @media(max-width 425px)
                 font-size: 45px
+                padding: 0 20px
             span
                 position relative
                 z-index 2
@@ -1024,6 +1032,10 @@ export default {
                 position absolute
                 top: -270px
                 left: calc(50% - 215px)
+                @media(max-width 600px)
+                    font-size 250px
+                    left: calc(50% - 166px)
+                    top -150px
         .font
             width: 417px
             height: 125px
@@ -1031,6 +1043,11 @@ export default {
             text-align center
             margin: 0 auto 80px
             padding: 38px 0 0 0
+            @media(max-width 600px)
+                max-width 260px
+                height: 84px
+                padding: 25px 40px 0
+                margin: 0 auto 40px
             img
                 max-width 100%
         .font-list
@@ -1039,14 +1056,31 @@ export default {
             align-items center
             justify-content space-around
             list-style none
+            @media(max-width 600px)
+                flex-wrap wrap
+                padding 0 60px
+                margin-bottom 65px
+            li
+                @media(max-width 600px)
+                    width 50%
+                    margin-bottom 27px
+                    &:nth-child(2n)
+                        text-align right
         .color-pallette
             display flex
             align-items center
             justify-content space-around
+            .txt
+                @media(max-width 860px)
+                    font-size 12px
+                @media(max-width 425px)
+                    font-size 6px
             .color-1
                 text-align center
                 .txt
                     margin-top 72px
+                    @media(max-width 425px)
+                        margin-top 30px
                 .ball
                     margin 0 auto
                     width: 50px
@@ -1054,10 +1088,18 @@ export default {
                     opacity: 0.2
                     background-color: #b2b2b2
                     border-radius 50%
+                    @media(max-width 860px)
+                        width: 25px
+                        height: 25px
+                    @media(max-width 425px)
+                        width: 14px
+                        height: 14px
             .color-2
                 text-align center
                 .txt
                     margin-top 68px
+                    @media(max-width 425px)
+                        margin-top 30px
                 .ball
                     margin 0 auto
                     width: 100px
@@ -1065,20 +1107,36 @@ export default {
                     opacity: 0.8
                     background-color: #161515
                     border-radius 50%
+                    @media(max-width 860px)
+                        width: 50px
+                        height: 50px
+                    @media(max-width 425px)
+                        width: 28px
+                        height: 28px
             .color-3
                 text-align center
                 .txt
                     margin-top 64px
+                    @media(max-width 425px)
+                        margin-top 30px
                 .ball
                     margin 0 auto
                     border-radius 50%
                     width: 150px
                     height: 150px
                     background-color: #f47539
+                    @media(max-width 860px)
+                        width: 75px
+                        height: 75px
+                    @media(max-width 425px)
+                        width: 42px
+                        height: 42px
             .color-4
                 text-align center
                 .txt
                     margin-top 62px
+                    @media(max-width 425px)
+                        margin-top 20px
                 .ball
                     margin 0 auto
                     width: 200px
@@ -1086,6 +1144,12 @@ export default {
                     background-color: #e75b4e
                     position relative
                     border-radius 50%
+                    @media(max-width 860px)
+                        width: 100px
+                        height: 100px
+                    @media(max-width 425px)
+                        width: 55px
+                        height: 55px
                     &:before
                         content ''
                         position absolute
@@ -1095,30 +1159,58 @@ export default {
                         top -30px
                         left -30px
                         border-radius 50%
+                        @media(max-width 860px)
+                            width: 130px
+                            height: 130px
+                            top -16px
+                            left -16px
+                        @media(max-width 425px)
+                            width: 72px
+                            height: 72px
+                            top -8px
+                            left -8px
             .color-5
                 text-align center
                 .txt
                     margin-top 64px
+                    @media(max-width 425px)
+                        margin-top 30px
                 .ball
                     margin 0 auto
                     width: 150px
                     height: 150px
                     background-color: #008eb7
                     border-radius 50%
+                    @media(max-width 860px)
+                        width: 75px
+                        height: 75px
+                    @media(max-width 425px)
+                        width: 42px
+                        height: 42px
             .color-6
                 text-align center
                 .txt
                     margin-top 67px
+                    @media(max-width 425px)
+                        margin-top 30px
                 .ball
                     margin 0 auto
                     width: 100px
                     height: 100px
                     background-color: #29acd2
                     border-radius 50%
+                    @media(max-width 860px)
+                        width: 50px
+                        height: 50px
+                    @media(max-width 425px)
+                        width: 28px
+                        height: 28px
             .color-7
                 text-align center
                 .txt
                     margin-top 62px
+                    @media(max-width 425px)
+                        margin-top 30px
                 .ball
                     margin 0 auto
                     width: 50px
@@ -1126,11 +1218,19 @@ export default {
                     opacity: 0.7
                     background-color: #008eb7
                     border-radius 50%
+                    @media(max-width 860px)
+                        width: 25px
+                        height: 25px
+                    @media(max-width 425px)
+                        width: 14px
+                        height: 14px
     .sohobook-05
         padding 346px 0 287px 0
         background url('~static/img/sohobook/05/section-5-bg.svg') no-repeat top
         background-size cover
         position relative
+        @media(max-width 425px)
+            padding 195px 0 87px 0
         .title
             font-size: 80px
             font-family: 'yeseva_oneregular'
@@ -1144,6 +1244,11 @@ export default {
             position: relative
             text-align: center
             margin: 0 auto 40px
+            @media(max-width 560px)
+                font-size: 70px
+            @media(max-width 425px)
+                font-size: 45px
+                padding: 0 20px
             span
                 position relative
                 z-index 2
@@ -1160,16 +1265,30 @@ export default {
                 position absolute
                 top: -260px
                 left: calc(50% - 215px)
+                @media(max-width 600px)
+                    font-size 250px
+                    left: calc(50% - 155px)
         .bg
             background url('~static/img/sohobook/05/main-img.png') no-repeat center
             width 100%
             height 1634px
             background-size cover
+            @media(max-width 768px)
+                height: 624px
+            @media(max-width 425px)
+                height: 481px
+            @media(max-width 375px)
+                height: 424px
+                background-size: contain
+            @media(max-width 320px)
+                height 364px
         .thank-you
             text-align center
             margin-bottom 35px
             img
                 max-width 256px
+                @media(max-width 425px)
+                    max-width 168px
         .sps
             font-family: 'yeseva_oneregular'
             font-size: 50px
@@ -1181,6 +1300,9 @@ export default {
             text-align: center
             color: #524941
             margin-bottom 75px
+            @media(max-width 425px)
+                font-size: 30px
+                padding 0 20px
         .line
             text-align center
             margin-bottom 10px

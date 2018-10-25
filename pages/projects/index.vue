@@ -75,6 +75,7 @@
             top: 0
             margin: 0
         img
+            max-width 300px
             @media(max-width 768px)
                 max-width 100%
     &__platform
