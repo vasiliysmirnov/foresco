@@ -341,10 +341,3 @@
         }
     }
 </script>
-            $('.project').slick({
-                infinite: true,
-                slidesToShow: 1,
-                dots: true,
-                arrows: false,
-                dotsClass: 'project__pagination',
-            });
