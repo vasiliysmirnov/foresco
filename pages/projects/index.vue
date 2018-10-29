@@ -57,10 +57,9 @@
         align-items center
         justify-content center
         margin: 0 0 20px 0
-        // opacity 0
         @media(max-width 768px)
             text-align: center
-            min-height: 470px
+            flex-wrap wrap
         @media(max-width 425px)
             min-height: 330px;
     &__img
@@ -68,11 +67,7 @@
         margin-right 100px
         // opacity 0
         @media(max-width 768px)
-            // width 100%
-            position: absolute
-            z-index: -1
-            opacity: .3!important
-            top: 0
+            max-width: 260px
             margin: 0
         img
             max-width 300px
@@ -107,8 +102,11 @@
         color: #eeeeee
         font-family: 'montserratsemibold'
         margin-bottom 15px
-        @media(max-width 425px)
-            font-size: 30px
+        @media(max-width 768px)
+            font-size 42px
+            margin-bottom 8px
+        // @media(max-width 425px)
+        //     font-size: 30px
     &__desc
         opacity: 0.5
         font-size: 16px

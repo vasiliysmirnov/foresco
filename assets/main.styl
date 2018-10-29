@@ -140,7 +140,7 @@ html {
       outline none
       transition transform .2s ease
       @media(max-width 425px)
-        display none
+        // display none
   &__prev
       background-image: url('~/static/img/prev-btn.svg')
       left: 10px
@@ -168,6 +168,8 @@ html {
     display: flex
     align-items: flex-end
     justify-content: center
+    @media(max-width 768px)
+      display: none
     li
       display inline-block
       button
