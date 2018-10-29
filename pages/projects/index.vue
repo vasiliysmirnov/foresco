@@ -12,7 +12,7 @@
                     
                     <div class="project">
                         <div v-for="project in projects" :key="project.id">
-                            <div class="project__item" >
+                            <div class="project__item" :data-bg-image="project.backgroung_color">
                                 <div class="project__img">
                                     <div class="project__platform">{{project.platform}}</div>
                                     <img :src="`http://u2859.green.elastictech.org/${project.image.data.url}`" :alt="project.name">
@@ -34,6 +34,10 @@
 </template>
 <style lang="stylus" scoped>
 .projects
+    position absolute
+    top 0
+    left 0
+    width 100%
     background-image: radial-gradient(circle at 68% 31%, #2d6271, #1e3c44)
     // background-image: radial-gradient(circle at 68% 31%, #823f89, #400945)
     // fix for content, to display elements by center
@@ -154,88 +158,123 @@
             let { data } = await client.getItems('projects')
             store.commit('setProjects', data)
         },
-        beforeRouteEnter (to, from, next) {
-            switch (from.path) {
-                // from main page
-                case '/':
-                    next(vm => {
-                        TweenMax.to(vm.$el, 0.1, {
-                            opacity: 0,
-                            onComplete: function() {
-                                TweenMax.to(vm.$el, 1, {
-                                    opacity: 1,
-                                    ease: Power2.easeInOut,
-                                })
-                            }
-                        })
-                    })
-                    break;
-                // from sohobook page
-                case '/projects/sohobook':
-                    next(vm => {
-                        vm.$el.style.transform = "scale(0.9) translateY(-100%)"
-                        TweenMax.to(vm.$el, 0.8, {
-                            y: 0,
-                            ease: Power2.easeInOut,
-                            onComplete: function() {
-                                TweenMax.to(vm.$el, 1, {
-                                    scale: 1,
-                                    ease: Power2.easeInOut,
-                                    onComplete: function() {
-
-                                    }, clearProps: 'all'
-                                })
-                            }
-                        })
-                    })
-                    break;
-                default:
-                    next()
-                }
-        },
-        // animation LEAVE from this page
-        beforeRouteLeave (to, from, next) {
-            switch (to.path) {
-                case "/projects/sohobook":
-                    TweenMax.to($('.projects'), 0.5, {
-                        scale: 0.9,
-                        ease: Power2.easeInOut,
-                        onComplete: function() {
-                            TweenMax.to($('.projects'), 1, {
-                                y: '-100%',
-                                ease: Power2.easeInOut,
-                                onComplete: function() {
-                                    next()
-                                }
-                            })
-                        }
-                    })
-                    break;
-                case "/team":
-                    TweenMax.to($('.projects'), 0.1, {
-                        opacity: 0, ease: Power2.easeInOut,
-                        onComplete: function() {
-                            next()
-                        }
-                    })
-                    break;
-                case "/contacts":
-                    TweenMax.to($('.projects'), 0.1, {
-                        opacity: 0, ease: Power2.easeInOut,
-                        onComplete: function() {
-                            next()
-                        }
-                    })
-                    break;
-                default:
-                    next()
-            }
-        },
+        scrollToTop: true,
         transition: {
-            name: 'projects',
-            // appear: true, // if we wanna to show animation on page load and reload
+            name: 'page-projects',
+            mode: 'in-out',
             css: false,
+            beforeEnter(el){
+                TweenMax.to(el, 0, {
+                    yPercent: -100, scale: 0.9, ease: Power2.easeInOut
+                })
+            },
+            enter(el, done){
+                done()
+                TweenMax.to(el, 1, {
+                    yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
+                    onComplete: function() {
+                        TweenMax.to(el, 1, {
+                            yPercent: 0, scale: 1, ease: Power2.easeInOut
+                        })
+                    }
+                })
+            },
+            // afterEnter(el){
+            //     TweenMax.to(el, 1, {
+            //         yPercent: 0, scale: 1, ease: Power2.easeInOut
+            //     })
+            // },
+            leave(el, done){
+                TweenMax.to(el, 1, {
+                    yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
+                    onComplete: function() {
+                        TweenMax.to(el, 1, {
+                            yPercent: -100, scale: 1, ease: Power2.easeInOut,
+                            onComplete: function() { done() }
+                        })
+                    }
+                })
+            }
+
         },
+        // beforeRouteEnter (to, from, next) {
+        //     switch (from.path) {
+        //         // from main page
+        //         case '/':
+        //             next(vm => {
+        //                 TweenMax.to(vm.$el, 0.1, {
+        //                     opacity: 0,
+        //                     onComplete: function() {
+        //                         TweenMax.to(vm.$el, 1, {
+        //                             opacity: 1,
+        //                             ease: Power2.easeInOut,
+        //                         })
+        //                     }
+        //                 })
+        //             })
+        //             break;
+        //         // from sohobook page
+        //         case '/projects/sohobook':
+        //             next(vm => {
+        //                 vm.$el.style.transform = "scale(0.9) translateY(-100%)"
+        //                 TweenMax.to(vm.$el, 0.8, {
+        //                     y: 0,
+        //                     ease: Power2.easeInOut,
+        //                     onComplete: function() {
+        //                         TweenMax.to(vm.$el, 1, {
+        //                             scale: 1,
+        //                             ease: Power2.easeInOut,
+        //                             onComplete: function() {
+
+        //                             }, clearProps: 'all'
+        //                         })
+        //                     }
+        //                 })
+        //             })
+        //             break;
+        //         default:
+        //             next()
+        //         }
+        // },
+        // animation LEAVE from this page
+        // beforeRouteLeave (to, from, next) {
+        //     switch (to.path) {
+        //         case "/projects/sohobook":
+        //             TweenMax.to($('.projects'), 0.5, {
+        //                 scale: 0.9,
+        //                 ease: Power2.easeInOut,
+        //                 onComplete: function() {
+        //                     TweenMax.to($('.projects'), 1, {
+        //                         y: '-100%',
+        //                         ease: Power2.easeInOut,
+        //                         onComplete: function() {
+        //                             next()
+        //                         }
+        //                     })
+        //                 }
+        //             })
+        //             break;
+        //         case "/team":
+        //             TweenMax.to($('.projects'), 0.1, {
+        //                 opacity: 0, ease: Power2.easeInOut,
+        //                 onComplete: function() {
+        //                     next()
+        //                 }
+        //             })
+        //             break;
+        //         case "/contacts":
+        //             TweenMax.to($('.projects'), 0.1, {
+        //                 opacity: 0, ease: Power2.easeInOut,
+        //                 onComplete: function() {
+        //                     next()
+        //                 }
+        //             })
+        //             break;
+        //         default:
+        //             next()
+        //     }
+        // },
+        
         methods:{
             // next animation for slider
             slideNextTo: function(event){

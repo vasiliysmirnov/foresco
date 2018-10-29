@@ -2,8 +2,8 @@
     <div class="sohobook">
         <transition name="slide-fade">
             <div class="goBack" v-if="show">
-                <!-- <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link> -->
-                <a @click="goToProjects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></a>
+                <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link>
+                <!-- <a @click="goToProjects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></a> -->
             </div>
         </transition>
         <div class="container">
@@ -198,59 +198,12 @@ export default {
         let { data } = await client.getItems('sohobook')
         store.commit('setSohobook', data)
     },
-    beforeRouteLeave (to, from, next) {
-        TweenMax.to($('.sohobook'), 0.1, {
-            opacity: 0, ease: Power2.easeInOut,
-            onComplete: function() {
-                next()
-            }
-        })
-    },
-    transition: {
-        name: 'sohobook',
-        // appear: true, // if we wanna to show animation on page load and reload
-        // css: false,
-        beforeEnter(el){
-            el.style.transform = "scale(0.9) translateY(100%)"
-        },
-        enter(el, done){
-            TweenMax.to($('.sohobook'), 1, {
-                y: 0,
-                ease: Power2.easeInOut,
-                onComplete: function() {
-                    TweenMax.to($('.sohobook'), 1, {
-                        scale: 1,
-                        ease: Power2.easeInOut,
-                        onComplete: function() {
-
-                        }, clearProps: 'all'
-                    })
-                }
-            })
-            done()
-        }
-    },
     components: {
         AppHeader,
         AppMenu,
         AppFooter
     },
     methods:{
-        goToProjects(){
-            TweenMax.to($('.sohobook'), 1, {
-                scale: 0.9,
-                ease: Power2.easeInOut,
-                onComplete: function() {
-                    TweenMax.to($('.sohobook'), 1, {
-                        y: '100%',
-                        ease: Power2.easeInOut,
-                        onComplete: function() {
-                            $nuxt.$router.back()
-                        }
-                    })
-                }
-            })
-        }
     },
     mounted() {
         // check when scroll is up to show the 'back' button
@@ -266,6 +219,46 @@ export default {
     computed: {
         sohobook() {
             return this.$store.state.sohobook
+        }
+    },
+    scrollToTop: true,
+    transition: {
+        name: 'page-sohobook',
+        mode: 'in-out',
+        css: false,
+        beforeEnter(el){
+            TweenMax.to(el, 0, {
+                y: '100vh', scale: 0.9, ease: Power2.easeInOut
+            })
+        },
+        enter(el, done){
+            done()
+            TweenMax.to(el, 1, {
+                y: '50vh', scale: 0.9, ease: Power2.easeInOut,
+                onComplete: function() {
+                    TweenMax.to(el, 1, {
+                        y: 0, scale: 1, ease: Power2.easeInOut,
+                        onComplete: function() {}, clearProps: 'all'
+                    })
+                }
+            })
+        },
+        // afterEnter(el){
+        //     TweenMax.to(el, 1, {
+        //         y: 0, scale: 1, ease: Power2.easeInOut,
+        //         onComplete: function() {}, clearProps: 'all'
+        //     })
+        // },
+        leave(el, done){
+            TweenMax.to(el, 1, {
+                y: '50vh', scale: 0.9, ease: Power2.easeInOut,
+                onComplete: function() {
+                    TweenMax.to(el, 1, {
+                        y: '100vh', ease: Power2.easeInOut,
+                        onComplete: function() { done() }
+                    })
+                }
+            })
         }
     },
     
@@ -286,7 +279,10 @@ export default {
 .sohobook
     background #ffffff
     color #302a2c
-    position relative
+    position absolute
+    top 0
+    left 0
+    width 100%
     .header
         position absolute
         top 0
