@@ -139,8 +139,6 @@ html {
       background-repeat: no-repeat
       outline none
       transition transform .2s ease
-      @media(max-width 425px)
-        // display none
   &__prev
       background-image: url('~/static/img/prev-btn.svg')
       left: 10px
@@ -165,11 +163,11 @@ html {
     width: 100%
     padding: 0
     list-style none
-    display: flex
+    display: flex!important
     align-items: flex-end
     justify-content: center
     @media(max-width 768px)
-      display: none
+      display: none!important
     li
       display inline-block
       button

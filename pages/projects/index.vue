@@ -46,7 +46,6 @@
         width 100%
         
 .project
-    max-height 600px // dirty hack for animation
     overflow hidden // dirty hack for animation
     &__wrapper
         max-width: 1200px
@@ -117,8 +116,8 @@
         letter-spacing: 0.2px
         color: #eeeeee
         margin-bottom 50px
-        @media(max-width 425px)
-            font-size: 14px
+        @media(max-width 768px)
+            margin-bottom 24px
     .swiper-slide-active
         .project__img,
         .project__text
