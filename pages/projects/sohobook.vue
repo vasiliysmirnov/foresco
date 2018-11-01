@@ -234,7 +234,7 @@ export default {
         enter(el, done){
             done()
             TweenMax.to(el, 1, {
-                y: '50vh', scale: 0.9, ease: Power2.easeInOut,
+                y: '25vh', ease: Power2.easeInOut,
                 onComplete: function() {
                     TweenMax.to(el, 1, {
                         y: 0, scale: 1, ease: Power2.easeInOut,
@@ -243,15 +243,9 @@ export default {
                 }
             })
         },
-        // afterEnter(el){
-        //     TweenMax.to(el, 1, {
-        //         y: 0, scale: 1, ease: Power2.easeInOut,
-        //         onComplete: function() {}, clearProps: 'all'
-        //     })
-        // },
         leave(el, done){
             TweenMax.to(el, 1, {
-                y: '50vh', scale: 0.9, ease: Power2.easeInOut,
+                scale: 0.9, ease: Power2.easeInOut,
                 onComplete: function() {
                     TweenMax.to(el, 1, {
                         y: '100vh', ease: Power2.easeInOut,
