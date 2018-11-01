@@ -86,6 +86,7 @@ export default {
                 var color = item.data("color");
                 var posY = 0;
                 posY = item.position().top + item.outerHeight();
+                console.log(posY)
                 if(item.data('last'))
                     var tween = TweenLite.to(line, 0.1, {transform: 'translateY(100%)', background: color});
                 else

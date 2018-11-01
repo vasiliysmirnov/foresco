@@ -4,7 +4,7 @@
             <app-header/>
             <app-menu/>
             <div class="content">
-                <div class="gallery gallery_main">
+                <!-- <div class="gallery gallery_main">
                     <div class="team__inner gallery__container">
                         <div class="gallery__draggable gallery__draggable_active" data-gallery>
                             <div class="team__item gallery__item" v-for="item in team" :key="item.id">
@@ -15,6 +15,21 @@
                                         <div class="position">{{item.position}}</div>
                                         <div class="txt">{{item.description}}</div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div> -->
+                <div class="teamSlide">
+                    <div class="team__inner">
+                        <div class="team__item" v-for="item in team" :key="item.id">
+                            <div class="team__item-inner">
+                                <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
+                                <div class="description">
+                                    <div class="name">{{item.name}}</div>
+                                    <div class="position">{{item.position}}</div>
+                                    <div class="txt">{{item.description}}</div>
                                 </div>
                             </div>
                         </div>
@@ -77,6 +92,25 @@
         },
         
         mounted() {
+
+            $('.teamSlide .team__inner').slick({
+                infinite: false,
+                slidesToShow: 1,
+                dots: false,
+                arrows: false,
+                variableWidth: true
+            });
+            $('.teamSlide .team__inner').on("mousedown", function(e){
+                // $(this).addClass('active')
+                TweenMax.to($('.team__item'), 0.6, {
+                    scale: 0.7
+                })
+            })
+            $('.teamSlide .team__inner').on("mouseup", function(e){
+                TweenMax.to($('.team__item'), 0.6, {
+                    scale: 1
+                })
+            })
 
             var tools = {
                 init: function(params) {
@@ -270,6 +304,7 @@
         display: flex
         flex-direction: column
         flex-grow: initial
+        padding 0
     &__inner
         // display flex
         // overflow-x scroll
@@ -277,7 +312,15 @@
         width: 100%
         max-width: 1200px
         margin: 0 auto
+        // transition: all .6s ease
+        // transform: scale(1)
+        // user-select: none
+        // cursor: none
+        // &.active
+        //     transform: scale(.7)
+        //     cursor: none
         .team__item
+            transform-origin left
             .team__item-inner
                 display flex
                 align-items center
@@ -385,9 +428,8 @@
 
 .cursor__text {
     font-size: 12px;
-    padding-top: 22px;
+    padding-top: 28px;
     text-align: center;
-    font-weight: 500;
     opacity: 0;
     transition: opacity .5s ease
 }
@@ -406,7 +448,6 @@
     text-align: center;
     font-size: 0;
     color: #fff;
-    -webkit-transform-origin: center center;
     transform-origin: center center
 }
 
@@ -498,11 +539,7 @@
     width: 100%;
     height: 516px;
     transition: all .6s ease;
-    -webkit-transform: scale(1);
     transform: scale(1);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     cursor: none;
 }
