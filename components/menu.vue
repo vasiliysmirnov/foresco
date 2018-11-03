@@ -183,10 +183,14 @@ export default {
     .menuBg
         width: 100%
         height: 100%
-        position: absolute;
-        background: #000;
-        z-index: 1;
-        top: 0;
+        position: absolute
+        background-color: #000
+        background-image url('~/static/img/menu-bg-2.gif')
+        background-position: center
+        background-repeat: no-repeat
+        background-size: cover
+        z-index: 1
+        top: 0
         right: 0
     .nav-wrapper
         position relative
