@@ -19,21 +19,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                </div> -->
-                <div class="teamSlide">
-                    <div class="team__inner">
-                        <div class="team__item" v-for="item in team" :key="item.id">
-                            <div class="team__item-inner">
-                                <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
-                                <div class="description">
-                                    <div class="name">{{item.name}}</div>
-                                    <div class="position">{{item.position}}</div>
-                                    <div class="txt">{{item.description}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="cursor" data-cursor>
                         <div class="cursor__fly" data-cursor-box>
                             <div class="cursor__body">
@@ -48,6 +33,20 @@
                         </div>
                         <div class="cursor__fly cursor__fly_slow" data-cursor-text>
                             <div class="cursor__text">drag me</div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="teamSlide">
+                    <div class="team__inner">
+                        <div class="team__item" v-for="item in team" :key="item.id">
+                            <div class="team__item-inner">
+                                <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
+                                <div class="description">
+                                    <div class="name">{{item.name}}</div>
+                                    <div class="position">{{item.position}}</div>
+                                    <div class="txt">{{item.description}}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,16 +97,15 @@
                 slidesToShow: 1,
                 dots: false,
                 arrows: false,
-                variableWidth: true
             });
             $('.teamSlide .team__inner').on("mousedown", function(e){
                 // $(this).addClass('active')
-                TweenMax.to($('.team__item'), 0.6, {
+                TweenMax.to($('.team__inner'), 0.6, {
                     scale: 0.7
                 })
             })
             $('.teamSlide .team__inner').on("mouseup", function(e){
-                TweenMax.to($('.team__item'), 0.6, {
+                TweenMax.to($('.team__inner'), 0.6, {
                     scale: 1
                 })
             })
@@ -306,62 +304,43 @@
         flex-grow: initial
         padding 0
     &__inner
-        // display flex
-        // overflow-x scroll
-        // flex-direction row
         width: 100%
         max-width: 1200px
         margin: 0 auto
-        // transition: all .6s ease
-        // transform: scale(1)
-        // user-select: none
-        // cursor: none
-        // &.active
-        //     transform: scale(.7)
-        //     cursor: none
         .team__item
             transform-origin left
+            width 100%
+            max-width 900px
+            position relative
+            margin-right 50px
             .team__item-inner
                 display flex
                 align-items center
                 justify-content space-between
                 flex: 1 0 auto
-            width 100%
-            max-width 900px
-            position relative
-            margin-right 50px
-            @media(max-width 620px)
-                min-height calc(100vh - 270px)
-                overflow hidden
+                @media(max-width 910px)
+                    flex-wrap wrap
+                    justify-content: center
             .img
                 width 50%
-                @media(max-width 620px)
+                @media(max-width 910px)
                     width 100%
-                    position absolute
-                    top 0
-                    left 0
-                    height 100%
-                    opacity: 0.6
+                    padding 0 15px 0 20px
+                    margin-bottom 50px
                 img
                     max-width 620px
-                    @media(max-width 620px)
-                        max-width initial
-                        min-width: 100%
-                        height: auto
-                        min-height: 100%
-                        width: auto
-                        position: absolute
-                        top: 50%
-                        left: 50%
-                        transform: translate(-50%,-50%) scale(0.5)
+                    @media(max-width 910px)
+                        margin 0 auto
+                    @media(max-width 768px)
+                        margin 0
+                    @media(max-width 650px)
+                        width 100%
             .description
                 text-align right
                 width 50%
-                @media(max-width 620px)
+                @media(max-width 600px)
                     width 100%
-                    position relative
-                    z-index 1
-                    text-shadow 1px 1px 3px #333
+                    padding-right 15px
                 .name
                     font-family: 'montserratbold'
                     font-size: 36px
