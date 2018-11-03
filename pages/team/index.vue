@@ -19,6 +19,21 @@
                             </div>
                         </div>
                     </div>
+                    
+                </div> -->
+                <div class="teamSlide">
+                    <div class="team__inner">
+                        <div class="team__item" v-for="item in team" :key="item.id">
+                            <div class="team__item-inner">
+                                <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
+                                <div class="description">
+                                    <div class="name">{{item.name}}</div>
+                                    <div class="position">{{item.position}}</div>
+                                    <div class="txt">{{item.description}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="cursor" data-cursor>
                         <div class="cursor__fly" data-cursor-box>
                             <div class="cursor__body">
@@ -33,20 +48,6 @@
                         </div>
                         <div class="cursor__fly cursor__fly_slow" data-cursor-text>
                             <div class="cursor__text">drag me</div>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="teamSlide">
-                    <div class="team__inner">
-                        <div class="team__item" v-for="item in team" :key="item.id">
-                            <div class="team__item-inner">
-                                <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
-                                <div class="description">
-                                    <div class="name">{{item.name}}</div>
-                                    <div class="position">{{item.position}}</div>
-                                    <div class="txt">{{item.description}}</div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,15 +92,15 @@
         },
         
         mounted() {
-
+            // team carousel
             $('.teamSlide .team__inner').slick({
                 infinite: false,
                 slidesToShow: 1,
                 dots: false,
                 arrows: false,
             });
+            // animation for carousel
             $('.teamSlide .team__inner').on("mousedown", function(e){
-                // $(this).addClass('active')
                 TweenMax.to($('.team__inner'), 0.6, {
                     scale: 0.7
                 })
@@ -109,6 +110,9 @@
                     scale: 1
                 })
             })
+
+            // animation for cursor
+            // $('.teamSlide')
 
             var tools = {
                 init: function(params) {
