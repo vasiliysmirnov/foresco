@@ -24,6 +24,8 @@
     width 100%
     @media (max-width 500px)
         flex-wrap wrap
+    @media (max-width 425px)
+        padding 30px 20px
     .phone
         font-size: 16px
         font-family: 'montserratmedium'

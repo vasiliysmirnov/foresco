@@ -246,23 +246,23 @@ $('.pressBtn')
         backface-visibility: hidden
         -webkit-backface-visibility: hidden
         #f
-          animation f-letter 60s linear
+          animation f-letter 80s linear
           animation-fill-mode forwards
         #o-1
-          animation o1-letter 40s linear
+          animation o1-letter 80s linear
           animation-fill-mode forwards
         #r
-          animation r-letter 50s linear
+          animation r-letter 80s linear
           animation-fill-mode forwards
         #s
-          animation s-letter 40s linear
+          animation s-letter 80s linear
           animation-fill-mode forwards
         #c
-          animation c-letter 50s linear
+          animation c-letter 80s linear
           animation-fill-mode forwards
           transform-origin center
         #o
-          animation o-letter 60s linear
+          animation o-letter 80s linear
           animation-fill-mode forwards
           
 
@@ -310,7 +310,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(-16%) translateY(-12%) rotate(15deg);
+    transform: translateX(-15%) translateY(-12%) rotate(15deg);
   }
 }
 @keyframes r-letter {
@@ -318,7 +318,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(-12%) translateY(-20%) rotate(5deg);
+    transform: translateX(-10%) translateY(-20%) rotate(5deg);
   }
 }
 @keyframes s-letter {
@@ -326,7 +326,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(15%) translateY(44%) rotate(-17deg);
+    transform: translateX(10%) translateY(44%) rotate(-17deg);
   }
 }
 @keyframes c-letter {
@@ -334,7 +334,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(25%) translateY(1%) rotate(10deg);
+    transform: translateX(23%) translateY(1%) rotate(10deg);
   }
 }
 @keyframes o-letter {

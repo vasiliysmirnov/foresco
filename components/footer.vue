@@ -15,6 +15,8 @@ footer
     display flex
     align-items center
     justify-content space-between
+    @media(max-width 425px)
+        padding 30px 20px
     .social
         a
             margin 0 16px 0 0

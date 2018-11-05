@@ -173,7 +173,8 @@
                     yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
                     onComplete: function() {
                         TweenMax.to(el, 1, {
-                            yPercent: 0, scale: 1, ease: Power2.easeInOut
+                            yPercent: 0, scale: 1, ease: Power2.easeInOut,
+                            onComplete: function() {}, clearProps: 'all'
                         })
                     }
                 })

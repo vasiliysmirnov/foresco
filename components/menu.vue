@@ -54,7 +54,7 @@ export default {
             $(this).css({'color': '#fff'})
             // return active link color
             for (let index = 0; index < navLinks.length; index++) {
-                const element = navLinks[index];
+                var element = navLinks[index];
                 if($nuxt.$route.path == $(element).data('link')){
                     $(element).css({'color': $(element).data("color")})
                     onLinkHover($(element))
@@ -67,13 +67,13 @@ export default {
             var posY = 0;
             posY = item.position().top + item.outerHeight();
             if(item.data('last'))
-                var tween = TweenLite.to(line, 0.1, {transform: 'translateY(100%)', background: color});
+                TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: color});
             else
-                var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+                TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
         };
         var onLinkLeave = function(item) {
             var posY = 0;
-            var tween = TweenLite.to(line, 0.1, {transform: 'translateY(0px)', background: 'transparent'});
+            TweenMax.to(line, 0.1, {transform: 'translateY(0px)', background: 'transparent'});
         };
         
     },
@@ -86,14 +86,14 @@ export default {
                 var color = item.data("color");
                 var posY = 0;
                 posY = item.position().top + item.outerHeight();
-                console.log(posY)
                 if(item.data('last'))
-                    var tween = TweenLite.to(line, 0.1, {transform: 'translateY(100%)', background: color});
+                    TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: color});
                 else
-                    var tween = TweenLite.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+                    TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+                    
             };
             for (let index = 0; index < navLinks.length; index++) {
-                const element = navLinks[index];
+                var element = navLinks[index];
                 if($nuxt.$route.path == $(element).data('link')){
                     $(element).css({'color': $(element).data("color")})
                     onLinkHover($(element))
@@ -106,7 +106,7 @@ export default {
         animationClickToLinkMenu: function(event, link){
             var line = document.getElementById('lineItem');
             var target = event.currentTarget
-            var tween = TweenLite.to(line, 0.1, {
+            TweenMax.to(line, 0.1, {
                 height: 0,
                 onComplete: function() {
                     TweenMax.to(target, 0.3, {
