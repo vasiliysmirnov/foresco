@@ -100,194 +100,37 @@
                 arrows: false,
             });
             // animation for carousel
-            $('.teamSlide .team__inner').on("mousedown", function(e){
-                TweenMax.to($('.team__inner'), 0.6, {
+            $('.teamSlide').on("mousedown", function(e){
+                TweenMax.to($('.team__item'), 0.6, {
                     scale: 0.7
                 })
+                cursor.addClass('cursor_active');
             })
-            $('.teamSlide .team__inner').on("mouseup", function(e){
-                TweenMax.to($('.team__inner'), 0.6, {
-                    scale: 1
+            $('.teamSlide')
+                .on("mouseup", function(e){
+                    TweenMax.to($('.team__item'), 0.6, {
+                        scale: 1
+                    })
+                    cursor.removeClass('cursor_active');
                 })
-            })
-
+                .on("mousemove", function(e){
+                    cursorMove(e);
+                });
+            function cursorMove(e){
+                cursor[0].style.transform = "translate3D("+(e.clientX-38)+"px, "+(e.clientY-38)+"px, 0)";
+            }
             // animation for cursor
-            // $('.teamSlide')
-
-            var tools = {
-                init: function(params) {
-
-                    this.client();
-
-                    if (params == undefined) return;
-
-                    var i = 0;
-                    var paramsLen = params.length;
-
-                    for (i; i < paramsLen; i++) {
-                        tools[params[i]]();
-                    }
-
-                },
-                client: function() {
-
-                    window.client = {
-                        get: function() {
-                            this.$document = $(document);
-                            this.$window = $(window);
-                            this.windowW = this.$window.width();
-                            this.windowH = this.$window.height();
-                            this.isMobile = this.windowW <= 1200;
-                            this.scrollW = this.getScrollWidth();
-                            this.isRetina = this.checkRetina();
-                        },
-                        getScrollWidth: function() {
-                            var outer = document.createElement("div");
-                            outer.style.visibility = "hidden";
-                            outer.style.width = "100px";
-                            outer.style.msOverflowStyle = "scrollbar";
-                            document.body.appendChild(outer);
-                            var widthNoScroll = outer.offsetWidth;
-                            outer.style.overflow = "scroll";
-                            var inner = document.createElement("div");
-                            inner.style.width = "100%";
-                            outer.appendChild(inner);
-                            var widthWithScroll = inner.offsetWidth;
-                            outer.parentNode.removeChild(outer);
-                            return widthNoScroll - widthWithScroll;
-                        },
-                        checkRetina: function() {
-                            if (window.matchMedia) {
-                                var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen  and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
-                                return (mq && mq.matches || (window.devicePixelRatio > 1));
-                            }
-                        },
-                    };
-
-                    client.get();
-
-                    client.$window.on('resize', function() {
-                        client.get();
-                    });
-                },
-            };
-
-            var gallery = {
-                init: function(){
-                    var th = gallery;
-                    
-                    th.elements = {
-                        $galleryContainer: $('.gallery__container'),
-                        $gallery: $('[data-gallery]'),
-                        $cursor: $('[data-cursor]'),
-                        $cursorText: $('[data-cursor-text]'),
-                        $cursorBox: $('[data-cursor-box]'),
-                    };
-
-                    th.mods = {
-                        galleryActive: 'gallery__container_active',
-                        cursorHover: 'cursor_hover',
-                        cursorActive: 'cursor_active'
-
-                    };
-                    
-                    if(th.elements.$gallery.length > 0){
+            var gallery = $('.teamSlide');
+            var cursor = $('[data-cursor]'),
+                cursorText = $('[data-cursor-text]'),
+                cursorBox = $('[data-cursor-box]');
+            gallery.on('mouseenter', function(e){
+                cursor.addClass('cursor_hover');
                 
-                        th.property = {
-                            x: 0,
-                            xTemp: 0,
-                            width: th.elements.$gallery.width(),
-                            halfSize: th.elements.$gallery.width() / 2,
-                            scale: 0.7
-                        };
-                
-                        th.data = {
-                            drag: false,
-                            mouse: {
-                                x: 0,
-                                y: 0,
-                                multiple: 1.2
-                            }
-                        };
-
-                        th.services = {
-                            multiple: function(x){
-                                x += th.data.mouse.multiple * x;
-                                return x;
-                            },
-                            setMaxPosition: function(x){
-                                var maxLeft = th.property.halfSize,
-                                    // maxRight = -(th.property.halfSize - tools.client.windowW);
-                                    maxRight = 0;
-                                if(x > maxLeft) x = maxLeft;
-                                if(x < maxRight) x = maxRight;
-                                return x;
-                            }
-                        };
-
-
-                        th.elements.$gallery.css({
-                            'left': -th.property.halfSize + 'px',
-                            'transform': 'translate3d(' + th.property.halfSize + 'px, 0px, 0px)'
-                        });
-                        th.events();
-
-                        th.elements.$gallery.addClass("gallery__draggable_active");
-                    }
-                },
-                events: function(){
-                    var th = gallery;
-                
-                    $(document)
-                    .on("mousedown", function(e){
-                        th.dragStart(e);
-                    })
-                    .on("mouseup", function(e){
-                        th.dragStop(e); 
-                    })
-                    .on("mousemove", function(e){
-                        th.drag(e);
-                        th.cursorMove(e);
-                    });
-
-                    th.elements.$gallery
-                    .on("mouseenter", function(){
-                        th.elements.$cursor.addClass(th.mods.cursorHover);
-                    })
-                    .on("mouseleave", function(){
-                        if(!th.elements.$cursor.hasClass(th.mods.cursorActive)) th.elements.$cursor.removeClass(th.mods.cursorHover);           
-                    });
-                },
-                dragStart: function(e){
-                    var th = gallery;
-                    if(!th.elements.$cursor.hasClass(th.mods.cursorHover)) return;
-
-                    th.data.drag = true;
-                    th.data.mouse.x = th.services.multiple(e.pageX);
-                    th.elements.$galleryContainer.addClass(th.mods.galleryActive);
-                    th.elements.$cursor.addClass(th.mods.cursorActive);
-                },
-                dragStop: function(e){
-                    var th = gallery;
-
-                    th.data.drag = false;
-                    th.property.x = th.property.xTemp;
-                    th.data.mouse.x = th.services.multiple(e.pageX);
-                    th.elements.$galleryContainer.removeClass(th.mods.galleryActive);
-                    th.elements.$cursor.removeClass(th.mods.cursorActive);
-                },
-                drag: function(e){
-                    var th = gallery;
-                    th.property.xTemp = th.services.setMaxPosition(th.property.x - (th.data.mouse.x - th.services.multiple(e.pageX)));
-                    if(th.data.drag) th.elements.$gallery[0].style.transform = "translate3D(" + th.property.xTemp + "px, 0, 0)";
-                },
-                cursorMove: function(e) {
-                    var th = gallery;
-                    th.elements.$cursor[0].style.transform = "translate3D("+(e.pageX-46)+"px, "+(e.pageY-$(document).scrollTop()-46)+"px, 0)";
-                }
-            };
-
-            gallery.init()
+            })
+            gallery.on('mouseleave', function(e){
+                if(!cursor.hasClass('cursor_active')) cursor.removeClass('cursor_hover');
+            })
             
         },
         computed: {
@@ -300,6 +143,9 @@
 </script>
 
 <style lang="stylus" scoped>
+.teamSlide
+    &:hover
+        cursor none
 .team
     // fix for content, to display elements by center
     .content
@@ -511,49 +357,5 @@
 .cursor_hover .cursor__text {
     opacity: 1
 }
-.gallery {
-    width: 100%;
-    min-height: 500px;
-    position: relative;
-}
-.gallery__container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 516px;
-    transition: all .6s ease;
-    transform: scale(1);
-    user-select: none;
-    cursor: none;
-}
 
-.gallery__container_active {
-    -webkit-transform: scale(.7);
-    transform: scale(.7);
-    cursor: none
-}
-.gallery__draggable {
-    position: absolute;
-    left: 50%;
-    width: auto;
-    white-space: nowrap;
-    height: 516px;
-    transition: opacity .6s ease 1s;
-    opacity: 0;
-}
-.gallery__draggable_active {
-    opacity: 1;
-}
-.gallery__item {
-    width: auto;
-    height: 470px;
-    margin-right: 64px;
-    display: inline-block;
-    text-align: right;
-    vertical-align: top;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 </style>
