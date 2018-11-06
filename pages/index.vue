@@ -201,12 +201,6 @@ $('.pressBtn')
     position relative
     overflow hidden
     .animateBlock
-      -webkit-transform-style: preserve-3d
-      -moz-transform-style: preserve-3d
-      transform-style: preserve-3d
-      transform: translateZ(0px)
-      -moz-transform: translateZ(0px)
-      -webkit-transform: translateZ(0px)
       position relative
       z-index 2
       perspective: 500px
@@ -242,9 +236,7 @@ $('.pressBtn')
       svg
         max-width 100%
         width 600px
-        overflow visible
-        backface-visibility: hidden
-        -webkit-backface-visibility: hidden
+        overflow visible!important
         #f
           animation f-letter 80s linear
           animation-fill-mode forwards
@@ -318,7 +310,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(-10%) translateY(-20%) rotate(5deg);
+    transform: translateX(-10%) translateY(-9%) rotate(5deg);
   }
 }
 @keyframes s-letter {
@@ -326,7 +318,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(10%) translateY(44%) rotate(-17deg);
+    transform: translateX(10%) translateY(48%) rotate(-17deg);
   }
 }
 @keyframes c-letter {
@@ -334,7 +326,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(23%) translateY(1%) rotate(10deg);
+    transform: translateX(23%) translateY(-11%) rotate(10deg);
   }
 }
 @keyframes o-letter {
@@ -342,7 +334,7 @@ $('.pressBtn')
     transform: translateX(0px) rotate(0deg);
   }
   100%{
-    transform: translateX(30%) translateY(-18%);
+    transform: translateX(30%);
   }
 }
 </style>
