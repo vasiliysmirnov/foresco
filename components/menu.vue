@@ -8,18 +8,18 @@
             <transition name="fadeMenu">
                 <div class="nav-wrapper" v-show='showNav'>
                     <ul>
-                        <li data-color="#4597e1" @click="changeNavStateProjects" data-link="/projects">
+                        <li data-color="#4597e1" @click="changeNavStateProjects" data-link="/projects" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
                             <a><span>Проекты</span></a>
                         </li>
-                        <li data-color="#bade38" @click="changeNavStateTeam" data-link="/team">
+                        <li data-color="#bade38" @click="changeNavStateTeam" data-link="/team" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
                             <a><span>Команда</span></a>
                         </li>
-                        <li data-color="#e19d45" data-link="/contacts" data-last="true" @click="changeNavStateContacts">
+                        <li data-color="#e19d45" data-link="/contacts" data-last="true" @click="changeNavStateContacts" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
                             <a><span>Контакты</span></a>
                         </li>
                     </ul>
                     <div class="line">
-                        <span id="lineItem"></span>
+                        <span id="menuLineItem"></span>
                     </div>
                 </div>
             </transition>
@@ -38,73 +38,58 @@ export default {
         }
     },
     mounted () {
-        var navLinks = $('.nav-wrapper ul li');
-        var line = document.getElementById('lineItem');
-
-        navLinks.on("mouseenter", function() {
-            onLinkHover($(this))
-            // all links are white
-            navLinks.css({'color': '#fff'})
-            // change color of the hover menu item 
-            $(this).css({'color': $(this).data("color")})
-        });
-        navLinks.on("mouseleave", function() {
-            onLinkLeave($(this))
-            // change color back to white
-            $(this).css({'color': '#fff'})
-            // return active link color
+        // check The Active Link when we change the route
+        this.checkTheActiveLink();
+    },
+    methods: {
+        checkTheActiveLink: function(){
+            var navLinks = $('.nav-wrapper ul li');
+            var line = document.getElementById('menuLineItem');
+            var posY = 0;
             for (let index = 0; index < navLinks.length; index++) {
                 var element = navLinks[index];
                 if($nuxt.$route.path == $(element).data('link')){
+                    // set position of the line
+                    posY = $(element).position().top + $(element).outerHeight();
+                    // set the color to the link
                     $(element).css({'color': $(element).data("color")})
-                    onLinkHover($(element))
+                    // move line to active item
+                    if($(element).data('last'))
+                        TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: $(element).data("color")});
+                    else
+                        TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: $(element).data("color")});
                 }
             }
-        });
-
-        var onLinkHover = function(item) {
-            var color = item.data("color");
+        },
+        onLinkHover: function(item) {
+            var line = document.getElementById('menuLineItem');
+            var color = $(item.target).data("color");
             var posY = 0;
-            posY = item.position().top + item.outerHeight();
-            if(item.data('last'))
+            var navLinks = $('.nav-wrapper ul li');
+            // set color to all elements
+            $(navLinks).css({'color': '#FFF'});
+            // set position of the line
+            posY = $(item.target).position().top + $(item.target).outerHeight();
+            // change color of the hover menu item 
+            $(item.target).css({'color': $(item.target).data("color")})
+            // animate line
+            if($(item.target).data('last'))
                 TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: color});
             else
                 TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
-        };
-        var onLinkLeave = function(item) {
+        },
+        onLinkLeave: function(item) {
+            var line = document.getElementById('menuLineItem');
             var posY = 0;
             TweenMax.to(line, 0.1, {transform: 'translateY(0px)', background: 'transparent'});
-        };
-        
-    },
-    updated: function () {
-        this.$nextTick(function () {
-            // well, it's not the code i proud of, but it's work
-            var navLinks = $('.nav-wrapper ul li');
-            var line = document.getElementById('lineItem');
-            var onLinkHover = function(item) {
-                var color = item.data("color");
-                var posY = 0;
-                posY = item.position().top + item.outerHeight();
-                if(item.data('last'))
-                    TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: color});
-                else
-                    TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
-                    
-            };
-            for (let index = 0; index < navLinks.length; index++) {
-                var element = navLinks[index];
-                if($nuxt.$route.path == $(element).data('link')){
-                    $(element).css({'color': $(element).data("color")})
-                    onLinkHover($(element))
-                }
-            }
-            // the end of this 
-        })
-    },
-    methods: {
+            // set the color to white
+            $(item.target).css({'color': '#FFF'});
+            // check the active link and add color
+            this.checkTheActiveLink()
+        },
+
         animationClickToLinkMenu: function(event, link){
-            var line = document.getElementById('lineItem');
+            var line = document.getElementById('menuLineItem');
             var target = event.currentTarget
             TweenMax.to(line, 0.1, {
                 height: 0,

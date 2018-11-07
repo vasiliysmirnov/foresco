@@ -323,10 +323,6 @@
             projects() {
                 return this.$store.state.projects
             },
-        },
-        data () {
-            return {
-            }
         }
     }
 </script>
