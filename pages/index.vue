@@ -178,6 +178,8 @@ $('.pressBtn')
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
+
 #canvas
   width 100%
   height 100%
@@ -203,7 +205,7 @@ $('.pressBtn')
     .animateBlock
       position relative
       z-index 2
-      perspective: 500px
+      perspective: rem(500px)
     .background
       width 100%
       height 100%
@@ -212,17 +214,15 @@ $('.pressBtn')
       top 0
       left 0
       .background__img
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-size: cover;
-        transform: translateZ(30px);
-        -moz-transform: translateZ(30px);
-        -webkit-transform: translateZ(30px);
-        transform: scale(1.2);
+        width: 100%
+        height: 100%
+        position: absolute
+        z-index: 1
+        top: 0
+        left: 0
+        background-size: cover
+        transform: translateZ(rem(30px))
+        transform: scale(1.2)
     .logo
       margin 0 auto
       // perspective: 300px
@@ -231,11 +231,11 @@ $('.pressBtn')
       @media(max-width 700px)
         // transform: translateZ(50px)
       @media(max-width 600px)
-        padding 0 20px
+        padding rem(0 20px)
         // transform: translateZ(20px)
       svg
         max-width 100%
-        width 600px
+        width rem(600px)
         overflow visible!important
         #f
           animation f-letter 80s linear
@@ -259,29 +259,29 @@ $('.pressBtn')
           
 
     .text
-      font-size: 14px
+      font-size: rem(14px)
       font-weight: normal
       font-style: normal
       font-stretch: normal
       line-height: normal
-      letter-spacing: 4px
+      letter-spacing: rem(4px)
       color: #eeeeee
       text-transform uppercase
       // transform: translateZ(120px)
       // @media(max-width 600px)
       //   transform: translateZ(10px)
     .pressBtn
-      width: 80px
-      height: 80px
+      width: rem(80px)
+      height: rem(80px)
       margin: 0 auto
-      border: 1px solid #fff
+      border: rem(1px) solid #fff
       border-radius: 50%
       text-align: center
-      line-height: 80px;
+      line-height: rem(80px)
       text-transform: uppercase
-      font-size: 13px
+      font-size: rem(13px)
       position absolute
-      bottom 50px
+      bottom rem(50px)
       cursor pointer
       z-index 2
       a
@@ -291,7 +291,7 @@ $('.pressBtn')
 
 @keyframes f-letter {
   0%{
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
   100%{
     transform: translateX(-30%) rotate(-5deg);
@@ -299,7 +299,7 @@ $('.pressBtn')
 }
 @keyframes o1-letter {
   0%{
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
   100%{
     transform: translateX(-15%) translateY(-12%) rotate(15deg);
@@ -307,7 +307,7 @@ $('.pressBtn')
 }
 @keyframes r-letter {
   0%{
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
   100%{
     transform: translateX(-10%) translateY(-9%) rotate(5deg);
@@ -315,7 +315,7 @@ $('.pressBtn')
 }
 @keyframes s-letter {
   0%{
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
   100%{
     transform: translateX(10%) translateY(48%) rotate(-17deg);
@@ -323,7 +323,7 @@ $('.pressBtn')
 }
 @keyframes c-letter {
   0%{
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
   100%{
     transform: translateX(23%) translateY(-11%) rotate(10deg);
@@ -331,7 +331,7 @@ $('.pressBtn')
 }
 @keyframes o-letter {
   0%{
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
   100%{
     transform: translateX(30%);

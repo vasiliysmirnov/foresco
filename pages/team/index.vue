@@ -180,7 +180,7 @@
                     padding rem(0 15px 0 20px)
                     margin-bottom rem(50px)
                 img
-                    max-width 620px
+                    max-width rem(620px)
                     @media(max-width 910px)
                         margin 0 auto
                     @media(max-width 768px)
