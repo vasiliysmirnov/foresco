@@ -143,6 +143,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
 .contacts
     // fix for content, to display elements by center
     .content
@@ -153,59 +154,59 @@ export default {
         display flex
         align-items flex-start
         width 100%
-        max-width: 1200px
+        max-width: rem(1200px)
         margin: 0 auto
         @media(max-width 768px)
             flex-direction: column-reverse
         .map
             width 50%
-            margin 0 60px 0 0
+            margin rem(0 60px 0 0)
             @media(max-width 768px)
                 width 100%
                 margin 0
             img
                 max-width 100%
             .address
-                font-size: 16px
+                font-size: rem(16px)
                 font-family: 'montserratsemibold'
                 font-style: normal
                 font-stretch: normal
                 line-height: normal
-                letter-spacing: 1px
+                letter-spacing: rem(1px)
                 color: #ffffff
-                margin 15px 0 0 0
+                margin rem(15px 0 0 0)
         .form
             width 50%
             text-align center
             @media(max-width 768px)
                 width 100%
-                margin-bottom 50px
+                margin-bottom rem(50px)
             .form__item
                 position relative
-                margin 0 0 30px 0
+                margin rem(0 0 30px 0)
                 label
                     font-family: 'montserratregular'
                     color rgba(255, 255, 255, .5)
                     position absolute
                     top 0
                     left 0
-                    font-size 14px
-                    transform: translateY(7px);
+                    font-size rem(14px)
+                    transform: translateY(rem(7px));
                     pointer-events: none
                     transition: all .1s
                 .error
                     color red
-                    font-size: 12px
+                    font-size: rem(12px)
             input[type=text],
             input[type=phone]
                 font-family: 'montserratregular'
                 color rgba(255, 255, 255, .5)
                 background transparent
                 border 0
-                border-bottom: solid 1px rgba(151, 151, 151, .4)
+                border-bottom: solid rem(1px) rgba(151, 151, 151, .4)
                 width 100%
                 display block
-                padding 10px 0
+                padding rem(10px 0)
                 margin 0
                 transition: all .1s
                 outline none
@@ -213,47 +214,47 @@ export default {
                 &.active
                     border-color #e19d45
                 &:-webkit-autofill + label
-                    transform: translateY(-5px)
-                    font-size: 10px
+                    transform: translateY(rem(-5px))
+                    font-size: rem(10px)
                     color #e19d45
                 &:focus + label
                 &.active + label
-                    transform: translateY(-5px)
-                    font-size: 10px
+                    transform: translateY(rem(-5px))
+                    font-size: rem(10px)
                     color #e19d45
             textarea
                 font-family: 'montserratregular'
                 color rgba(255, 255, 255, .5)
                 background transparent
                 border 0
-                border-bottom: solid 1px rgba(151, 151, 151, .4)
+                border-bottom: solid rem(1px) rgba(151, 151, 151, .4)
                 width 100%
                 display block
-                padding 10px 0
-                margin 0 0 30px 0
+                padding rem(10px 0)
+                margin rem(0 0 30px 0)
                 outline none
                 &:focus,
                 &.active
                     border-color #e19d45
                 &:-webkit-autofill + label
-                    transform: translateY(-5px)
-                    font-size: 10px
+                    transform: translateY(rem(-5px))
+                    font-size: rem(10px)
                     color #e19d45
                 &:focus + label
                 &.active + label
-                    transform: translateY(-5px)
-                    font-size: 10px
+                    transform: translateY(rem(-5px))
+                    font-size: rem(10px)
                     color #e19d45
             input[type='submit']
                 width: 100%
-                max-width: 321px
-                height: 48px
-                border-radius: 24px
+                max-width: rem(321px)
+                height: rem(48px)
+                border-radius: rem(24px)
                 background-color: #e19d45
                 outline none
                 border 0
                 font-family: 'montserratregular'
-                font-size: 16px
+                font-size: rem(16px)
                 font-weight: normal
                 font-style: normal
                 font-stretch: normal
@@ -262,24 +263,24 @@ export default {
                 color: #ffffff
                 cursor pointer
             .radio
-                margin-bottom 50px
+                margin-bottom rem(50px)
                 .title
                     opacity: 0.8
-                    font-size: 14px
+                    font-size: rem(14px)
                     font-family: 'montserratmedium'
                     font-style: normal
                     font-stretch: normal
                     line-height: normal
                     letter-spacing: normal
                     color: #ffffff
-                    margin-bottom 20px
+                    margin-bottom rem(20px)
                 &__item
                     display inline-block
-                    width calc(33% - 10px)
-                    margin-right 15px
+                    width calc(33% - 0.625rem)
+                    margin-right rem(15px)
                     @media(max-width 425px)
                         width 100%
-                        margin 0 0 15px 0
+                        margin rem(0 0 15px 0)
                     &:last-child
                         margin 0
                     input[type="radio"]
@@ -287,13 +288,13 @@ export default {
                     label
                         font-family: 'montserratregular'
                         width: 100%
-                        height: 48px
-                        border-radius: 24px
-                        border: solid 1px #ffffff
-                        font-size: 16px
+                        height: rem(48px)
+                        border-radius: rem(24px)
+                        border: solid rem(1px) #ffffff
+                        font-size: rem(16px)
                         color: rgba(255, 255, 255, .5)
                         display block
-                        line-height 48px
+                        line-height rem(48px)
                         cursor pointer
                         transition all .3s ease
                         &:hover
@@ -306,6 +307,6 @@ export default {
                             border-color: #e19d45
                 .error
                     color red
-                    font-size: 12px
+                    font-size: rem(12px)
 </style>
 

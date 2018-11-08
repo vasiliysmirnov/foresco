@@ -16,32 +16,37 @@
     </div>
 </template>
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
 .header
     display flex
     align-items center
     justify-content space-between
-    padding 50px
+    padding rem(50px)
     width 100%
     @media (max-width 500px)
         flex-wrap wrap
     @media (max-width 425px)
-        padding 30px 20px
+        padding rem(30px 20px)
     .phone
-        font-size: 16px
+        font-size: rem(16px)
         font-family: 'montserratmedium'
         font-style: normal
         font-stretch: normal
         line-height: normal
-        letter-spacing: 2px
+        letter-spacing: rem(2px)
         color: #eeeeee
-        margin 0 30px 0 0
+        margin rem(0 30px 0 0)
         flex: 1 0 auto
         text-align: right
         @media (max-width 500px)
             display none
     .logo
-        img
-            max-width 100%
+        width rem(100px)
+        a
+            display block
+        svg
+            width 100%
+            height 100%
 
 // for sohobook page
 .sohobook

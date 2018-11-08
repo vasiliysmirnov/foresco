@@ -7,6 +7,7 @@
     </div>
 </template>
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
 // for sohobook page
 .sohobook
     .nav
@@ -14,30 +15,30 @@
             background: #272625
 .nav
     &__btn
-        width: 50px
-        height: 50px
+        width: rem(50px)
+        height: rem(50px)
         background: rgba(216, 216, 216, .05)
         cursor pointer
         position relative
-        padding: 19px 0 0 0
+        padding: rem(19px 0 0 0)
         z-index 100
         &.active
             span
                 background: #eeeeee
                 transform: rotate(45deg)
-                left: 0px
-                top: 6px
+                left: 0
+                top: rem(6px)
                 &:last-child
                     transform: rotate(-45deg)
-                    top: -6px
+                    top: rem(-6px)
                     left: 0
         span
-            width: 23px
-            height: 2px
-            border-radius: 1px
+            width: rem(23px)
+            height: rem(2px)
+            border-radius: rem(1px)
             background: #eeeeee
             display: block
-            margin: 0 auto 10px
+            margin: 0 auto rem(10px)
             position relative
             transition all .2s ease
 

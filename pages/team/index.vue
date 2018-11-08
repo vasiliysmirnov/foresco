@@ -143,6 +143,8 @@
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
+
 .teamSlide
     &:hover
         cursor none
@@ -155,14 +157,14 @@
         padding 0
     &__inner
         width: 100%
-        max-width: 1200px
+        max-width: rem(1200px)
         margin: 0 auto
         .team__item
             transform-origin left
             width 100%
-            max-width 900px
+            max-width rem(900px)
             position relative
-            margin-right 50px
+            margin-right rem(50px)
             .team__item-inner
                 display flex
                 align-items center
@@ -175,8 +177,8 @@
                 width 50%
                 @media(max-width 910px)
                     width 100%
-                    padding 0 15px 0 20px
-                    margin-bottom 50px
+                    padding rem(0 15px 0 20px)
+                    margin-bottom rem(50px)
                 img
                     max-width 620px
                     @media(max-width 910px)
@@ -190,26 +192,26 @@
                 width 50%
                 @media(max-width 600px)
                     width 100%
-                    padding-right 15px
+                    padding-right rem(15px)
                 .name
                     font-family: 'montserratbold'
-                    font-size: 36px
+                    font-size: rem(36px)
                     font-style: normal
                     font-stretch: normal
                     line-height: normal
                     letter-spacing: normal
                     color: #eeeeee
-                    margin-bottom 10px
+                    margin-bottom rem(10px)
                 .position
-                    font-size: 12px
+                    font-size: rem(12px)
                     font-family: 'montserratlight'
                     font-style: normal
                     font-stretch: normal
                     line-height: normal
                     letter-spacing: normal
                     color: #eeeeee
-                    margin-bottom 20px
-                    padding-bottom 20px
+                    margin-bottom rem(20px)
+                    padding-bottom rem(20px)
                     position relative
                     &:before
                         content ''
@@ -217,10 +219,10 @@
                         bottom 0
                         right 0
                         width 100%
-                        height 1px
+                        height rem(1px)
                         background #FFF
                 .txt
-                    font-size: 10px
+                    font-size: rem(10px)
                     font-weight: normal
                     font-style: normal
                     font-stretch: normal
@@ -229,88 +231,78 @@
                     color: #eeeeee
 
 .cursor {
-    width: 76px;
-    height: 76px;
-    -webkit-transform: translate3d(-100%,0,0);
-    transform: translate3d(-100%,0,0);
-    pointer-events: none;
-    position: fixed;
-    top: 0;
-    left: 0;
+    width: rem(76px)
+    height: rem(76px)
+    transform: translate3d(-100%,0,0)
+    pointer-events: none
+    position: fixed
+    top: 0
+    left: 0
     z-index: 300
 }
 
 .cursor__fly {
-    width: 76px;
-    height: 76px;
-    position: absolute;
-    top: 0;
-    left: 0;
+    width: rem(76px)
+    height: rem(76px)
+    position: absolute
+    top: 0
+    left: 0
     z-index: 300
 }
 
 .cursor__fly_slow {
-    transition: -webkit-transform .1s ease;
-    transition: transform .1s ease;
-    transition: transform .1s ease,-webkit-transform .1s ease
+    transition: transform .1s ease
 }
 
 .cursor__text {
-    font-size: 12px;
-    padding-top: 28px;
-    text-align: center;
-    opacity: 0;
+    font-size: rem(12px)
+    padding-top: rem(28px)
+    text-align: center
+    opacity: 0
     transition: opacity .5s ease
 }
 
 .cursor__body {
-    transition: opacity .1s ease,-webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5),opacity .1s ease;
-    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5),opacity .1s ease,-webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    width: 76px;
-    height: 76px;
-    background: 0 0;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
-    font-size: 0;
-    color: #fff;
+    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5),opacity .1s ease
+    width: rem(76px)
+    height: rem(76px)
+    background: 0 0
+    border-radius: 50%
+    position: absolute
+    top: 0
+    left: 0
+    text-align: center
+    font-size: 0
+    color: #fff
     transform-origin: center center
 }
 
 .cursor__body svg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    stroke-dasharray: 300px;
-    stroke-dashoffset: 300px;
-    transition: stroke-dashoffset 1.5s ease,-webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    transition: stroke-dashoffset 1.5s ease,transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    transition: stroke-dashoffset 1.5s ease,transform .3s cubic-bezier(.5,-.5,.5,1.5),-webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5)
+    position: absolute
+    left: 0
+    top: 0
+    stroke-dasharray: rem(300px)
+    stroke-dashoffset: rem(300px)
+    transition: stroke-dashoffset 1.5s ease,transform .3s cubic-bezier(.5,-.5,.5,1.5)
+    width 100%
+    height 100%
+    overflow visible
 }
 
 .cursor__body svg:first-child {
-    left: 3px;
-    top: 16px
+    left: 0
+    top: 0
 }
 
 .cursor__body svg .arrow-left {
-    -webkit-transform: translate(50px,26px) scale(1,-1) rotate(90deg);
-    transform: translate(50px,26px) scale(1,-1) rotate(90deg);
-    opacity: 0;
-    transition: -webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5),-webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5)
+    transform: translate(rem(20px), rem(18px)) scale(1, -1) rotate(-90deg)
+    opacity: 0
+    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5)
 }
 
 .cursor__body svg .arrow-right {
-    -webkit-transform: translate(20px,18px) scale(1,-1) rotate(-90deg);
-    transform: translate(20px,18px) scale(1,-1) rotate(-90deg);
-    transition: -webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5);
-    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5),-webkit-transform .3s cubic-bezier(.5,-.5,.5,1.5);
+    transform: translate(rem(50px), rem(26px)) scale(1, -1) rotate(90deg)
+    transition: transform .3s cubic-bezier(.5,-.5,.5,1.5)
     opacity: 0
 }
 
@@ -319,24 +311,21 @@
 }
 
 .cursor_active .cursor__body svg:first-child {
-    opacity: 1;
+    opacity: 1
     stroke-dashoffset: 0
 }
 
 .cursor_active .cursor__body svg:last-child {
-    -webkit-transform: scale(.5675);
     transform: scale(.5675)
 }
 
 .cursor_active .cursor__body svg .arrow-left {
-    -webkit-transform: translate(70px,26px) scale(1,-1) rotate(90deg);
-    transform: translate(70px,26px) scale(1,-1) rotate(90deg);
+    transform: translate(rem(0px), rem(18px)) scale(1, -1) rotate(-90deg)
     opacity: 1
 }
 
 .cursor_active .cursor__body svg .arrow-right {
-    -webkit-transform: translate(0,18px) scale(1,-1) rotate(-90deg);
-    transform: translate(0,18px) scale(1,-1) rotate(-90deg);
+    transform: translate(rem(70px), rem(26px)) scale(1, -1) rotate(90deg)
     opacity: 1
 }
 
@@ -345,12 +334,12 @@
 }
 
 .cursor_hover .cursor__body {
-    font-size: 12px;
+    font-size: rem(12px)
     opacity: 1
 }
 
 .cursor_hover .cursor__body svg:last-child {
-    opacity: 1;
+    opacity: 1
     stroke-dashoffset: 0
 }
 

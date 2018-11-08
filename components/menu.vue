@@ -137,12 +137,14 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
+
 .fadeMenu-enter-active
     transition: all .5s ease .3s
 .fadeMenu-leave-active
     transition: all .1s ease
 .fadeMenu-enter, .fadeMenu-leave-to
-    transform: translateX(50px)
+    transform: translateX(rem(50px))
     opacity: 0
 .menuBgAn-enter-active, .menuBgAn-leave-active
     transition: all .3s ease
@@ -184,26 +186,26 @@ export default {
         display flex
         align-items center
         justify-content flex-start
-        padding-right 60px
+        padding-right rem(60px)
         @media(max-width 455px)
-            padding 0 20px 0 0
+            padding rem(0 20px 0 0)
         .line
             position absolute
             top 0
             right 0
-            width 1px
+            width rem(1px)
             height 100%
             background rgba(255, 255, 255, 0.2)
             span
                 position absolute
                 bottom: 100%
-                left: 0px
+                left: 0
                 height: 100%
                 width: 100%
                 transition: all 0.4s linear
     ul
         list-style none
-        padding 0 0 0 160px
+        padding rem(0 0 0 160px)
         @media(max-width 500px)
             padding 0
         li
@@ -211,11 +213,11 @@ export default {
             text-align right
             a
                 font-family: 'montserratmedium'
-                font-size: 45px
+                font-size: rem(45px)
                 font-style: normal
                 font-stretch: normal
                 line-height: 2.13
-                letter-spacing: 10px
+                letter-spacing: rem(10px)
                 color: inherit
                 text-decoration none
                 cursor pointer
@@ -223,11 +225,11 @@ export default {
                 display: block
                 transition color .2s ease
                 @media(max-width 500px)
-                    font-size: 35px
+                    font-size: rem(35px)
                 @media(max-width 410px)
-                    font-size: 30px
+                    font-size: rem(30px)
                 @media(max-width 320px)
-                    font-size: 20px
+                    font-size: rem(20px)
 
 @keyframes menuOpen {
     0%{

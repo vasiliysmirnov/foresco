@@ -32,6 +32,8 @@
     </section>
 </template>
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
+
 .projects
     position absolute
     top 0
@@ -51,41 +53,41 @@
 .project
     overflow hidden // dirty hack for animation
     &__wrapper
-        max-width: 1200px
+        max-width: rem(1200px)
         margin: 0 auto
         position relative
     &__item
         display flex
         align-items center
         justify-content center
-        margin: 0 0 20px 0
+        margin: rem(0 0 20px 0)
         @media(max-width 768px)
             text-align: center
             flex-wrap wrap
         @media(max-width 425px)
-            min-height: 330px;
+            min-height: rem(330px)
     &__img
         position relative
-        margin-right 100px
+        margin-right rem(100px)
         // opacity 0
         @media(max-width 768px)
-            max-width: 260px
+            max-width: rem(260px)
             margin: 0
         img
-            max-width 300px
+            max-width rem(300px)
             @media(max-width 768px)
                 max-width 100%
     &__platform
         position absolute
-        top 5px
-        left -20px
+        top rem(5px)
+        left rem(-20px)
         opacity: 0.5
-        font-size: 16px
+        font-size: rem(16px)
         font-weight: normal
         font-style: normal
         font-stretch: normal
         line-height: normal
-        letter-spacing: 0.2px
+        letter-spacing: rem(0.2px)
         color: #ffffff
         writing-mode: tb-rl
         transform: rotate(-180deg)
@@ -93,34 +95,34 @@
         @media(max-width 768px)
             left 0
     &__text
-        max-width 340px
+        max-width rem(340px)
         // opacity 0
     &__title
-        font-size: 50px
+        font-size: rem(50px)
         font-style: normal
         font-stretch: normal
         line-height: normal
-        letter-spacing: 2.5px
+        letter-spacing: rem(2.5px)
         color: #eeeeee
         font-family: 'montserratsemibold'
-        margin-bottom 15px
+        margin-bottom rem(15px)
         @media(max-width 768px)
-            font-size 42px
-            margin-bottom 8px
+            font-size rem(42px)
+            margin-bottom rem(8px)
         // @media(max-width 425px)
         //     font-size: 30px
     &__desc
         opacity: 0.5
-        font-size: 16px
+        font-size: rem(16px)
         font-weight: normal
         font-style: normal
         font-stretch: normal
         line-height: normal
-        letter-spacing: 0.2px
+        letter-spacing: rem(0.2px)
         color: #eeeeee
-        margin-bottom 50px
+        margin-bottom rem(50px)
         @media(max-width 768px)
-            margin-bottom 24px
+            margin-bottom rem(24px)
     .swiper-slide-active
         .project__img,
         .project__text

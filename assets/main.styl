@@ -1,3 +1,5 @@
+@import 'rem.styl'
+
 .page-enter-active, .page-leave-active {
   transition: opacity .6s ease;
 }
@@ -22,17 +24,20 @@ body{
 .content{
   flex: 1 0 auto;
   width: 100%;
-  padding: 0 50px;
+  padding: rem(0 50px);
 }
 html {
   font-family: 'montserratregular'
   font-size: 16px;
-  word-spacing: 1px;
+  word-spacing: rem(1px);
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  @media(min-width 3000px){
+    font-size: 26px;
+  }
 }
 
 *, *:before, *:after {
@@ -109,13 +114,13 @@ html {
   display inline-block
   text-decoration: none
   color #ffffff
-  height: 48px
-  font-size: 16px
-  line-height: 48px
+  height: rem(48px)
+  font-size: rem(16px)
+  line-height: rem(48px)
   cursor pointer
-  padding: 0 47px
-  border-radius: 24px
-  border: solid 1px #ffffff
+  padding: rem(0 47px)
+  border-radius: rem(24px)
+  border: solid rem(1px) #ffffff
   outline: none
   transition: all 0.3s ease
   &:hover
@@ -130,9 +135,9 @@ html {
   &__next
       position: absolute
       // top calc(50% - 40px)
-      top 220px
-      width: 50px
-      height: 80px
+      top rem(220px)
+      width: rem(50px)
+      height: rem(80px)
       z-index: 10
       cursor: pointer
       background-position: center
@@ -141,18 +146,18 @@ html {
       transition transform .2s ease
   &__prev
       background-image: url('~/static/img/prev-btn.svg')
-      left: 10px
+      left: rem(10px)
       right: auto
       &:hover
-          transform: translateX(-5px)
+          transform: translateX(rem(-5px))
   &__next
       background-image: url('~/static/img/next-btn.svg')
       right: 10px
       left: auto
       &:hover
-          transform: translateX(5px)
+          transform: translateX(rem(5px))
   .project__pagination
-    border-bottom 1px solid rgba(255, 255, 255, .1)
+    border-bottom rem(1px) solid rgba(255, 255, 255, .1)
     position: absolute
     text-align: center
     transition: 300ms opacity
@@ -171,29 +176,29 @@ html {
     li
       display inline-block
       button
-        width: 1px
-        height 50px
-        max-height: 25px
+        width: rem(1px)
+        height rem(50px)
+        max-height: rem(25px)
         display: inline-block
         border-radius: 0
         border 0
         background: transparent
         opacity: 0.5
-        margin 0 70px 0 0
-        padding: 0 10px
+        margin rem(0 70px 0 0)
+        padding: rem(0 10px)
         cursor pointer
         outline: none
         position: relative
-        bottom: -5px
+        bottom: rem(-5px)
         overflow: hidden
-        text-indent: 99px
+        text-indent: rem(99px)
         transition: all .3s ease
         &:before
           content: ''
           position: absolute
           top 0
           left 50%
-          width 1px
+          width rem(1px)
           height 100%
           background: #ffffff
 
@@ -202,7 +207,7 @@ html {
           margin 0
     li.slick-active
       button
-        max-height 50px
+        max-height rem(50px)
         opacity 1
-        width: 2px
+        width: rem(2px)
   

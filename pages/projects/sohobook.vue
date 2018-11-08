@@ -260,6 +260,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/rem.styl'
+
 .slide-fade-enter-active {
     transition: all .3s ease;
 }
@@ -267,7 +269,7 @@ export default {
     transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .slide-fade-enter, .slide-fade-leave-to{
-    transform: translateY(10px);
+    transform: translateY(rem(10px));
     opacity: 0;
 }
 .sohobook
@@ -300,25 +302,25 @@ export default {
             background rgba(240, 240, 240, 0.7)
     .goBack
         position fixed
-        top 50px
-        left calc(50% - 30px)
+        top rem(50px)
+        left calc(50% - 1.875rem)
         cursor pointer
-        width 60px
+        width rem(60px)
         text-align center
         z-index 99
         a
-            font-size: 13px
+            font-size: rem(13px)
             font-weight: normal
             font-style: normal
             font-stretch: normal
             line-height: normal
-            letter-spacing: 1.6px
+            letter-spacing: rem(1.6px)
             color: #272625
             text-decoration none
             text-transform uppercase
             span
                 display block
-                margin 10px 0 0 0
+                margin rem(10px 0 0 0)
                 text-align center
     .content
         overflow hidden
@@ -326,15 +328,15 @@ export default {
     .top
         text-align center
         position relative
-        padding-top 150px 
+        padding-top rem(150px) 
         &__inner
-            padding 0 50px
+            padding rem(0 50px)
             z-index 2
             position relative
             @media(max-width 768px)
-                padding 0 40px
+                padding rem(0 40px)
             @media(max-width 320px)
-                padding 0 20px
+                padding rem(0 20px)
         #top_bottom_mask
             position absolute
             bottom 0
@@ -349,71 +351,71 @@ export default {
             // @media(max-width 1100px)
 
         .title
-            font-size: 120px
+            font-size: rem(120px)
             font-family: 'montserratbold'
             font-style: normal
             font-stretch: normal
             line-height: normal
-            letter-spacing: 45px
+            letter-spacing: rem(45px)
             color: #524941
-            margin-bottom 20px
+            margin-bottom rem(20px)
             text-align center
             @media(max-width 1200px)
-                font-size: 100px
+                font-size: rem(100px)
             @media(max-width 1024px)
-                font-size: 80px
+                font-size: rem(80px)
             @media(max-width 900px)
-                font-size: 60px
+                font-size: rem(60px)
             @media(max-width 768px)
-                font-size: 50px
-                letter-spacing: 15px
+                font-size: rem(50px)
+                letter-spacing: rem(15px)
             @media(max-width 425px)
-                font-size: 40px
-                letter-spacing: 5px
+                font-size: rem(40px)
+                letter-spacing: rem(5px)
             @media(max-width 320px)
-                font-size: 35px
+                font-size: rem(35px)
         .desc
-            font-size: 24px
+            font-size: rem(24px)
             font-family: 'montserratmedium'
             font-style: normal
             font-stretch: normal
             line-height: normal
-            letter-spacing: 4px
+            letter-spacing: rem(4px)
             color: #524941
-            margin-bottom 45px
+            margin-bottom rem(45px)
             @media(max-width 425px)
-                font-size: 16px
+                font-size: rem(16px)
                 letter-spacing: normal
                 text-transform uppercase
-                max-width: 270px
-                margin: 0 auto 30px
+                max-width: rem(270px)
+                margin: 0 auto rem(30px)
         .img
             position relative
-            font-size: 18px
+            font-size: rem(18px)
             font-family: 'montserratmedium'
             color: #524941
             @media(max-width 600px)
-                padding 0 30px
+                padding rem(0 30px)
             img
                 @media(max-width 600px)
                     max-width 100%
             .platform
                 position absolute
-                top 300px
-                left 130px
-                letter-spacing: 6.3px
+                top rem(300px)
+                left rem(130px)
+                letter-spacing: rem(6.3px)
                 text-transform uppercase
                 @media(max-width 970px)
                     display none
             .year
                 position absolute
-                top 300px
-                right 160px
-                letter-spacing: 3px
+                top rem(300px)
+                right rem(160px)
+                letter-spacing: rem(3px)
                 @media(max-width 970px)
                     display none
         .descFull
-            font-size: 22px
+            font-size: rem(22px)
             font-weight: normal
             font-style: normal
             font-stretch: normal
@@ -421,67 +423,67 @@ export default {
             letter-spacing: normal
             text-align: center
             color: #302a2c
-            max-width 950px
+            max-width rem(950px)
             z-index 2
             position: absolute
-            bottom: 85px
-            left: calc(50% - 475px)
+            bottom: rem(85px)
+            left: calc(50% - 29.6875rem)
             width: 100%
             @media(max-width 1100px)
                 bottom 0
             @media(max-width 970px)
                 left 0
             @media(max-width 770px)
-                font-size: 18px
-                padding: 0 30px
+                font-size: rem(18px)
+                padding: rem(0 30px)
             @media(max-width 600px)
-                bottom -60px
+                bottom rem(-60px)
             @media(max-width 425px)
                 font-family: 'yeseva_oneregular'
-                font-size: 15px
-                bottom -90px
+                font-size: rem(15px)
+                bottom rem(-90px)
             @media(max-width 320px)
-                bottom -140px
+                bottom rem(-140px)
             .separator
                 position absolute
-                top -40px
-                left: calc(50% - 35px)
+                top rem(-40px)
+                left: calc(50% - 2.1875rem)
                 text-align center
-                width: 70px
+                width: rem(70px)
                 span
-                    width: 8px
-                    height: 8px
+                    width: rem(8px)
+                    height: rem(8px)
                     border-radius 50%
                     background-color: #313131
-                    margin-right 20px
+                    margin-right rem(20px)
                     display: inline-block
                     &:last-child
                         margin 0
     .sohobook-01
-        padding 100px 0 250px 0
+        padding rem(100px 0 250px 0)
         position relative
         @media(max-width 600px)
-            padding 170px 0 250px 0
+            padding rem(170px 0 250px 0)
         .inner
             display flex
             flex-wrap wrap
             align-items center
             justify-content center
-            max-width: 1440px
+            max-width: rem(1440px)
             margin: 0 auto
             position relative
             @media(max-width 768px)
-                padding 0 20px
+                padding rem(0 20px)
         .leafs
             position absolute
-            top 100px
-            left calc(50% - 315px)
+            top rem(100px)
+            left calc(50% - 19.6875rem)
             z-index 3
-            max-width 630px
+            max-width rem(630px)
             img
                 max-width 100%
         .title
-            font-size: 80px
+            font-size: rem(80px)
             font-family: 'yeseva_oneregular'
             font-weight: normal
             font-style: normal
@@ -489,37 +491,37 @@ export default {
             line-height: normal
             letter-spacing: normal
             color: #524941
-            max-width 600px
+            max-width rem(600px)
             position relative
             @media(max-width 560px)
-                font-size: 70px
+                font-size: rem(70px)
             @media(max-width 425px)
-                font-size: 50px
+                font-size: rem(50px)
             span
                 display: block
                 position relative
                 z-index 2
                 opacity 0
-                transform translateX(-50px)
+                transform translateX(rem(-50px))
                 transition all .4s ease 0.5s
                 &.in-viewport
                     opacity: 1
-                    transform: translateX(0px)
+                    transform: translateX(0)
             .number
-                font-size: 350px;
+                font-size: rem(350px)
                 font-family: 'montserratmedium'
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: normal;
-                color: #e5bd98;
+                font-style: normal
+                font-stretch: normal
+                line-height: normal
+                letter-spacing: normal
+                color: #e5bd98
                 position absolute
-                top: -190px
-                left: 180px
+                top: rem(-190px)
+                left: rem(180px)
                 z-index: 1
                 opacity: .1
                 @media(max-width 600px)
-                    font-size 250px
+                    font-size rem(250px)
         .img
             max-width 50%
             position relative
@@ -528,21 +530,21 @@ export default {
             img
                 position relative
                 z-index 2
-                max-width 780px
+                max-width rem(780px)
                 @media(max-width 650px)
                     transform: translateX(-50%)
                     left: 50%
-                    max-width: 600px
+                    max-width: rem(600px)
                 @media(max-width 425px)
                     transform: translateX(-50%)
                     left: 40%
-                    max-width: 510px
+                    max-width: rem(510px)
             .img-03
                 position: absolute
-                bottom: -320px
+                bottom: rem(-320px)
                 z-index: 1
-                width: 384px
-                right: -180px
+                width: rem(384px)
+                right: rem(-180px)
                 opacity 0
                 transition opacity .4s ease 0.5s
                 @media(max-width 930px)
@@ -553,13 +555,13 @@ export default {
                     max-width 100%
         .next-step-1
             position: absolute
-            width: 500px
-            left: calc(50% - 307px)
-            bottom: -540px
+            width: rem(500px)
+            left: calc(50% - 19.1875rem)
+            bottom: rem(-540px)
             @media(max-width 930px)
-                width: 20px
-                left: calc(50% - 10px)
-                bottom: -20px
+                width: rem(20px)
+                left: calc(50% - 0.625rem)
+                bottom: rem(-20px)
             .desktop
                 max-width 100%
                 @media(max-width 930px)
@@ -570,9 +572,9 @@ export default {
                     display block
         .footprint-1
             position: absolute
-            height: 190px
-            bottom: -400px
-            left: 40px
+            height: rem(190px)
+            bottom: rem(-400px)
+            left: rem(40px)
             opacity: 0
             transition opacity .4s ease 0.5s
             @media(max-width 930px)
@@ -583,8 +585,8 @@ export default {
                 max-height 100%
         .footprint-mobile
             position: absolute
-            height: 190px
-            bottom: -10px
+            height: rem(190px)
+            bottom: rem(-10px)
             left: 30%
             opacity: 0
             transition opacity .4s ease 0.5s
@@ -600,31 +602,31 @@ export default {
 
 
     .sohobook-02
-        padding 400px 0 150px 0
+        padding rem(400px 0 150px 0)
         @media(max-width 930px)
-            padding 200px 0 150px 0
+            padding rem(200px 0 150px 0)
         @media(max-width 425px)
-            padding 100px 0 150px 0
+            padding rem(100px 0 150px 0)
         .inner
             display flex
             flex-wrap wrap
             align-items center
             justify-content center
-            max-width: 1200px
+            max-width: rem(1200px)
             margin: 0 auto
             position relative
             @media(max-width 768px)
-                padding 0 20px
+                padding rem(0 20px)
         .leafs
             position absolute
-            top 100px
-            left calc(50% - 315px)
+            top rem(100px)
+            left calc(50% - 19.6875rem)
             z-index 3
-            max-width 630px
+            max-width rem(630px)
             img
                 max-width 100%
         .title
-            font-size: 80px
+            font-size: rem(80px)
             font-family: 'yeseva_oneregular'
             font-weight: normal
             font-style: normal
@@ -632,40 +634,40 @@ export default {
             line-height: normal
             letter-spacing: normal
             color: #524941
-            max-width 600px
+            max-width rem(600px)
             position relative
             @media(max-width 1200px)
                 order 1
-                margin-bottom 80px
+                margin-bottom rem(80px)
             @media(max-width 560px)
-                font-size: 70px
+                font-size: rem(70px)
             @media(max-width 425px)
-                font-size: 50px
+                font-size: rem(50px)
             span
                 display block
                 position relative
                 z-index 2
                 opacity: 0
-                transform translateX(50px)
+                transform translateX(rem(50px))
                 transition all .4s ease 0.5s
                 &.in-viewport
                     opacity: 1
-                    transform: translateX(0px)
+                    transform: translateX(0)
             .number
-                font-size: 350px;
+                font-size: rem(350px)
                 font-family: 'montserratmedium'
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: normal;
-                color: #e5bd98;
+                font-style: normal
+                font-stretch: normal
+                line-height: normal
+                letter-spacing: normal
+                color: #e5bd98
                 position absolute
-                top: -400px
-                left: 80px
+                top: rem(-400px)
+                left: rem(80px)
                 z-index: 1
                 opacity: .1
                 @media(max-width 600px)
-                    font-size 250px
+                    font-size rem(250px)
         .img
             max-width 50%
             position relative
@@ -676,21 +678,21 @@ export default {
             &>img
                 position relative
                 z-index 2
-                max-width: 760px
+                max-width: rem(760px)
                 transform: rotate(-9deg)
                 @media(max-width 650px)
                     transform: translateX(-50%) rotate(-9deg)
                     left: 50%
-                    max-width: 600px
+                    max-width: rem(600px)
                 @media(max-width 425px)
                     transform: translateX(-50%) rotate(-9deg)
                     left: 60%
-                    max-width: 510px
+                    max-width: rem(510px)
         .footprint-1
             position: absolute
-            height: 190px
-            top: -330px
-            right: 130px
+            height: rem(190px)
+            top: rem(-330px)
+            right: rem(130px)
             opacity: 0
             transition opacity .4s ease 0.5s
             @media(max-width 1200px)
@@ -701,8 +703,8 @@ export default {
                 max-height 100%
         .footprint-mobile
             position: absolute
-            height: 190px
-            bottom: -210px
+            height: rem(190px)
+            bottom: rem(-210px)
             right: 30%
             opacity: 0
             transition opacity .4s ease 0.5s
@@ -717,12 +719,12 @@ export default {
                 max-height 100%
         .next-step-2
             position absolute
-            bottom -520px
+            bottom rem(-520px)
             left 50%
             @media(max-width 930px)
-                width: 20px
-                left: calc(50% - 10px)
-                bottom: -220px
+                width: rem(20px)
+                left: calc(50% - 0.625rem)
+                bottom: rem(-220px)
             .desktop
                 max-width 100%
                 @media(max-width 930px)
@@ -733,13 +735,13 @@ export default {
                     display block
     
     .sohobook-03
-        padding 450px 0 150px 0
+        padding rem(450px 0 150px 0)
         @media(max-width 930px)
-            padding 280px 0 150px 0
+            padding rem(280px 0 150px 0)
         @media(max-width 425px)
-            padding 210px 0 150px 0
+            padding rem(210px 0 150px 0)
         .title
-            font-size: 80px
+            font-size: rem(80px)
             font-family: 'yeseva_oneregular'
             font-weight: normal
             font-style: normal
@@ -747,20 +749,20 @@ export default {
             line-height: normal
             letter-spacing: normal
             color: #524941
-            max-width: 880px
+            max-width: rem(880px)
             position: relative
             text-align: center
-            margin: 0 auto 100px
+            margin: 0 auto rem(100px)
             @media(max-width 1200px)
-                margin-bottom 80px
+                margin-bottom rem(80px)
             @media(max-width 768px)
-                padding 0 20px
+                padding rem(0 20px)
             @media(max-width 560px)
-                font-size: 70px
+                font-size: rem(70px)
             @media(max-width 425px)
-                font-size: 45px
+                font-size: rem(45px)
             @media(max-width 320px)
-                font-size: 35px
+                font-size: rem(35px)
             span
                 position relative
                 z-index 2
@@ -768,22 +770,22 @@ export default {
                 z-index 1
                 opacity: 0.1
                 font-family: 'montserratmedium'
-                font-size: 350px
+                font-size: rem(350px)
                 font-style: normal
                 font-stretch: normal
                 line-height: normal
                 letter-spacing: normal
                 color: #e5bd98
                 position absolute
-                top: -240px
-                left: calc(50% - 215px)
+                top: rem(-240px)
+                left: calc(50% - 13.4375rem)
                 @media(max-width 600px)
-                    font-size 250px
+                    font-size rem(250px)
             .footprint-1
-                height 190px
+                height rem(190px)
                 position absolute
-                top: -310px
-                left: 300px
+                top: rem(-310px)
+                left: rem(300px)
                 opacity: 0
                 transition opacity .4s ease 0.5s
                 @media(max-width 930px)
@@ -794,9 +796,9 @@ export default {
                     max-height 100%
             .one-month-1
                 position: absolute
-                top: -370px
-                right: -70px
-                width: 250px
+                top: rem(-370px)
+                right: rem(-70px)
+                width: rem(250px)
                 opacity: 0
                 transition opacity .4s ease 0.5s
                 @media(max-width 930px)
@@ -821,30 +823,30 @@ export default {
                 background rgba(0,0,0,0.4)
                 z-index 1
             .bg__inner
-                max-width: 1440px
+                max-width: rem(1440px)
                 margin: 0 auto
                 position relative
                 z-index 2
             .leafs
                 position absolute
-                top -300px
-                left calc(50% - 315px)
+                top rem(-300px)
+                left calc(50% - 19.6875rem)
                 z-index 3
-                max-width 630px
+                max-width rem(630px)
                 img
                     max-width 100%
             .light-1
                 position absolute
                 top 0
-                right 280px
+                right rem(280px)
                 opacity: 0
-                transform translateY(-100px)
+                transform translateY(rem(-100px))
                 transition all .4s ease 0.5s
                 @media(max-width 1024px)
-                    right 110px
+                    right rem(110px)
                 @media(max-width 600px)
-                    height 183px
-                    right 90px
+                    height rem(183px)
+                    right rem(90px)
                     img
                         max-height 100%
                 &.in-viewport
@@ -853,14 +855,14 @@ export default {
             .light-2
                 position: absolute
                 top: 0
-                right: 160px
+                right: rem(160px)
                 opacity: 0
-                transform translateY(-100px)
+                transform translateY(rem(-100px))
                 transition all .4s ease 0.5s
                 @media(max-width 1024px)
-                    right 10px
+                    right rem(10px)
                 @media(max-width 600px)
-                    height 256px
+                    height rem(256px)
                     img
                         max-height 100%
                 &.in-viewport
@@ -868,18 +870,18 @@ export default {
                     transform translateY(0)
             .img-main
                 text-align center
-                padding 80px 0
+                padding rem(80px 0)
                 position: relative
                 z-index: 2
                 @media(max-width 980px)
-                    padding 170px 70px 0 70px
+                    padding rem(170px 70px 0 70px)
                 img
-                    max-width 432px
+                    max-width rem(432px)
                     @media(max-width 660px)
                         max-width 100%
             .text-1
                 font-family: 'yeseva_oneregular'
-                font-size: 40px
+                font-size: rem(40px)
                 font-weight: normal
                 font-style: normal
                 font-stretch: normal
@@ -888,29 +890,29 @@ export default {
                 text-align: center
                 color: #ffffff
                 position: absolute
-                bottom: 290px
-                left: 150px
+                bottom: rem(290px)
+                left: rem(150px)
                 opacity: 0
                 transition opacity .4s ease 0.5s
                 @media(max-width 1200px)
-                    left 40px
+                    left rem(40px)
                 @media(max-width 980px)
                     position static
                     text-align center
-                    padding-bottom: 20px
+                    padding-bottom: rem(20px)
                 &.in-viewport
                     opacity: 1
                 .arrow
-                    width: 50px
-                    height: 138px
+                    width: rem(50px)
+                    height: rem(138px)
                     position: absolute
                     background url('~static/img/sohobook/03/arrow.svg') no-repeat center
-                    bottom: -120px
-                    right: -80px
+                    bottom: rem(-120px)
+                    right: rem(-80px)
                     transform: rotate(160deg)
             .text-2
                 font-family: 'yeseva_oneregular'
-                font-size: 40px
+                font-size: rem(40px)
                 font-weight: normal
                 font-style: normal
                 font-stretch: normal
@@ -919,77 +921,77 @@ export default {
                 text-align: center
                 color: #ffffff
                 position: absolute
-                bottom: 380px
-                right: 80px
+                bottom: rem(380px)
+                right: rem(80px)
                 opacity: 0
                 transition opacity .4s ease 0.5s
                 @media(max-width 1200px)
-                    right: 40px
+                    right: rem(40px)
                     text-align right
-                    max-width: 240px
+                    max-width: rem(240px)
                 @media(max-width 980px)
                     max-width initial
                     position static
                     text-align center
-                    padding-bottom: 70px
+                    padding-bottom: rem(70px)
                 &.in-viewport
                     opacity: 1
                 .arrow
-                    width: 50px
-                    height: 138px
+                    width: rem(50px)
+                    height: rem(138px)
                     position: absolute
                     background url('~static/img/sohobook/03/arrow.svg') no-repeat center
-                    top: -120px
-                    left: -10px
+                    top: rem(-120px)
+                    left: rem(-10px)
                     transform: rotate(-30deg)
             .photo-cards
-                top 255px
-                left 220px
+                top rem(255px)
+                left rem(220px)
                 position absolute
                 opacity 0
-                transform: translateX(320px)
+                transform: translateX(rem(320px))
                 transition all .4s ease
                 @media(max-width 1024px)
-                    left 40px
+                    left rem(40px)
                 @media(max-width 768px)
-                    left -40px
+                    left rem(-40px)
                 @media(max-width 500px)
-                    width 200px
+                    width rem(200px)
                     img
                         max-width 100%
                 &.in-viewport
                     opacity 1
-                    transform: translateX(0px)
+                    transform: translateX(0)
             .polaroid
-                bottom 50px
-                right 300px
+                bottom rem(50px)
+                right rem(300px)
                 position absolute
                 opacity 0
-                transform: translate(-320px, -100px);
+                transform: translate(rem(-320px), rem(-100px));
                 transition all .4s ease
                 @media(max-width 1024px)
-                    right 40px
+                    right rem(40px)
                 @media(max-width 768px)
-                    right: -40px
-                    bottom: 200px
+                    right rem(-40px)
+                    bottom rem(200px)
                 @media(max-width 500px)
-                    width 170px
-                    bottom: 220px
+                    width rem(170px)
+                    bottom rem(220px)
                     img
                         max-width 100%
                 &.in-viewport
                     opacity 1
-                    transform: translate(0px, 0px)
+                    transform: translate(0, 0)
 
     .sohobook-04
-        padding: 380px 0 232px 0
+        padding: rem(380px 0 232px 0)
         @media(max-width 425px)
-            padding: 50px 0 100px 0
+            padding: rem(50px 0 100px 0)
         .inner
-            max-width 1440px
+            max-width rem(1440px)
             margin 0 auto
         .title
-            font-size: 80px
+            font-size: rem(80px)
             font-family: 'yeseva_oneregular'
             font-weight: normal
             font-style: normal
@@ -997,15 +999,15 @@ export default {
             line-height: normal
             letter-spacing: normal
             color: #524941
-            max-width: 880px
+            max-width: rem(880px)
             position: relative
             text-align: center
-            margin: 0 auto 40px
+            margin: 0 auto rem(40px)
             @media(max-width 560px)
-                font-size: 70px
+                font-size: rem(70px)
             @media(max-width 425px)
-                font-size: 45px
-                padding: 0 20px
+                font-size: rem(45px)
+                padding: rem(0 20px)
             span
                 position relative
                 z-index 2
@@ -1013,47 +1015,47 @@ export default {
                 z-index 1
                 opacity: 0.1
                 font-family: 'montserratmedium'
-                font-size: 350px
+                font-size: rem(350px)
                 font-style: normal
                 font-stretch: normal
                 line-height: normal
                 letter-spacing: normal
                 color: #e5bd98
                 position absolute
-                top: -270px
-                left: calc(50% - 215px)
+                top: rem(-270px)
+                left: calc(50% - 13.4375rem)
                 @media(max-width 600px)
-                    font-size 250px
-                    left: calc(50% - 166px)
-                    top -150px
+                    font-size rem(250px)
+                    left: calc(50% - 10.375rem)
+                    top rem(-150px)
         .font
-            width: 417px
-            height: 125px
-            border: solid 5px #524941
+            width: rem(417px)
+            height: rem(125px)
+            border: solid rem(5px) #524941
             text-align center
-            margin: 0 auto 80px
-            padding: 38px 0 0 0
+            margin: 0 auto rem(80px)
+            padding: rem(38px 0 0 0)
             @media(max-width 600px)
-                max-width 260px
-                height: 84px
-                padding: 25px 40px 0
-                margin: 0 auto 40px
+                max-width rem(260px)
+                height: rem(84px)
+                padding: rem(25px 40px 0)
+                margin: 0 auto rem(40px)
             img
                 max-width 100%
         .font-list
-            margin-bottom 110px
+            margin-bottom rem(110px)
             display flex
             align-items center
             justify-content space-around
             list-style none
             @media(max-width 600px)
                 flex-wrap wrap
-                padding 0 60px
-                margin-bottom 65px
+                padding rem(0 60px)
+                margin-bottom rem(65px)
             li
                 @media(max-width 600px)
                     width 50%
-                    margin-bottom 27px
+                    margin-bottom rem(27px)
                     &:nth-child(2n)
                         text-align right
         .color-pallette
@@ -1062,167 +1064,167 @@ export default {
             justify-content space-around
             .txt
                 @media(max-width 860px)
-                    font-size 12px
+                    font-size rem(12px)
                 @media(max-width 425px)
-                    font-size 6px
+                    font-size rem(6px)
             .color-1
                 text-align center
                 .txt
-                    margin-top 72px
+                    margin-top rem(72px)
                     @media(max-width 425px)
-                        margin-top 30px
+                        margin-top rem(30px)
                 .ball
                     margin 0 auto
-                    width: 50px
-                    height: 50px
+                    width: rem(50px)
+                    height: rem(50px)
                     opacity: 0.2
                     background-color: #b2b2b2
                     border-radius 50%
                     @media(max-width 860px)
-                        width: 25px
-                        height: 25px
+                        width: rem(25px)
+                        height: rem(25px)
                     @media(max-width 425px)
-                        width: 14px
-                        height: 14px
+                        width: rem(14px)
+                        height: rem(14px)
             .color-2
                 text-align center
                 .txt
-                    margin-top 68px
+                    margin-top rem(68px)
                     @media(max-width 425px)
-                        margin-top 30px
+                        margin-top rem(30px)
                 .ball
                     margin 0 auto
-                    width: 100px
-                    height: 100px
+                    width: rem(100px)
+                    height: rem(100px)
                     opacity: 0.8
                     background-color: #161515
                     border-radius 50%
                     @media(max-width 860px)
-                        width: 50px
-                        height: 50px
+                        width: rem(50px)
+                        height: rem(50px)
                     @media(max-width 425px)
-                        width: 28px
-                        height: 28px
+                        width: rem(28px)
+                        height: rem(28px)
             .color-3
                 text-align center
                 .txt
-                    margin-top 64px
+                    margin-top rem(64px)
                     @media(max-width 425px)
-                        margin-top 30px
+                        margin-top rem(30px)
                 .ball
                     margin 0 auto
                     border-radius 50%
-                    width: 150px
-                    height: 150px
+                    width: rem(150px)
+                    height: rem(150px)
                     background-color: #f47539
                     @media(max-width 860px)
-                        width: 75px
-                        height: 75px
+                        width: rem(75px)
+                        height: rem(75px)
                     @media(max-width 425px)
-                        width: 42px
-                        height: 42px
+                        width: rem(42px)
+                        height: rem(42px)
             .color-4
                 text-align center
                 .txt
-                    margin-top 62px
+                    margin-top rem(62px)
                     @media(max-width 425px)
-                        margin-top 20px
+                        margin-top rem(20px)
                 .ball
                     margin 0 auto
-                    width: 200px
-                    height: 200px
+                    width: rem(200px)
+                    height: rem(200px)
                     background-color: #e75b4e
                     position relative
                     border-radius 50%
                     @media(max-width 860px)
-                        width: 100px
-                        height: 100px
+                        width: rem(100px)
+                        height: rem(100px)
                     @media(max-width 425px)
-                        width: 55px
-                        height: 55px
+                        width: rem(55px)
+                        height: rem(55px)
                     &:before
                         content ''
                         position absolute
                         background rgba(210, 210, 210, .2)
-                        width 260px
-                        height 260px
-                        top -30px
-                        left -30px
+                        width rem(260px)
+                        height rem(260px)
+                        top rem(-30px)
+                        left rem(-30px)
                         border-radius 50%
                         @media(max-width 860px)
-                            width: 130px
-                            height: 130px
-                            top -16px
-                            left -16px
+                            width rem(130px)
+                            height rem(130px)
+                            top rem(-16px)
+                            left rem(-16px)
                         @media(max-width 425px)
-                            width: 72px
-                            height: 72px
-                            top -8px
-                            left -8px
+                            width rem(72px)
+                            height rem(72px)
+                            top rem(-8px)
+                            left rem(-8px)
             .color-5
                 text-align center
                 .txt
-                    margin-top 64px
+                    margin-top rem(64px)
                     @media(max-width 425px)
-                        margin-top 30px
+                        margin-top rem(30px)
                 .ball
                     margin 0 auto
-                    width: 150px
-                    height: 150px
+                    width: rem(150px)
+                    height: rem(150px)
                     background-color: #008eb7
                     border-radius 50%
                     @media(max-width 860px)
-                        width: 75px
-                        height: 75px
+                        width: rem(75px)
+                        height: rem(75px)
                     @media(max-width 425px)
-                        width: 42px
-                        height: 42px
+                        width: rem(42px)
+                        height: rem(42px)
             .color-6
                 text-align center
                 .txt
-                    margin-top 67px
+                    margin-top rem(67px)
                     @media(max-width 425px)
-                        margin-top 30px
+                        margin-top rem(30px)
                 .ball
                     margin 0 auto
-                    width: 100px
-                    height: 100px
+                    width: rem(100px)
+                    height: rem(100px)
                     background-color: #29acd2
                     border-radius 50%
                     @media(max-width 860px)
-                        width: 50px
-                        height: 50px
+                        width: rem(50px)
+                        height: rem(50px)
                     @media(max-width 425px)
-                        width: 28px
-                        height: 28px
+                        width: rem(28px)
+                        height: rem(28px)
             .color-7
                 text-align center
                 .txt
-                    margin-top 62px
+                    margin-top rem(62px)
                     @media(max-width 425px)
-                        margin-top 30px
+                        margin-top rem(30px)
                 .ball
                     margin 0 auto
-                    width: 50px
-                    height: 50px
+                    width: rem(50px)
+                    height: rem(50px)
                     opacity: 0.7
                     background-color: #008eb7
                     border-radius 50%
                     @media(max-width 860px)
-                        width: 25px
-                        height: 25px
+                        width: rem(25px)
+                        height: rem(25px)
                     @media(max-width 425px)
-                        width: 14px
-                        height: 14px
+                        width: rem(14px)
+                        height: rem(14px)
     .sohobook-05
-        padding 346px 0 287px 0
+        padding rem(346px 0 287px 0)
         background url('~static/img/sohobook/05/section-5-bg.svg') no-repeat top
         background-size cover
         position relative
         @media(max-width 425px)
-            padding 195px 0 87px 0
+            padding rem(195px 0 87px 0)
         .title
-            font-size: 80px
+            font-size: rem(80px)
             font-family: 'yeseva_oneregular'
             font-weight: normal
             font-style: normal
@@ -1230,15 +1232,15 @@ export default {
             line-height: normal
             letter-spacing: normal
             color: #524941
-            max-width: 880px
+            max-width: rem(880px)
             position: relative
             text-align: center
-            margin: 0 auto 40px
+            margin: 0 auto rem(40px)
             @media(max-width 560px)
-                font-size: 70px
+                font-size: rem(70px)
             @media(max-width 425px)
-                font-size: 45px
-                padding: 0 20px
+                font-size: rem(45px)
+                padding: rem(0 20px)
             span
                 position relative
                 z-index 2
@@ -1246,42 +1248,42 @@ export default {
                 z-index 1
                 opacity: 0.1
                 font-family: 'montserratmedium'
-                font-size: 350px
+                font-size: rem(350px)
                 font-style: normal
                 font-stretch: normal
                 line-height: normal
                 letter-spacing: normal
                 color: #e5bd98
                 position absolute
-                top: -260px
-                left: calc(50% - 215px)
+                top: rem(-260px)
+                left: calc(50% - 13.4375rem)
                 @media(max-width 600px)
                     font-size 250px
-                    left: calc(50% - 155px)
+                    left: calc(50% - 9.6875rem)
         .bg
             background url('~static/img/sohobook/05/main-img.png') no-repeat center
             width 100%
-            height 1634px
+            height rem(1634px)
             background-size cover
             @media(max-width 768px)
-                height: 624px
+                height: rem(624px)
             @media(max-width 425px)
-                height: 481px
+                height: rem(481px)
             @media(max-width 375px)
-                height: 424px
+                height: rem(424px)
                 background-size: contain
             @media(max-width 320px)
-                height 364px
+                height rem(364px)
         .thank-you
             text-align center
-            margin-bottom 35px
+            margin-bottom rem(35px)
             img
-                max-width 256px
+                max-width rem(256px)
                 @media(max-width 425px)
-                    max-width 168px
+                    max-width rem(168px)
         .sps
             font-family: 'yeseva_oneregular'
-            font-size: 50px
+            font-size: rem(50px)
             font-weight: normal
             font-style: normal
             font-stretch: normal
@@ -1289,15 +1291,15 @@ export default {
             letter-spacing: normal
             text-align: center
             color: #524941
-            margin-bottom 75px
+            margin-bottom rem(75px)
             @media(max-width 425px)
-                font-size: 30px
-                padding 0 20px
+                font-size: rem(30px)
+                padding rem(0 20px)
         .line
             text-align center
-            margin-bottom 10px
+            margin-bottom rem(10px)
         .app-store
             text-align center
             img
-                max-width 140px
+                max-width rem(140px)
 </style>
