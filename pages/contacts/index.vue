@@ -165,7 +165,7 @@ export default {
                 width 100%
                 margin 0
             img
-                max-width 100%
+                width 100%
             .address
                 font-size: rem(16px)
                 font-family: 'montserratsemibold'
