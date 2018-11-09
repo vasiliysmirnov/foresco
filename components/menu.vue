@@ -37,9 +37,15 @@ export default {
             return this.$store.state.showNav
         }
     },
-    mounted () {
-        // check The Active Link when we change the route
-        this.checkTheActiveLink();
+    watch: {
+        showNav: function(val) {
+            if (val) {
+                setTimeout(
+                    this.checkTheActiveLink, 500
+                )
+            }
+            
+        }
     },
     methods: {
         checkTheActiveLink: function(){
@@ -54,10 +60,12 @@ export default {
                     // set the color to the link
                     $(element).css({'color': $(element).data("color")})
                     // move line to active item
-                    if($(element).data('last'))
+                    if($(element).data('last')){
                         TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: $(element).data("color")});
-                    else
+                    }
+                    else{
                         TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: $(element).data("color")});
+                    }
                 }
             }
         },
