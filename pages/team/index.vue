@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="cursor__fly cursor__fly_slow" data-cursor-text>
-                            <div class="cursor__text">drag me</div>
+                            <div class="cursor__text">тяни</div>
                         </div>
                     </div>
                 </div>
