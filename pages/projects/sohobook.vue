@@ -1,10 +1,10 @@
 <template>
     <div class="sohobook">
         <transition name="slide-fade">
-            <div class="goBack" v-if="show">
-                <router-link to="/projects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></router-link>
-                <!-- <a @click="goToProjects">Назад<span><img src="~static/img/arrow-up.svg" alt="up"></span></a> -->
-            </div>
+            <router-link class="goBack" v-if="show" tag="div" to="/projects">
+                Назад
+                <span><img src="~static/img/arrow-up.svg" alt="up"></span>
+            </router-link>
         </transition>
         <div class="container">
             <app-header/>
@@ -190,7 +190,7 @@ export default {
     },
     data () {
         return{
-            show: false
+            show: true
         }
     },
     // get the data
@@ -280,9 +280,12 @@ export default {
     left 0
     width 100%
     .header
-        position absolute
+        position fixed
         top 0
         left 0
+        z-index 100
+    .menu
+        position fixed
     .sohobook-main-img
         position absolute
         top 0
@@ -308,20 +311,19 @@ export default {
         width rem(60px)
         text-align center
         z-index 99
-        a
-            font-size: rem(13px)
-            font-weight: normal
-            font-style: normal
-            font-stretch: normal
-            line-height: normal
-            letter-spacing: rem(1.6px)
-            color: #272625
-            text-decoration none
-            text-transform uppercase
-            span
-                display block
-                margin rem(10px 0 0 0)
-                text-align center
+        font-size: rem(13px)
+        font-weight: normal
+        font-style: normal
+        font-stretch: normal
+        line-height: normal
+        letter-spacing: rem(1.6px)
+        color: #272625
+        text-decoration none
+        text-transform uppercase
+        span
+            display block
+            margin rem(10px 0 0 0)
+            text-align center
     .content
         overflow hidden
         padding 0
