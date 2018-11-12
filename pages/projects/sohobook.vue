@@ -310,7 +310,7 @@ export default {
         cursor pointer
         width rem(60px)
         text-align center
-        z-index 99
+        z-index 101
         font-size: rem(13px)
         font-weight: normal
         font-style: normal
