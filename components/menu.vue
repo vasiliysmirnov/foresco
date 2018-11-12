@@ -173,17 +173,16 @@ export default {
     align-items center
     justify-content flex-start
     overflow hidden
+    padding rem(50px 0)
     @media(max-width 500px)
         justify-content center
+    @media (max-width 425px)
+        padding rem(30px 0)
     .menuBg
         width: 100%
         height: 100%
         position: absolute
         background-color: #000
-        background-image url('~/static/img/menu-bg-2.gif')
-        background-position: center
-        background-repeat: no-repeat
-        background-size: cover
         z-index: 1
         top: 0
         right: 0
@@ -195,6 +194,7 @@ export default {
         align-items center
         justify-content flex-start
         padding-right rem(60px)
+        overflow hidden
         @media(max-width 455px)
             padding rem(0 20px 0 0)
         .line
