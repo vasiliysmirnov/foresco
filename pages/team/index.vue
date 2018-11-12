@@ -98,6 +98,7 @@
                 slidesToShow: 1,
                 dots: false,
                 arrows: false,
+                centerMode: true,
             });
             // animation for carousel
             $('.teamSlide').on("mousedown", function(e){
@@ -157,14 +158,15 @@
         padding 0
     &__inner
         width: 100%
-        max-width: rem(1200px)
-        margin: 0 auto
+        // max-width: rem(1200px)
+        // margin: 0 auto
         .team__item
             transform-origin left
             width 100%
             max-width rem(900px)
             position relative
-            margin-right rem(50px)
+            // margin-right rem(50px)
+            margin 0 auto
             .team__item-inner
                 display flex
                 align-items center
