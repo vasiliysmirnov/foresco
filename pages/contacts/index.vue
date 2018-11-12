@@ -7,7 +7,7 @@
                 <div class="contacts__inner">
                     <div class="map">
                         <img src="~/static/img/map.png" alt="">
-                        <div class="address" v-for="contact in contacts" :key="contact.id">{{contact.address}}</div>
+                        <div class="address" v-for="contact in contacts" :key="contact.id">{{contact.address}}, тел. {{ contact.phone }}</div>
                     </div>
                     <div class="form">
                         <form @submit="checkForm">
