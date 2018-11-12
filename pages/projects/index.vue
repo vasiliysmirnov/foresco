@@ -130,201 +130,207 @@
 
 </style>
 <script>
-    import AppHeader from '~/components/header.vue'
-    import AppMenu from '~/components/menu.vue'
-    import AppFooter from '~/components/footer.vue'
+import AppHeader from '~/components/header.vue'
+import AppMenu from '~/components/menu.vue'
+import AppFooter from '~/components/footer.vue'
 
-    import {client} from '~/store'
-    
-    // import slick from '~/plugins/slick-carousel'
-    if (process.browser) {
-        require('~/plugins/slick-carousel')
-    }
+import {client} from '~/store'
 
-    import $ from 'jquery'
+// import slick from '~/plugins/slick-carousel'
+if (process.browser) {
+    require('~/plugins/slick-carousel')
+}
 
-    import {mapActions} from 'vuex'
+import $ from 'jquery'
 
-    export default {
-        components: {
-            AppHeader,
-            AppMenu,
-            AppFooter,
+import {mapActions} from 'vuex'
+
+export default {
+    components: {
+        AppHeader,
+        AppMenu,
+        AppFooter,
+    },
+    head: {
+        title: 'Проекты'
+    },
+    // get the data
+    async fetch ({ store, params }) {
+        let { data } = await client.getItems('projects')
+        store.commit('setProjects', data)
+    },
+    scrollToTop: true,
+    transition: {
+        name: 'page-projects',
+        mode: 'in-out',
+        css: false,
+        beforeEnter(el){
+            TweenMax.to(el, 0, {
+                yPercent: -100, scale: 0.9, ease: Power2.easeInOut
+            })
         },
-        head: {
-            title: 'Проекты'
-        },
-        // get the data
-        async fetch ({ store, params }) {
-            let { data } = await client.getItems('projects')
-            store.commit('setProjects', data)
-        },
-        scrollToTop: true,
-        transition: {
-            name: 'page-projects',
-            mode: 'in-out',
-            css: false,
-            beforeEnter(el){
-                TweenMax.to(el, 0, {
-                    yPercent: -100, scale: 0.9, ease: Power2.easeInOut
-                })
-            },
-            enter(el, done){
-                done()
-                TweenMax.to(el, 1, {
-                    yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
-                    onComplete: function() {
-                        TweenMax.to(el, 1, {
-                            yPercent: 0, scale: 1, ease: Power2.easeInOut,
-                            onComplete: function() {}, clearProps: 'all'
-                        })
-                    }
-                })
-            },
-            leave(el, done){
-                TweenMax.to(el, 1, {
-                    yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
-                    onComplete: function() {
-                        TweenMax.to(el, 1, {
-                            yPercent: -100, scale: 1, ease: Power2.easeInOut,
-                            onComplete: function() { done() }
-                        })
-                    }
-                })
-            }
-
-        },
-        beforeRouteEnter (to, from, next) {
-            switch (from.path) {
-                // from main page
-                case '/':
-                    next(vm => {
-                        TweenMax.to(vm.$el, 0.1, {
-                            opacity: 0,
-                            onComplete: function() {
-                                TweenMax.to(vm.$el, 1, {
-                                    opacity: 1,
-                                    ease: Power2.easeInOut,
-                                })
-                            }
-                        })
+        enter(el, done){
+            done()
+            TweenMax.to(el, 1, {
+                yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
+                onComplete: function() {
+                    TweenMax.to(el, 1, {
+                        yPercent: 0, scale: 1, ease: Power2.easeInOut,
+                        onComplete: function() {}, clearProps: 'all'
                     })
-                    break;
-                default:
-                    next()
                 }
+            })
         },
-        // animation LEAVE from this page
-        beforeRouteLeave (to, from, next) {
-            switch (to.path) {
-                case "/team":
-                    TweenMax.to($('.projects'), 0.1, {
-                        opacity: 0, ease: Power2.easeInOut,
+        leave(el, done){
+            TweenMax.to(el, 1, {
+                yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
+                onComplete: function() {
+                    TweenMax.to(el, 1, {
+                        yPercent: -100, scale: 1, ease: Power2.easeInOut,
+                        onComplete: function() { done() }
+                    })
+                }
+            })
+        }
+
+    },
+    beforeRouteEnter (to, from, next) {
+        switch (from.path) {
+            // from main page
+            case '/':
+                next(vm => {
+                    TweenMax.to(vm.$el, 0.1, {
+                        opacity: 0,
                         onComplete: function() {
-                            next()
+                            TweenMax.to(vm.$el, 1, {
+                                opacity: 1,
+                                ease: Power2.easeInOut,
+                            })
                         }
                     })
-                    break;
-                case "/contacts":
-                    TweenMax.to($('.projects'), 0.1, {
-                        opacity: 0, ease: Power2.easeInOut,
-                        onComplete: function() {
-                            next()
-                        }
-                    })
-                    break;
-                default:
-                    next()
+                })
+                break;
+            default:
+                next()
             }
+    },
+    // animation LEAVE from this page
+    beforeRouteLeave (to, from, next) {
+        switch (to.path) {
+            case "/team":
+                TweenMax.to($('.projects'), 0.1, {
+                    opacity: 0, ease: Power2.easeInOut,
+                    onComplete: function() {
+                        next()
+                    }
+                })
+                break;
+            case "/contacts":
+                TweenMax.to($('.projects'), 0.1, {
+                    opacity: 0, ease: Power2.easeInOut,
+                    onComplete: function() {
+                        next()
+                    }
+                })
+                break;
+            default:
+                next()
+        }
+    },
+    methods:{
+        // next animation for slider
+        slideNextTo: function(event){
+            this.nextSlide()
+            setTimeout( () => {$('.project').slick('slickNext')}, 900)
+        },
+        nextSlide: (event) => {
+            TweenMax.to($('.slick-current .project__img'), 0.8, {
+                x: '-200px',
+                opacity: 0
+            })
+            TweenMax.to($('.slick-current .project__text'), 0.9, {
+                x: '-200px',
+                opacity: 0,
+                ease: Power2.easeInOut
+            })
+            
+        },
+        // change bg to each project
+        setProjectsBg: function(color) {
+            TweenMax.to($('.projects'), 0.4, {
+                backgroundImage: color
+            })
+        },
+        // prev animation for slider
+        slidePrevTo: function(event){
+            this.prevSlide()
+            setTimeout( () => {$('.project').slick('slickPrev')}, 900)
+        },
+        prevSlide: (event) => {
+            TweenMax.to($('.slick-current .project__img'), 0.8, {
+                x: '200px',
+                opacity: 0
+            })
+            TweenMax.to($('.slick-current .project__text'), 0.9, {
+                x: '200px',
+                opacity: 0,
+                ease: Power2.easeInOut
+            })
         },
         
-        methods:{
-            // next animation for slider
-            slideNextTo: function(event){
-                this.nextSlide()
-                setTimeout( () => {$('.project').slick('slickNext')}, 900)
-            },
-            nextSlide: (event) => {
-                TweenMax.to($('.slick-current .project__img'), 0.8, {
-                    x: '-200px',
-                    opacity: 0
-                })
-                TweenMax.to($('.slick-current .project__text'), 0.9, {
-                    x: '-200px',
-                    opacity: 0,
-                    ease: Power2.easeInOut
-                })
-                
-            },
-            // prev animation for slider
-            slidePrevTo: function(event){
-                this.prevSlide()
-                setTimeout( () => {$('.project').slick('slickPrev')}, 900)
-            },
-            prevSlide: (event) => {
-                TweenMax.to($('.slick-current .project__img'), 0.8, {
-                    x: '200px',
-                    opacity: 0
-                })
-                TweenMax.to($('.slick-current .project__text'), 0.9, {
-                    x: '200px',
-                    opacity: 0,
-                    ease: Power2.easeInOut
-                })
-            },
-            
+    },
+    mounted() {
+        // init slick carousel
+        $('.project').slick({
+            infinite: true,
+            slidesToShow: 1,
+            dots: true,
+            arrows: false,
+            dotsClass: 'project__pagination',
+        });
+        $('.project').on('afterChange', (event, slick, currentSlide) => {
+            this.setProjectsBg($('.slick-current.slick-active .project__item').attr('data-bg-image'))
+            TweenMax.to($('.slick-slide .project__img'), 0.8, {
+                x: '0',
+                opacity: 1
+            })
+            TweenMax.to($('.slick-slide .project__text'), 0.9, {
+                x: '0',
+                opacity: 1,
+                ease: Power2.easeInOut
+            })
+        });
+        
+        $('.project').on('beforeChange', (event, slick, currentSlide, nextSlide) => {            
+            $('.slick-slide').each(function(index, el){
+                // if(currentSlide > nextSlide){
+                //     TweenMax.to($(el).find('.project__img'), 0.8, {
+                //         x: '-200px',
+                //         opacity: 0
+                //     })
+                //     TweenMax.to($(el).find('.project__text'), 0.9, {
+                //         x: '-200px',
+                //         opacity: 0,
+                //         ease: Power2.easeInOut
+                //     })
+                // } else {
+                //     TweenMax.to($(el).find('.project__img'), 0.8, {
+                //         x: '200px',
+                //         opacity: 0
+                //     })
+                //     TweenMax.to($(el).find('.project__text'), 0.9, {
+                //         x: '200px',
+                //         opacity: 0,
+                //         ease: Power2.easeInOut
+                //     })
+                // }
+            })
+        });
+    },
+    computed: {
+        projects() {
+            return this.$store.state.projects
         },
-        mounted() {
-            // init slick carousel
-            $('.project').slick({
-                infinite: true,
-                slidesToShow: 1,
-                dots: true,
-                arrows: false,
-                dotsClass: 'project__pagination',
-            });
-            $('.project').on('afterChange', function(event, slick, currentSlide){
-                TweenMax.to($('.slick-slide .project__img'), 0.8, {
-                    x: '0',
-                    opacity: 1
-                })
-                TweenMax.to($('.slick-slide .project__text'), 0.9, {
-                    x: '0',
-                    opacity: 1,
-                    ease: Power2.easeInOut
-                })
-            });
-            
-            $('.project').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-                $('.slick-slide').each(function(index, el){
-                    // if(currentSlide > nextSlide){
-                    //     TweenMax.to($(el).find('.project__img'), 0.8, {
-                    //         x: '-200px',
-                    //         opacity: 0
-                    //     })
-                    //     TweenMax.to($(el).find('.project__text'), 0.9, {
-                    //         x: '-200px',
-                    //         opacity: 0,
-                    //         ease: Power2.easeInOut
-                    //     })
-                    // } else {
-                    //     TweenMax.to($(el).find('.project__img'), 0.8, {
-                    //         x: '200px',
-                    //         opacity: 0
-                    //     })
-                    //     TweenMax.to($(el).find('.project__text'), 0.9, {
-                    //         x: '200px',
-                    //         opacity: 0,
-                    //         ease: Power2.easeInOut
-                    //     })
-                    // }
-                })
-            });
-        },
-        computed: {
-            projects() {
-                return this.$store.state.projects
-            },
-        }
     }
+}
 </script>
