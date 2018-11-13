@@ -62,8 +62,7 @@ export default {
                     // move line to active item
                     if($(element).data('last')){
                         TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: $(element).data("color")});
-                    }
-                    else{
+                    } else{
                         TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: $(element).data("color")});
                     }
                 }
@@ -81,10 +80,11 @@ export default {
             // change color of the hover menu item 
             $(item.target).css({'color': $(item.target).data("color")})
             // animate line
-            if($(item.target).data('last'))
+            if($(item.target).data('last')){
                 TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: color});
-            else
+            } else {
                 TweenMax.to(line, 0.1, {transform: 'translateY('+posY+'px)', background: color});
+            }
         },
         onLinkLeave: function(item) {
             var line = document.getElementById('menuLineItem');
