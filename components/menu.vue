@@ -8,13 +8,13 @@
             <transition name="fadeMenu">
                 <div class="nav-wrapper" v-show='showNav'>
                     <ul>
-                        <li data-color="#4597e1" @click="changeNavStateProjects" data-link="/projects" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
+                        <li data-color="#4597e1" @click="changeNavStateProjects" data-link="projects" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
                             <a><span>Проекты</span></a>
                         </li>
-                        <li data-color="#bade38" @click="changeNavStateTeam" data-link="/team" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
+                        <li data-color="#bade38" @click="changeNavStateTeam" data-link="team" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
                             <a><span>Команда</span></a>
                         </li>
-                        <li data-color="#e19d45" data-link="/contacts" data-last="true" @click="changeNavStateContacts" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
+                        <li data-color="#e19d45" data-link="contacts" data-last="true" @click="changeNavStateContacts" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
                             <a><span>Контакты</span></a>
                         </li>
                     </ul>
@@ -54,7 +54,7 @@ export default {
             var posY = 0;
             for (let index = 0; index < navLinks.length; index++) {
                 var element = navLinks[index];
-                if($nuxt.$route.path == $(element).data('link')){
+                if($nuxt.$route.name == $(element).data('link')){
                     // set position of the line
                     posY = $(element).position().top + $(element).outerHeight();
                     // set the color to the link
@@ -113,7 +113,7 @@ export default {
         },
 
         changeNavStateContacts: function(event){
-            if ($nuxt.$route.path == '/contacts') {
+            if ($nuxt.$route.name == 'contacts') {
                 this.$store.commit('toggleNav')
             } else {
                 this.animationClickToLinkMenu(event, '/contacts')
@@ -122,7 +122,7 @@ export default {
             
         },
         changeNavStateTeam: function(event){
-            if ($nuxt.$route.path == '/team') {
+            if ($nuxt.$route.name == 'team') {
                 this.$store.commit('toggleNav')
             } else {
                 this.animationClickToLinkMenu(event, '/team')
@@ -132,7 +132,7 @@ export default {
             
         },
         changeNavStateProjects: function(event){
-            if ($nuxt.$route.path == '/projects') {
+            if ($nuxt.$route.name == 'projects') {
                 this.$store.commit('toggleNav')
             } else {
                 this.animationClickToLinkMenu(event, '/projects')
