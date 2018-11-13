@@ -255,7 +255,7 @@ export default {
             })
             
         },
-        // change bg to each project
+        // change bg function to each project
         setProjectsBg: function(color) {
             TweenMax.to($('.projects'), 0.4, {
                 backgroundImage: color
@@ -289,7 +289,9 @@ export default {
             dotsClass: 'project__pagination',
         });
         $('.project').on('afterChange', (event, slick, currentSlide) => {
+            // change projects background
             this.setProjectsBg($('.slick-current.slick-active .project__item').attr('data-bg-image'))
+            // custom animation for slider
             TweenMax.to($('.slick-slide .project__img'), 0.8, {
                 x: '0',
                 opacity: 1

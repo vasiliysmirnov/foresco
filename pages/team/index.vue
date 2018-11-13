@@ -4,23 +4,6 @@
             <app-header/>
             <app-menu/>
             <div class="content">
-                <!-- <div class="gallery gallery_main">
-                    <div class="team__inner gallery__container">
-                        <div class="gallery__draggable gallery__draggable_active" data-gallery>
-                            <div class="team__item gallery__item" v-for="item in team" :key="item.id">
-                                <div class="team__item-inner">
-                                    <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
-                                    <div class="description">
-                                        <div class="name">{{item.name}}</div>
-                                        <div class="position">{{item.position}}</div>
-                                        <div class="txt">{{item.description}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div> -->
                 <div class="teamSlide">
                     <div class="team__inner">
                         <div class="team__item" v-for="item in team" :key="item.id">
