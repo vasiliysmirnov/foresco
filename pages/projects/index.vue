@@ -136,12 +136,11 @@ import AppFooter from '~/components/footer.vue'
 
 import {client} from '~/store'
 
-// import slick from '~/plugins/slick-carousel'
+import $ from 'jquery'
+
 if (process.browser) {
     require('~/plugins/slick-carousel')
 }
-
-import $ from 'jquery'
 
 import {mapActions} from 'vuex'
 
@@ -191,50 +190,6 @@ export default {
                     })
                 }
             })
-        }
-
-    },
-    beforeRouteEnter (to, from, next) {
-        switch (from.path) {
-            // from main page
-            case '/':
-                next(vm => {
-                    TweenMax.to(vm.$el, 0.1, {
-                        opacity: 0,
-                        onComplete: function() {
-                            TweenMax.to(vm.$el, 1, {
-                                opacity: 1,
-                                ease: Power2.easeInOut,
-                            })
-                        }
-                    })
-                })
-                break;
-            default:
-                next()
-            }
-    },
-    // animation LEAVE from this page
-    beforeRouteLeave (to, from, next) {
-        switch (to.path) {
-            case "/team":
-                TweenMax.to($('.projects'), 0.1, {
-                    opacity: 0, ease: Power2.easeInOut,
-                    onComplete: function() {
-                        next()
-                    }
-                })
-                break;
-            case "/contacts":
-                TweenMax.to($('.projects'), 0.1, {
-                    opacity: 0, ease: Power2.easeInOut,
-                    onComplete: function() {
-                        next()
-                    }
-                })
-                break;
-            default:
-                next()
         }
     },
     methods:{
