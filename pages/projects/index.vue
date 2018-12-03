@@ -144,6 +144,40 @@ if (process.browser) {
 
 import {mapActions} from 'vuex'
 
+const transitionForProjects = {
+    name: 'page-projects',
+    mode: 'in-out',
+    css: false,
+    beforeEnter(el){
+        TweenMax.to(el, 0, {
+            yPercent: -100, scale: 0.9, ease: Power2.easeInOut
+        })
+    },
+    enter(el, done){
+        done()
+        TweenMax.to(el, 1, {
+            yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
+            onComplete: function() {
+                TweenMax.to(el, 1, {
+                    yPercent: 0, scale: 1, ease: Power2.easeInOut,
+                    onComplete: function() {}, clearProps: 'all'
+                })
+            }
+        })
+    },
+    leave(el, done){
+        TweenMax.to(el, 1, {
+            yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
+            onComplete: function() {
+                TweenMax.to(el, 1, {
+                    yPercent: -100, scale: 1, ease: Power2.easeInOut,
+                    onComplete: function() { done() }
+                })
+            }
+        })
+    }
+}
+
 export default {
     components: {
         AppHeader,
@@ -159,37 +193,9 @@ export default {
         store.commit('setProjects', data)
     },
     scrollToTop: true,
-    transition: {
-        name: 'page-projects',
-        mode: 'in-out',
-        css: false,
-        beforeEnter(el){
-            TweenMax.to(el, 0, {
-                yPercent: -100, scale: 0.9, ease: Power2.easeInOut
-            })
-        },
-        enter(el, done){
-            done()
-            TweenMax.to(el, 1, {
-                yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
-                onComplete: function() {
-                    TweenMax.to(el, 1, {
-                        yPercent: 0, scale: 1, ease: Power2.easeInOut,
-                        onComplete: function() {}, clearProps: 'all'
-                    })
-                }
-            })
-        },
-        leave(el, done){
-            TweenMax.to(el, 1, {
-                yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
-                onComplete: function() {
-                    TweenMax.to(el, 1, {
-                        yPercent: -100, scale: 1, ease: Power2.easeInOut,
-                        onComplete: function() { done() }
-                    })
-                }
-            })
+    transition(to, from) {
+        if ((from && from.name === 'projects-sohobook') || (to && to.name === 'projects-sohobook')) {
+            return transitionForProjects
         }
     },
     methods:{
