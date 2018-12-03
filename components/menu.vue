@@ -2,7 +2,9 @@
     <transition :duration="500">
         <div class="menu" v-show='showNav'>
             <transition name="menuBgAn">
-                <div class="menuBg" v-show='showNav' id="particles-js"></div>
+                <div class="menuBg" v-show='showNav'>
+                    <div id="menuBgStars"></div>
+                </div>
             </transition>
 
             <transition name="fadeMenu">
@@ -30,6 +32,7 @@
 <script>
 import $ from 'jquery'
 import TweenMax from "gsap"
+import * as THREE from 'three'
 
 export default {
     data: function() {
@@ -156,13 +159,69 @@ export default {
         },
     },
     mounted() {
+        // three.js
+        var height = window.innerHeight,
+            width = window.innerWidth;
+
+        var scene = new THREE.Scene(); // Creates a new scene
+
+        var camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 750 );
+        scene.add(camera);
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( width, height ); // sets size of render to the screen size
+        var canvas;
+        canvas = $("#menuBgStars").get(0);
+        canvas.appendChild( renderer.domElement );
+
+        // Listen for resizing of window
+        window.addEventListener( 'resize', onWindowResize, false );
+        // Resize Three.js scene on window resize
+        function onWindowResize(){
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        }
+
+        var starsGeometry = new THREE.Geometry(); // creates new geometry
+
+        for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
+            var star = new THREE.Vector3(); 
+            star.x = THREE.Math.randFloatSpread( 2000 );
+            star.y = THREE.Math.randFloatSpread( 2000 );
+            star.z = THREE.Math.randFloatSpread( 2000 );
+
+            starsGeometry.vertices.push( star );
+        }
+
+        var starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+        var starField = new THREE.Points( starsGeometry, starsMaterial );
+
+        scene.add( starField );
+
+        // Render loop to move through star field
+        function render() {
+        requestAnimationFrame( render );
+        starField.rotation.z -= 0.002;
         
+        renderer.render( scene, camera );
+        };
+
+        render();
     },
 }
 </script>
 
 <style lang="stylus" scoped>
 @import '~assets/rem.styl'
+
+#menuBgStars
+  width 100%
+  height 100%
+  position absolute
+  z-index 1
+  top 0
+  left 0
 
 .fadeMenu-enter-active
     transition: all .5s ease .3s

@@ -128,9 +128,9 @@ scene.add( starField );
 // Render loop to move through star field
 function render() {
   requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
-  starField.rotation.z += 0.002;
-  starField.rotation.x -= 0.002;
-  starField.rotation.y += 0.002;  // Runs every frame giving it the animation
+  starField.rotation.z -= 0.002;
+  // starField.rotation.x -= 0.002;
+  // starField.rotation.y += 0.002;
   
   renderer.render( scene, camera );
 };
@@ -139,8 +139,6 @@ render();
 
 function render2() {
     requestAnimationFrame( render2 );
-    starField.rotation.z = 0;
-    starField.rotation.x = 0;
     starField.rotation.y = 0;
     starField.scale.z -= 0.006;
     renderer.render( scene, camera );

@@ -36,14 +36,13 @@ module.exports = {
         })
       }
     },
-    vendor: ['directus-sdk-javascript', 'axios', 'jquery', 'slick-carousel', 'vue-parallax-js', 'vue-in-viewport-directive', 'particles.js']
+    vendor: ['directus-sdk-javascript', 'axios', 'jquery', 'slick-carousel', 'vue-parallax-js', 'vue-in-viewport-directive']
   },
   plugins: [
     '~/plugins/vue-in-viewport-directive.js',
     { src: '~plugins/directus-sdk-javascript' },
     { src: '~/plugins/vue-parallax-js.js', ssr: false },
     { src: '~/plugins/slick-carousel.js', ssr: false },
-    { src: '~/plugins/particles.js', ssr: false },
   ],
   css: [
     'swiper/dist/css/swiper.css',
