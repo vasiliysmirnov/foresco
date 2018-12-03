@@ -227,6 +227,8 @@ $('.pressBtn')
         max-width 100%
         width rem(600px)
         overflow visible!important
+        #sloi-2
+          overflow visible!important
         #f
           animation f-letter 80s linear
           animation-fill-mode forwards
