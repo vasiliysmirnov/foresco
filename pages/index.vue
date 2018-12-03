@@ -72,7 +72,9 @@ export default {
       var degree = (radius * 10);
       // animate text
       TweenLite.to("#logoBig", 5, {
-        transform:'rotate3d(' + tiltx/5 + ', ' + tilty/5 + ', 0, ' + degree + 'deg) ', ease: Power2.easeOut, force3D:false
+        transform:'rotate3d(' + tiltx/5 + ', ' + tilty/5 + ', 0, ' + degree + 'deg) ',
+        ease: Power2.easeOut, 
+        force3D:false
       });
       TweenLite.to(".text", 3, {
         transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) ', ease:Power2.easeOut, force3D:false
@@ -180,7 +182,7 @@ $('.pressBtn')
 .mainPage
   height: 100vh
   width 100%
-  overflow hidden
+  // overflow hidden
   &__inner
     text-align: center
     display: flex
@@ -191,7 +193,7 @@ $('.pressBtn')
     height: 100%
     text-align center
     position relative
-    overflow hidden
+    // overflow hidden
     .animateBlock
       position relative
       z-index 2
