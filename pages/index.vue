@@ -8,7 +8,6 @@
       <div class="animateBlock">
         <div class="logo">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 384.7" xml:space="preserve" id="logoBig" >
-          <g id="sloi-2" fill-rule="evenodd">
 
             <path fill="#FFF" id="f" d="M163.4,114.7V97.8c-67.1,2-71.3,61.7-71.3,61.7H68.7v17.2h23.4v0h0.3v99.9h16.9c0,0,0-64.9,0-99.9h22.4v-17.2
               h-22.4C109.3,137.6,131.7,114.7,163.4,114.7z"/>
@@ -19,7 +18,6 @@
             <path fill="#FFF" id="c" d="M742.3,168.2c14.6,0,27.6,6.9,35.9,17.5l13.4-10.5c-11.5-14.6-29.3-24-49.3-24c-34.6,0-62.7,28.1-62.7,62.7 c0,34.6,28.1,62.7,62.7,62.7c19.9,0,37.7-9.3,49.2-23.9l-13.4-10.5c-8.4,10.6-21.3,17.3-35.8,17.3c-25.2,0-45.7-20.4-45.7-45.7 C696.7,188.7,717.1,168.2,742.3,168.2z"/>
             <path fill="#FFF" id="o" d="M870.5,151.2c-34.6,0-62.7,28.1-62.7,62.7c0,34.6,28.1,62.7,62.7,62.7c34.6,0,62.7-28.1,62.7-62.7 C933.2,179.3,905.2,151.2,870.5,151.2z M870.5,259.6c-25.2,0-45.7-20.4-45.7-45.7c0-25.2,20.4-45.7,45.7-45.7s45.7,20.4,45.7,45.7 C916.2,239.1,895.8,259.6,870.5,259.6z"/>
             
-          </g>
           </svg>
         </div>
         <div class="text">digital  design  studio</div>
@@ -130,7 +128,7 @@ scene.add( starField );
 // Render loop to move through star field
 function render() {
   requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
-  starField.rotation.z -= 0.002;
+  starField.rotation.z -= 0.0004;
   // starField.rotation.x -= 0.002;
   // starField.rotation.y += 0.002;
   
@@ -182,7 +180,7 @@ $('.pressBtn')
 .mainPage
   height: 100vh
   width 100%
-  // overflow hidden
+  overflow hidden
   &__inner
     text-align: center
     display: flex
@@ -218,6 +216,7 @@ $('.pressBtn')
     .logo
       margin 0 auto
       // perspective: 300px
+      overflow visible
       @media(max-width 900px)
         // transform: translateZ(70px)
       @media(max-width 700px)
@@ -229,26 +228,24 @@ $('.pressBtn')
         max-width 100%
         width rem(600px)
         overflow visible!important
-        #sloi-2
-          overflow visible!important
         #f
-          animation f-letter 80s linear
+          animation f-letter 10s linear
           animation-fill-mode forwards
         #o-1
-          animation o1-letter 80s linear
+          animation o1-letter 10s linear
           animation-fill-mode forwards
         #r
-          animation r-letter 80s linear
+          animation r-letter 10s linear
           animation-fill-mode forwards
         #s
-          animation s-letter 80s linear
+          animation s-letter 10s linear
           animation-fill-mode forwards
         #c
-          animation c-letter 80s linear
+          animation c-letter 10s linear
           animation-fill-mode forwards
           transform-origin center
         #o
-          animation o-letter 80s linear
+          animation o-letter 10s linear
           animation-fill-mode forwards
           
 
@@ -285,50 +282,50 @@ $('.pressBtn')
 
 @keyframes f-letter {
   0%{
-    transform: translateX(0) rotate(0deg);
+    transform: translate(0,0);
   }
   100%{
-    transform: translateX(-30%) rotate(-5deg);
+    transform: translate(-140px,0);
   }
 }
 @keyframes o1-letter {
   0%{
-    transform: translateX(0) rotate(0deg);
+    transform: translate(0,0);
   }
   100%{
-    transform: translateX(-15%) translateY(-12%) rotate(15deg);
+    transform: translate(-100px,0);
   }
 }
 @keyframes r-letter {
   0%{
-    transform: translateX(0) rotate(0deg);
+    transform: translate(0,0);
   }
   100%{
-    transform: translateX(-10%) translateY(-9%) rotate(5deg);
+    transform: translate(-60px,0);
   }
 }
 @keyframes s-letter {
   0%{
-    transform: translateX(0) rotate(0deg);
+    transform: translate(0,0);
   }
   100%{
-    transform: translateX(10%) translateY(48%) rotate(-17deg);
+    transform: translate(60px,0);
   }
 }
 @keyframes c-letter {
   0%{
-    transform: translateX(0) rotate(0deg);
+    transform: translate(0,0);
   }
   100%{
-    transform: translateX(23%) translateY(-11%) rotate(10deg);
+    transform: translate(100px,0);
   }
 }
 @keyframes o-letter {
   0%{
-    transform: translateX(0) rotate(0deg);
+    transform: translate(0,0);
   }
   100%{
-    transform: translateX(30%);
+    transform: translate(140px,0);
   }
 }
 </style>
