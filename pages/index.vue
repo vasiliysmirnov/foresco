@@ -9,8 +9,7 @@
         <div class="logo">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 384.7" xml:space="preserve" id="logoBig" >
 
-            <path fill="#FFF" id="f" d="M163.4,114.7V97.8c-67.1,2-71.3,61.7-71.3,61.7H68.7v17.2h23.4v0h0.3v99.9h16.9c0,0,0-64.9,0-99.9h22.4v-17.2
-              h-22.4C109.3,137.6,131.7,114.7,163.4,114.7z"/>
+            <path fill="#FFF" id="f" d="M163.4,114.7V97.8c-67.1,2-71.3,61.7-71.3,61.7H68.7v17.2h23.4v0h0.3v99.9h16.9c0,0,0-64.9,0-99.9h22.4v-17.2h-22.4C109.3,137.6,131.7,114.7,163.4,114.7z"/>
             <path fill="#FFF" id="o-1" d="M225.7,151.2c-7.9,0-15.4,1.5-22.3,4.1l5.9,15.9c5.1-1.9,10.6-3,16.3-3c25.2,0,45.7,20.4,45.7,45.7 c0,25.2-20.4,45.7-45.7,45.7s-45.7-20.4-45.7-45.7c0-6.6,1.4-12.9,4-18.6l-16-6c-3.2,7.6-5,15.9-5,24.6 c0,34.6,28.1,62.7,62.7,62.7c34.6,0,62.7-28.1,62.7-62.7C288.4,179.3,260.3,151.2,225.7,151.2z"/>
             <path fill="#FFF" id="r" d="M339.1,151.1l-16.9,0v125.1h17c0,0,0-2.4,0-32.6c0-14.9-0.7-26,1.6-35.7c0.5-2.2,1.2-4.3,2-6.3 c3-7.2,7.4-13.4,12.5-18.4c5.4-5.2,11.6-9.1,18.2-11.6c5.9-2.3,12.1-3.4,18.2-3.4v-17c-29.3,0-52.7,22.7-52.7,22.7V151.1z"/>
             <path fill="#FFF" id="e" d="M475.1,151.2c-34.6,0-62.7,28.1-62.7,62.7c0,34.6,28.1,62.7,62.7,62.7c20,0,37.9-9.4,49.3-24L511.1,242 c-8.4,10.7-21.3,17.5-35.9,17.5c-21.9,0-40.2-15.5-44.6-36.1h89.3h17.3c0.1-0.8,0.2-1.6,0.3-2.5v-14.2c0-0.1,0-0.2,0-0.3 C533.7,175.4,507.2,151.2,475.1,151.2z M430.1,206.5c3.6-21.7,22.4-38.2,45-38.2s41.5,16.5,45,38.2H430.1z"/>
@@ -91,10 +90,11 @@ var height = window.innerHeight,
 
 var scene = new THREE.Scene(); // Creates a new scene
 
-var camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 750 );
+var camera = new THREE.PerspectiveCamera( 65, width / height, 1, 1000 );
 scene.add(camera);
 
 var renderer = new THREE.WebGLRenderer();
+renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( width, height ); // sets size of render to the screen size
 var canvas;
 canvas = $("#canvas").get(0);
