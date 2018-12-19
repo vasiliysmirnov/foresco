@@ -22,9 +22,8 @@
 <script>
 import TweenMax from "gsap"
 export default {
-    layout: 'projects-layouts',
     transition: {
-        name: 'page-projects',
+        name: 'parent-page',
         mode: 'in-out',
         css: false,
         beforeEnter(el){
@@ -38,15 +37,9 @@ export default {
                 yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
                 onComplete: function() {
                     TweenMax.to(el, 1, {
-                        yPercent: 0, scale: 1, ease: Power2.easeInOut,
-                        onComplete: function() {  }
+                        yPercent: 0, scale: 1, ease: Power2.easeInOut
                     })
                 }
-            })
-        },
-        afterEnter(el){
-            TweenMax.to(el, 1, {
-                yPercent: 0, scale: 1, ease: Power2.easeInOut
             })
         },
         leave(el, done){
