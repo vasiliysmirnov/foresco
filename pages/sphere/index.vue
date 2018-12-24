@@ -8,6 +8,9 @@
 import * as THREE from 'three'
 export default {
     mounted () {
+        //fps stats
+        var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);
+        
         var container;
         var camera, scene, renderer;
         var spheres = [];
@@ -20,7 +23,7 @@ export default {
         function init() {
             container = document.createElement( 'div' );
             document.body.appendChild( container );
-            camera = new THREE.PerspectiveCamera( 65, window.innerWidth / window.innerHeight, 1, 1000 );
+            camera = new THREE.PerspectiveCamera( 65, window.innerWidth / window.innerHeight, 1, 10000 );
             camera.position.z = 1;
             scene = new THREE.Scene();
 

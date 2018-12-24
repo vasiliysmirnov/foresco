@@ -151,14 +151,14 @@ $('.pressBtn')
   .mousedown(function() {
     // start the animation
     render2();
-    TweenLite.to("#logoBig", 2.5, {
-      transform:'scale(100) translate(15px, 2px)', ease: Power4.easeIn, force3D:false,
+    TweenLite.to("#logoBig", 3, {
+      transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
       onComplete: function() {
         $nuxt.$router.push('projects')
       }
     });
-    TweenLite.to(".text", 2, {
-      transform:'scale(0)', ease: Power2.easeIn, force3D:false,
+    TweenLite.to(".text", 4.5, {
+      transform:'scale(100) translate(0px, 100px)', ease: Power2.easeIn, force3D:false,
       opacity: 0
     }, 0);
   });
@@ -226,26 +226,26 @@ $('.pressBtn')
         // transform: translateZ(20px)
       svg
         max-width 100%
-        width rem(600px)
+        width rem(500px)
         overflow visible!important
         #f
-          animation f-letter 10s linear
+          animation f-letter 8s linear
           animation-fill-mode forwards
         #o-1
-          animation o1-letter 10s linear
+          animation o1-letter 8s linear
           animation-fill-mode forwards
         #r
-          animation r-letter 10s linear
+          animation r-letter 8s linear
           animation-fill-mode forwards
         #s
-          animation s-letter 10s linear
+          animation s-letter 8s linear
           animation-fill-mode forwards
         #c
-          animation c-letter 10s linear
+          animation c-letter 8s linear
           animation-fill-mode forwards
           transform-origin center
         #o
-          animation o-letter 10s linear
+          animation o-letter 8s linear
           animation-fill-mode forwards
           
 
@@ -258,6 +258,10 @@ $('.pressBtn')
       letter-spacing: rem(4px)
       color: #eeeeee
       text-transform uppercase
+      animation text-text .8s linear
+      animation-fill-mode forwards
+      animation-delay 2s
+      opacity 0
       // transform: translateZ(120px)
       // @media(max-width 600px)
       //   transform: translateZ(10px)
@@ -275,6 +279,10 @@ $('.pressBtn')
       bottom rem(50px)
       cursor pointer
       z-index 2
+      animation text-text .8s linear
+      animation-fill-mode forwards
+      animation-delay 2.8s
+      opacity 0
       a
         text-decoration none
         color #ffffff
@@ -285,7 +293,7 @@ $('.pressBtn')
     transform: translate(0,0);
   }
   100%{
-    transform: translate(-140px,0);
+    transform: translate(-105px,0);
   }
 }
 @keyframes o1-letter {
@@ -293,7 +301,7 @@ $('.pressBtn')
     transform: translate(0,0);
   }
   100%{
-    transform: translate(-100px,0);
+    transform: translate(-65px,0);
   }
 }
 @keyframes r-letter {
@@ -301,7 +309,7 @@ $('.pressBtn')
     transform: translate(0,0);
   }
   100%{
-    transform: translate(-60px,0);
+    transform: translate(-25px,0);
   }
 }
 @keyframes s-letter {
@@ -309,7 +317,7 @@ $('.pressBtn')
     transform: translate(0,0);
   }
   100%{
-    transform: translate(60px,0);
+    transform: translate(25px,0);
   }
 }
 @keyframes c-letter {
@@ -317,7 +325,7 @@ $('.pressBtn')
     transform: translate(0,0);
   }
   100%{
-    transform: translate(100px,0);
+    transform: translate(65px,0);
   }
 }
 @keyframes o-letter {
@@ -325,7 +333,15 @@ $('.pressBtn')
     transform: translate(0,0);
   }
   100%{
-    transform: translate(140px,0);
+    transform: translate(105px,0);
+  }
+}
+@keyframes text-text {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
   }
 }
 </style>

@@ -86,7 +86,7 @@
             // animation for carousel
             $('.teamSlide').on("mousedown", function(e){
                 TweenMax.to($('.team__item'), 0.6, {
-                    scale: 0.7
+                    scale: 0.8
                 })
                 cursor.addClass('cursor_active');
             })
