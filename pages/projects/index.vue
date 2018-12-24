@@ -250,8 +250,6 @@ export default {
             dotsClass: 'project__pagination',
         });
         $('.project').on('afterChange', (event, slick, currentSlide) => {
-            // change projects background
-            this.setProjectsBg($('.slick-current.slick-active .project__item').attr('data-bg-image'))
             // custom animation for slider
             TweenMax.to($('.slick-slide .project__img'), 0.8, {
                 x: '0',
@@ -264,7 +262,10 @@ export default {
             })
         });
         
-        $('.project').on('beforeChange', (event, slick, currentSlide, nextSlide) => {            
+        $('.project').on('beforeChange', (event, slick, currentSlide, nextSlide) => {
+            // change projects background
+            this.setProjectsBg( slick.$slides.eq(nextSlide).find('.project__item').attr('data-bg-image') )
+            
             $('.slick-slide').each(function(index, el){
                 // if(currentSlide > nextSlide){
                 //     TweenMax.to($(el).find('.project__img'), 0.8, {
