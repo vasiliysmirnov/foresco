@@ -82,6 +82,15 @@
                 dots: false,
                 arrows: false,
                 centerMode: true,
+                variableWidth: true,
+                responsive: [
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            variableWidth: false,
+                        }
+                    }
+                ]
             });
             // animation for carousel
             $('.teamSlide').on("mousedown", function(e){
@@ -148,8 +157,9 @@
             width 100%
             max-width rem(900px)
             position relative
-            // margin-right rem(50px)
-            margin 0 auto
+            margin 0 rem(50px)
+            @media(max-width 600px)
+                margin 0
             .team__item-inner
                 display flex
                 align-items center
