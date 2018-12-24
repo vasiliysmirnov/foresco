@@ -66,7 +66,7 @@ export default {
                     // set position of the line
                     posY = $(element).position().top + $(element).outerHeight();
                     // set the color to the link
-                    $(element).css({'color': $(element).data("color")})
+                    $(element).css({'color': $(element).data("color")});
                     // move line to active item
                     if($(element).data('last')){
                         TweenMax.to(line, 0.1, {transform: 'translateY(100%)', background: $(element).data("color")});
@@ -76,17 +76,7 @@ export default {
                 }
             }
         },
-        hexToRgb: function( hex ){
-            hex = parseInt( hex[0] != '#' ? hex : hex.substring( 1 ), 16 );
-            var rgb = [
-                hex >> 16 & 255,
-                hex >> 8 & 255,
-                hex & 255
-            ];
-            return rgb;
-        },
         onLinkHover: function(item) {
-            
             var line = document.getElementById('menuLineItem');
             var color = $(item.target).data("color");
             var posY = 0;
@@ -111,12 +101,12 @@ export default {
             // set the color to white
             $(item.target).css({'color': '#FFF'});
             // check the active link and add color
-            this.checkTheActiveLink()
+            this.checkTheActiveLink();
         },
 
         animationClickToLinkMenu: function(event, link){
             var line = document.getElementById('menuLineItem');
-            var target = event.currentTarget
+            var target = event.currentTarget;
             TweenMax.to(line, 0.1, {
                 height: 0,
                 onComplete: function() {
@@ -132,29 +122,26 @@ export default {
 
         changeNavStateContacts: function(event){
             if ($nuxt.$route.name == 'contacts') {
-                this.$store.commit('toggleNav')
+                this.$store.commit('toggleNav');
             } else {
-                this.animationClickToLinkMenu(event, '/contacts')
-                setTimeout(() => {this.$store.commit('toggleNav')}, 500)    
+                this.animationClickToLinkMenu(event, '/contacts');
+                setTimeout(() => {this.$store.commit('toggleNav')}, 500);
             }
-            
         },
         changeNavStateTeam: function(event){
             if ($nuxt.$route.name == 'team') {
-                this.$store.commit('toggleNav')
+                this.$store.commit('toggleNav');
             } else {
-                this.animationClickToLinkMenu(event, '/team')
-                setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+                this.animationClickToLinkMenu(event, '/team');
+                setTimeout(() => {this.$store.commit('toggleNav')}, 500);
             }
-            
-            
         },
         changeNavStateProjects: function(event){
             if ($nuxt.$route.name == 'projects') {
-                this.$store.commit('toggleNav')
+                this.$store.commit('toggleNav');
             } else {
-                this.animationClickToLinkMenu(event, '/projects')
-                setTimeout(() => {this.$store.commit('toggleNav')}, 500)
+                this.animationClickToLinkMenu(event, '/projects');
+                setTimeout(() => {this.$store.commit('toggleNav')}, 500);
             }
         },
     },
