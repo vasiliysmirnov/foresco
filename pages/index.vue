@@ -25,6 +25,9 @@
       <div class="pressBtn" >
         зажми
       </div>
+      <div class="pressBtn pressBtn__mobile" >
+        нажми
+      </div>
     </div>
   </div>
 </template>
@@ -94,7 +97,7 @@ export default {
 
     this.scene = new THREE.Scene(); // Creates a new scene
 
-    var camera = new THREE.PerspectiveCamera( 65, width / height, 1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 70, width / height, 1, 10000 );
     this.scene.add(camera);
 
     var renderer = new THREE.WebGLRenderer();
@@ -124,7 +127,7 @@ export default {
       this.starsGeometry.vertices.push( star );
     }
 
-    this.starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+    this.starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, opacity: Math.random()* 0.5 + 0.5, transparent: true} );
     var starField = new THREE.Points( this.starsGeometry, this.starsMaterial );
 
     this.scene.add( starField );
@@ -292,10 +295,16 @@ export default {
       animation-fill-mode forwards
       animation-delay 2.8s
       opacity 0
+      @media(max-width 1024px)
+        display none
       a
         text-decoration none
         color #ffffff
         display: block
+      &__mobile
+        display none
+        @media(max-width 1024px)
+          display inline
 
 @keyframes f-letter {
   0%{
