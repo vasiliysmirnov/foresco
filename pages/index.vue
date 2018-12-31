@@ -49,43 +49,43 @@ export default {
     //fps stats
     this.fpsStats=document.createElement('script');this.fpsStats.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};this.fpsStats.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(this.fpsStats);
     
-    var request = null;
-    var mouse = { x: 0, y: 0 };
-    var cx = window.innerWidth / 2;
-    var cy = window.innerHeight / 2;
+    // var request = null;
+    // var mouse = { x: 0, y: 0 };
+    // var cx = window.innerWidth / 2;
+    // var cy = window.innerHeight / 2;
 
-    $('body').mousemove(function(event) {
-      mouse.x = event.pageX;
-      mouse.y = event.pageY;
+    // $('body').mousemove(function(event) {
+    //   mouse.x = event.pageX;
+    //   mouse.y = event.pageY;
     
-      cancelAnimationFrame(request);
-      request = requestAnimationFrame(update);	
-    });
+    //   cancelAnimationFrame(request);
+    //   request = requestAnimationFrame(update);	
+    // });
 
-    function update() {
-      var dx = mouse.x - cx;
-      var dy = mouse.y - cy;
+    // function update() {
+    //   var dx = mouse.x - cx;
+    //   var dy = mouse.y - cy;
 
-      var tiltx = (dy / cy);
-      var tilty = - (dx / cx);
+    //   var tiltx = (dy / cy);
+    //   var tilty = - (dx / cx);
 
-      var radius = Math.sqrt(Math.pow(tiltx,2) + Math.pow(tilty,2));
-      var degree = (radius * 10);
-      // animate text
-      TweenLite.to("#logoBig", 5, {
-        transform:'rotate3d(' + tiltx/5 + ', ' + tilty/5 + ', 0, ' + degree + 'deg) ',
-        ease: Power2.easeOut, 
-        force3D:false
-      });
-      TweenLite.to(".text", 3, {
-        transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) ', ease:Power2.easeOut, force3D:false
-      });
-    }
+    //   var radius = Math.sqrt(Math.pow(tiltx,2) + Math.pow(tilty,2));
+    //   var degree = (radius * 10);
+    //   // animate text
+    //   TweenLite.to("#logoBig", 5, {
+    //     transform:'rotate3d(' + tiltx/5 + ', ' + tilty/5 + ', 0, ' + degree + 'deg) ',
+    //     ease: Power2.easeOut, 
+    //     force3D:false
+    //   });
+    //   TweenLite.to(".text", 3, {
+    //     transform:'rotate3d(' + tiltx + ', ' + tilty + ', 0, ' + degree + 'deg) ', ease:Power2.easeOut, force3D:false
+    //   });
+    // }
     
-    $(window).resize(function() {
-      cx = window.innerWidth / 2;
-      cy = window.innerHeight / 2;
-    });
+    // $(window).resize(function() {
+    //   cx = window.innerWidth / 2;
+    //   cy = window.innerHeight / 2;
+    // });
 
     
     // three.js
