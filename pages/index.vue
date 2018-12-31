@@ -194,7 +194,6 @@ export default {
   width 100%
   overflow hidden
   &__inner
-    text-align: center
     display: flex
     align-items: center
     justify-content: center
@@ -207,6 +206,7 @@ export default {
     .animateBlock
       position relative
       z-index 2
+      overflow: visible
       perspective: rem(500px)
     .background
       width 100%
