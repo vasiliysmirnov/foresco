@@ -135,7 +135,7 @@ export default {
                 this.$store.commit('toggleNav');
             } else {
                 this.animationClickToLinkMenu(event, '/team');
-                setTimeout(() => {this.$store.commit('toggleNav')}, 500);
+                setTimeout(() => {this.$store.commit('toggleNav')}, 800);
             }
         },
         changeNavStateProjects: function(event){

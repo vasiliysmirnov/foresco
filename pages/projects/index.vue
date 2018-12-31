@@ -178,6 +178,34 @@ const transitionForProjects = {
     }
 }
 
+const transitionForProjects2 = {
+    name: 'page-projects2',
+    mode: 'out-in',
+    css: false,
+    beforeEnter(el){
+        TweenMax.to(el, 0, {
+            opacity: 0, ease: Power2.easeInOut
+        })
+    },
+    enter(el, done){
+        done()
+        TweenMax.to(el, 0.5, {
+            opacity: 1, ease: Power2.easeInOut,
+        })
+    },
+    beforeLeave(el){
+        TweenMax.to(el, 0, {
+            yPercent: -50, opacity: 0, ease: Power2.easeInOut,
+        })
+    },
+    leave(el, done){
+        TweenMax.to(el, 0, {
+            opacity: 0, ease: Power2.easeInOut,
+            onComplete: function() { done() }
+        })
+    }
+}
+
 export default {
     components: {
         AppHeader,
@@ -196,6 +224,8 @@ export default {
     transition(to, from) {
         if ((from && from.name === 'projects-sohobook') || (to && to.name === 'projects-sohobook')) {
             return transitionForProjects
+        } else {
+            return transitionForProjects2
         }
     },
     methods:{
