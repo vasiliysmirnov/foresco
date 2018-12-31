@@ -127,7 +127,7 @@ export default {
       this.starsGeometry.vertices.push( star );
     }
 
-    this.starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, opacity: Math.random()* 0.5 + 0.5, transparent: true} );
+    this.starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, transparent: true} );
     var starField = new THREE.Points( this.starsGeometry, this.starsMaterial );
 
     this.scene.add( starField );
