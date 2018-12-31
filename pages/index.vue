@@ -154,14 +154,14 @@ export default {
         render2();
         TweenLite.to("#logoBig", 3, {
           transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
-          onComplete: function() {
-            $nuxt.$router.push('projects')
-          }
-        });
+        }, 0);
         TweenLite.to(".text", 4.5, {
           transform:'scale(100) translate(0px, 100px)', ease: Power2.easeIn, force3D:false,
           opacity: 0
         }, 0);
+        setTimeout(function() {
+          $nuxt.$router.push('projects')
+        }, 2000);
       });
     
   },
