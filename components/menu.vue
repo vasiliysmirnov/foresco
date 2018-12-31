@@ -37,7 +37,9 @@ import * as THREE from 'three'
 export default {
     data: function() {
         return {
-            
+            scene: null,
+            starsGeometry: null,
+            starsMaterial: null,
         }
     },
     computed: {
@@ -150,12 +152,13 @@ export default {
         var height = window.innerHeight,
             width = window.innerWidth;
 
-        var scene = new THREE.Scene(); // Creates a new scene
+        this.scene = new THREE.Scene(); // Creates a new scene
 
-        var camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 750 );
-        scene.add(camera);
+        var camera = new THREE.PerspectiveCamera( 65, width / height, 1, 1000 );
+        this.scene.add(camera);
 
         var renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( width, height ); // sets size of render to the screen size
         var canvas;
         canvas = $("#menuBgStars").get(0);
@@ -170,32 +173,36 @@ export default {
         renderer.setSize( window.innerWidth, window.innerHeight );
         }
 
-        var starsGeometry = new THREE.Geometry(); // creates new geometry
+        this.starsGeometry = new THREE.Geometry(); // creates new geometry
 
         for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
-            var star = new THREE.Vector3(); 
-            star.x = THREE.Math.randFloatSpread( 2000 );
-            star.y = THREE.Math.randFloatSpread( 2000 );
-            star.z = THREE.Math.randFloatSpread( 2000 );
-
-            starsGeometry.vertices.push( star );
+        var star = new THREE.Vector3(); 
+        star.x = THREE.Math.randFloatSpread( 2000 );
+        star.y = THREE.Math.randFloatSpread( 2000 );
+        star.z = THREE.Math.randFloatSpread( 2000 );
+        
+        this.starsGeometry.vertices.push( star );
         }
 
-        var starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
-        var starField = new THREE.Points( starsGeometry, starsMaterial );
+        this.starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+        var starField = new THREE.Points( this.starsGeometry, this.starsMaterial );
 
-        scene.add( starField );
+        this.scene.add( starField );
 
         // Render loop to move through star field
-        function render() {
-        requestAnimationFrame( render );
-        starField.rotation.z -= 0.002;
-        
-        renderer.render( scene, camera );
+        var render = () => {
+        requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
+        starField.rotation.z -= 0.0004;
+        renderer.render( this.scene, camera );
         };
 
         render();
     },
+    beforeDestroy: function () {
+    //clear scene three js
+    this.starsGeometry.dispose();
+    this.starsMaterial.dispose();
+  }
 }
 </script>
 
