@@ -158,6 +158,7 @@
             max-width rem(900px)
             position relative
             margin 0 rem(50px)
+            outline none
             @media(max-width 600px)
                 margin 0
             .team__item-inner
@@ -165,6 +166,7 @@
                 align-items center
                 justify-content space-between
                 flex: 1 0 auto
+                outline none
                 @media(max-width 910px)
                     flex-wrap wrap
                     justify-content: center
