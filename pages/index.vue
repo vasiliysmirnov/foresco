@@ -36,14 +36,18 @@ import TweenMax from "gsap"
 import * as THREE from 'three'
 
 export default {
-  beforeCreate() {
-    
+  data: function () {
+    return {
+      fpsStats: null,
+      scene: null,
+      starsGeometry: null,
+      starsMaterial: null,
+    }
   },
-  
   mounted () {
 
     //fps stats
-    var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);
+    this.fpsStats=document.createElement('script');this.fpsStats.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};this.fpsStats.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(this.fpsStats);
     
     var request = null;
     var mouse = { x: 0, y: 0 };
@@ -84,85 +88,90 @@ export default {
     });
 
     
-// three.js
-var height = window.innerHeight,
-    width = window.innerWidth;
+    // three.js
+    var height = window.innerHeight,
+        width = window.innerWidth;
 
-var scene = new THREE.Scene(); // Creates a new scene
+    this.scene = new THREE.Scene(); // Creates a new scene
 
-var camera = new THREE.PerspectiveCamera( 65, width / height, 1, 1000 );
-scene.add(camera);
+    var camera = new THREE.PerspectiveCamera( 65, width / height, 1, 1000 );
+    this.scene.add(camera);
 
-var renderer = new THREE.WebGLRenderer();
-renderer.setPixelRatio( window.devicePixelRatio );
-renderer.setSize( width, height ); // sets size of render to the screen size
-var canvas;
-canvas = $("#canvas").get(0);
-canvas.appendChild( renderer.domElement );
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( width, height ); // sets size of render to the screen size
+    var canvas;
+    canvas = $("#canvas").get(0);
+    canvas.appendChild( renderer.domElement );
 
-// Listen for resizing of window
-window.addEventListener( 'resize', onWindowResize, false );
-// Resize Three.js scene on window resize
-function onWindowResize(){
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-}
+    // Listen for resizing of window
+    window.addEventListener( 'resize', onWindowResize, false );
+    // Resize Three.js scene on window resize
+    function onWindowResize(){
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+    }
 
-var starsGeometry = new THREE.Geometry(); // creates new geometry
+    this.starsGeometry = new THREE.Geometry(); // creates new geometry
 
-for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
-	var star = new THREE.Vector3(); 
-	star.x = THREE.Math.randFloatSpread( 2000 );
-	star.y = THREE.Math.randFloatSpread( 2000 );
-	star.z = THREE.Math.randFloatSpread( 2000 );
+    for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
+      var star = new THREE.Vector3(); 
+      star.x = THREE.Math.randFloatSpread( 2000 );
+      star.y = THREE.Math.randFloatSpread( 2000 );
+      star.z = THREE.Math.randFloatSpread( 2000 );
 
-	starsGeometry.vertices.push( star );
-}
+      this.starsGeometry.vertices.push( star );
+    }
 
-var starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
-var starField = new THREE.Points( starsGeometry, starsMaterial );
+    this.starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+    var starField = new THREE.Points( this.starsGeometry, this.starsMaterial );
 
-scene.add( starField );
+    this.scene.add( starField );
 
-// Render loop to move through star field
-function render() {
-  requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
-  starField.rotation.z -= 0.0004;
-  // starField.rotation.x -= 0.002;
-  // starField.rotation.y += 0.002;
-  
-  renderer.render( scene, camera );
-};
+    // Render loop to move through star field
+    var render = () => {
+      requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
+      starField.rotation.z -= 0.0004;
+      renderer.render( this.scene, camera );
+    };
 
-render();
+    render();
 
-function render2() {
-    requestAnimationFrame( render2 );
-    starField.rotation.y = 0;
-    starField.scale.z -= 0.006;
-    renderer.render( scene, camera );
-}
+    var render2 = () => {
+        requestAnimationFrame( render2 );
+        starField.rotation.y = 0;
+        starField.scale.z -= 0.006;
+        renderer.render( this.scene, camera );
+    }
 
-$('.pressBtn')
-  .mouseup(function() {
-    $nuxt.$router.push('projects')
-  })
-  .mousedown(function() {
-    // start the animation
-    render2();
-    TweenLite.to("#logoBig", 3, {
-      transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
-      onComplete: function() {
+    $('.pressBtn')
+      .mouseup(function() {
         $nuxt.$router.push('projects')
-      }
-    });
-    TweenLite.to(".text", 4.5, {
-      transform:'scale(100) translate(0px, 100px)', ease: Power2.easeIn, force3D:false,
-      opacity: 0
-    }, 0);
-  });
+      })
+      .mousedown(function(){
+        // start the animation
+        render2();
+        TweenLite.to("#logoBig", 3, {
+          transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
+          onComplete: function() {
+            $nuxt.$router.push('projects')
+          }
+        });
+        TweenLite.to(".text", 4.5, {
+          transform:'scale(100) translate(0px, 100px)', ease: Power2.easeIn, force3D:false,
+          opacity: 0
+        }, 0);
+      });
     
+  },
+
+  beforeDestroy: function () {
+    // clear fps stats script
+    this.fpsStats = null
+    //clear scene three js
+    this.starsGeometry.dispose();
+    this.starsMaterial.dispose();
   }
 }
 </script>
