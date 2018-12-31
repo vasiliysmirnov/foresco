@@ -240,6 +240,7 @@ export default {
         max-width 100%
         width rem(500px)
         overflow visible!important
+        transform-box: fill-box
         #f
           animation f-letter 8s linear
           animation-fill-mode forwards

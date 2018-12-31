@@ -171,7 +171,8 @@
                     flex-wrap wrap
                     justify-content: center
             .img
-                width 50%
+                width 20%
+                outline none
                 @media(max-width 910px)
                     width 100%
                     padding rem(0 15px 0 20px)
@@ -187,6 +188,8 @@
             .description
                 text-align right
                 width 50%
+                outline none
+                cursor none
                 @media(max-width 600px)
                     width 100%
                     padding-right rem(15px)
@@ -199,6 +202,8 @@
                     letter-spacing: normal
                     color: #eeeeee
                     margin-bottom rem(10px)
+                    &:hover
+                        cursor none
                 .position
                     font-size: rem(12px)
                     font-family: 'montserratlight'
@@ -210,6 +215,7 @@
                     margin-bottom rem(20px)
                     padding-bottom rem(20px)
                     position relative
+                    cursor none
                     &:before
                         content ''
                         position absolute
@@ -226,6 +232,7 @@
                     line-height: normal
                     letter-spacing: normal
                     color: #eeeeee
+                    cursor none
 
 .cursor {
     width: rem(76px)
@@ -235,7 +242,7 @@
     position: fixed
     top: 0
     left: 0
-    z-index: 300
+    z-index: 10
 }
 
 .cursor__fly {
@@ -244,7 +251,7 @@
     position: absolute
     top: 0
     left: 0
-    z-index: 300
+    z-index: 10
 }
 
 .cursor__fly_slow {
