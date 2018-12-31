@@ -35,22 +35,19 @@
 <script>
 import $ from 'jquery'
 import TweenMax from "gsap"
-// import Draggable from "gsap/Draggable"
+
 import * as THREE from 'three'
 
 export default {
   data: function () {
     return {
-      fpsStats: null,
-      scene: null,
-      starsGeometry: null,
-      starsMaterial: null,
+      // fpsStats: null,
+      // scene: null,
+      // starsGeometry: null,
+      // starsMaterial: null,
     }
   },
   mounted () {
-
-    //fps stats
-    this.fpsStats=document.createElement('script');this.fpsStats.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};this.fpsStats.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(this.fpsStats);
     
     // var request = null;
     // var mouse = { x: 0, y: 0 };
@@ -95,10 +92,10 @@ export default {
     var height = window.innerHeight,
         width = window.innerWidth;
 
-    this.scene = new THREE.Scene(); // Creates a new scene
+    var scene = new THREE.Scene(); // Creates a new scene
 
     var camera = new THREE.PerspectiveCamera( 70, width / height, 1, 10000 );
-    this.scene.add(camera);
+    scene.add(camera);
 
     var renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -116,7 +113,7 @@ export default {
       renderer.setSize( window.innerWidth, window.innerHeight );
     }
 
-    this.starsGeometry = new THREE.Geometry(); // creates new geometry
+    var starsGeometry = new THREE.Geometry(); // creates new geometry
 
     for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
       var star = new THREE.Vector3(); 
@@ -124,19 +121,19 @@ export default {
       star.y = THREE.Math.randFloatSpread( 2000 );
       star.z = THREE.Math.randFloatSpread( 2000 );
 
-      this.starsGeometry.vertices.push( star );
+      starsGeometry.vertices.push( star );
     }
 
-    this.starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, transparent: true} );
-    var starField = new THREE.Points( this.starsGeometry, this.starsMaterial );
+    var starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, transparent: true} );
+    var starField = new THREE.Points( starsGeometry, starsMaterial );
 
-    this.scene.add( starField );
+    scene.add( starField );
 
     // Render loop to move through star field
     var render = () => {
       requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
       starField.rotation.z -= 0.0004;
-      renderer.render( this.scene, camera );
+      renderer.render( scene, camera );
     };
 
     render();
@@ -145,12 +142,14 @@ export default {
         requestAnimationFrame( render2 );
         starField.rotation.y = 0;
         starField.scale.z -= 0.006;
-        renderer.render( this.scene, camera );
+        renderer.render( scene, camera );
     }
 
     $('.pressBtn')
       .mouseup(function() {
-        $nuxt.$router.push('projects')
+        renderer.dispose();
+        $nuxt.$router.push('projects');
+        
       })
       .mousedown(function(){
         // start the animation
@@ -163,6 +162,7 @@ export default {
           opacity: 0
         }, 0);
         setTimeout(function() {
+          renderer.dispose();
           $nuxt.$router.push('projects')
         }, 2000);
       });
@@ -171,10 +171,10 @@ export default {
 
   beforeDestroy: function () {
     // clear fps stats script
-    this.fpsStats = null
+    // fpsStats = null
     //clear scene three js
-    this.starsGeometry.dispose();
-    this.starsMaterial.dispose();
+    // starsGeometry.dispose();
+    // starsMaterial.dispose();
   }
 }
 </script>

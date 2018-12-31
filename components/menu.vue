@@ -40,6 +40,7 @@ export default {
             scene: null,
             starsGeometry: null,
             starsMaterial: null,
+            renderer: null,
         }
     },
     computed: {
@@ -157,12 +158,12 @@ export default {
         var camera = new THREE.PerspectiveCamera( 65, width / height, 1, 1000 );
         this.scene.add(camera);
 
-        var renderer = new THREE.WebGLRenderer();
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( width, height ); // sets size of render to the screen size
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setPixelRatio( window.devicePixelRatio );
+        this.renderer.setSize( width, height ); // sets size of render to the screen size
         var canvas;
         canvas = $("#menuBgStars").get(0);
-        canvas.appendChild( renderer.domElement );
+        canvas.appendChild( this.renderer.domElement );
 
         // Listen for resizing of window
         window.addEventListener( 'resize', onWindowResize, false );
@@ -170,7 +171,7 @@ export default {
         function onWindowResize(){
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        this.renderer.setSize( window.innerWidth, window.innerHeight );
         }
 
         this.starsGeometry = new THREE.Geometry(); // creates new geometry
@@ -193,7 +194,7 @@ export default {
         var render = () => {
         requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
         starField.rotation.z -= 0.0004;
-        renderer.render( this.scene, camera );
+        this.renderer.render( this.scene, camera );
         };
 
         render();
@@ -202,6 +203,7 @@ export default {
     //clear scene three js
     this.starsGeometry.dispose();
     this.starsMaterial.dispose();
+    this.renderer.dispose();
   }
 }
 </script>
