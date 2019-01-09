@@ -3,7 +3,7 @@
         <div class="menu" v-show='showNav'>
             <transition name="menuBgAn">
                 <div class="menuBg" v-show='showNav'>
-                    <div id="menuBgStars"></div>
+                    <app-stars/>
                 </div>
             </transition>
 
@@ -32,9 +32,12 @@
 <script>
 import $ from 'jquery'
 import TweenMax from "gsap"
-import * as THREE from 'three'
+import AppStars from '~/components/stars.vue'
 
 export default {
+    components: {
+        AppStars
+    },
     data: function() {
         return {
             

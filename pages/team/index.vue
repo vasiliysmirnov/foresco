@@ -48,7 +48,6 @@
 
     import $ from 'jquery'
 
-    import {mapActions} from 'vuex'
     import {client} from '~/store'
 
     export default {

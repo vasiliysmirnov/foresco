@@ -2,12 +2,11 @@
   <div class="mainPage">
     <div class="mainPage__inner">
       <div class="background">
-        <div id="canvas"></div>
-        <div class="background__img"></div>
+        <app-stars ref="triggerAnimation" />
       </div>
       <div class="animateBlock">
         <div class="logo">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 384.7" xml:space="preserve" id="logoBig" >
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-50 0 1100 385" id="logoBig" >
 
             <path fill="#FFF" id="f" d="M163.4,114.7V97.8c-67.1,2-71.3,61.7-71.3,61.7H68.7v17.2h23.4v0h0.3v99.9h16.9c0,0,0-64.9,0-99.9h22.4v-17.2h-22.4C109.3,137.6,131.7,114.7,163.4,114.7z"/>
             <path fill="#FFF" id="o-1" d="M225.7,151.2c-7.9,0-15.4,1.5-22.3,4.1l5.9,15.9c5.1-1.9,10.6-3,16.3-3c25.2,0,45.7,20.4,45.7,45.7 c0,25.2-20.4,45.7-45.7,45.7s-45.7-20.4-45.7-45.7c0-6.6,1.4-12.9,4-18.6l-16-6c-3.2,7.6-5,15.9-5,24.6 c0,34.6,28.1,62.7,62.7,62.7c34.6,0,62.7-28.1,62.7-62.7C288.4,179.3,260.3,151.2,225.7,151.2z"/>
@@ -22,10 +21,10 @@
         <div class="text">digital  design  studio</div>
       </div>
       
-      <div class="pressBtn" >
+      <div class="pressBtn" v-on:mousedown="letsfly()" v-on:mouseup="godeep()">
         зажми
       </div>
-      <div class="pressBtn pressBtn__mobile" >
+      <div class="pressBtn pressBtn__mobile" v-on:click="godeep()">
         нажми
       </div>
     </div>
@@ -36,16 +35,15 @@
 import $ from 'jquery'
 import TweenMax from "gsap"
 
-import * as THREE from 'three'
+import AppStars from '~/components/stars.vue'
 
 export default {
   data: function () {
     return {
-      // fpsStats: null,
-      // scene: null,
-      // starsGeometry: null,
-      // starsMaterial: null,
     }
+  },
+  components: {
+    AppStars
   },
   mounted () {
     
@@ -86,95 +84,30 @@ export default {
     //   cx = window.innerWidth / 2;
     //   cy = window.innerHeight / 2;
     // });
-
-    
-    // three.js
-    var height = window.innerHeight,
-        width = window.innerWidth;
-
-    var scene = new THREE.Scene(); // Creates a new scene
-
-    var camera = new THREE.PerspectiveCamera( 70, width / height, 1, 10000 );
-    scene.add(camera);
-
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( width, height ); // sets size of render to the screen size
-    var canvas;
-    canvas = $("#canvas").get(0);
-    canvas.appendChild( renderer.domElement );
-
-    // Listen for resizing of window
-    window.addEventListener( 'resize', onWindowResize, false );
-    // Resize Three.js scene on window resize
-    function onWindowResize(){
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize( window.innerWidth, window.innerHeight );
-    }
-
-    var starsGeometry = new THREE.Geometry(); // creates new geometry
-
-    for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
-      var star = new THREE.Vector3(); 
-      star.x = THREE.Math.randFloatSpread( 2000 );
-      star.y = THREE.Math.randFloatSpread( 2000 );
-      star.z = THREE.Math.randFloatSpread( 2000 );
-
-      starsGeometry.vertices.push( star );
-    }
-
-    var starsMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, transparent: true} );
-    var starField = new THREE.Points( starsGeometry, starsMaterial );
-
-    scene.add( starField );
-
-    // Render loop to move through star field
-    var render = () => {
-      requestAnimationFrame( render ); // requestAnimationFrame will pause when the user navigates to a new tab
-      starField.rotation.z -= 0.0004;
-      renderer.render( scene, camera );
-    };
-
-    render();
-
-    var render2 = () => {
-        requestAnimationFrame( render2 );
-        starField.rotation.y = 0;
-        starField.scale.z -= 0.006;
-        renderer.render( scene, camera );
-    }
-
-    $('.pressBtn')
-      .mouseup(function() {
-        renderer.dispose();
-        $nuxt.$router.push('projects');
-        
-      })
-      .mousedown(function(){
-        // start the animation
-        render2();
-        TweenLite.to("#logoBig", 3, {
-          transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
-        }, 0);
-        TweenLite.to(".text", 4.5, {
-          transform:'scale(100) translate(0px, 100px)', ease: Power2.easeIn, force3D:false,
-          opacity: 0
-        }, 0);
-        setTimeout(function() {
-          renderer.dispose();
-          $nuxt.$router.push('projects')
-        }, 2000);
-      });
     
   },
+  methods: {
+    // start page transition animation
+    letsfly: function(){
+      
+      this.$refs.triggerAnimation.render2()
 
-  beforeDestroy: function () {
-    // clear fps stats script
-    // fpsStats = null
-    //clear scene three js
-    // starsGeometry.dispose();
-    // starsMaterial.dispose();
+      TweenLite.to("#logoBig", 3, {
+        transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
+      }, 0);
+      TweenLite.to(".text", 4.5, {
+        transform:'scale(100) translate(0px, 100px)', ease: Power2.easeIn, force3D:false,
+        opacity: 0
+      }, 0);
+      setTimeout(function() {
+        $nuxt.$router.push('projects')
+      }, 2000);
+    },
+    // go to projects page
+    godeep: function(){
+      $nuxt.$router.push('projects');
+    },
+
   }
 }
 </script>
@@ -182,29 +115,25 @@ export default {
 <style lang="stylus" scoped>
 @import '~assets/rem.styl'
 
-#canvas
-  width 100%
-  height 100%
-  position absolute
-  z-index 1
-  top 0
-  left 0
 .mainPage
   height: 100vh
   width 100%
   overflow hidden
   &__inner
-    display: flex
-    align-items: center
-    justify-content: center
-    flex-direction: column
+    // display: flex
+    // align-items: center
+    // justify-content: center
+    // flex-direction: column
     width: 100%
     height: 100%
     text-align center
     position relative
     // overflow hidden
     .animateBlock
-      position relative
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
       z-index 2
       overflow: visible
       perspective: rem(500px)
@@ -236,7 +165,7 @@ export default {
       @media(max-width 600px)
         padding rem(0 20px)
         // transform: translateZ(20px)
-      svg
+      svg#logoBig
         max-width 100%
         width rem(500px)
         overflow visible!important
@@ -289,6 +218,7 @@ export default {
       text-transform: uppercase
       font-size: rem(13px)
       position absolute
+      left calc(50% - 2.5rem)
       bottom rem(50px)
       cursor pointer
       z-index 2
