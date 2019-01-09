@@ -14,7 +14,9 @@ export default {
       starsMaterial: null,
       renderer: null,
       camera: null,
-      starField: null
+      starField: null,
+      height: 0,
+      width: 0,
     }
   },
   beforeMount () {
@@ -27,25 +29,16 @@ export default {
   methods: {
     init: function() {
       // three.js
-      var height = window.innerHeight,
-          width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.width = window.innerWidth;
 
-      this.camera = new THREE.PerspectiveCamera( 70, width / height, 1, 10000 );
+      this.camera = new THREE.PerspectiveCamera( 70, this.width / this.height, 1, 10000 );
       this.scene.add(this.camera);
 
       this.renderer.setPixelRatio( window.devicePixelRatio );
-      this.renderer.setSize( width, height ); // sets size of render to the screen size
+      this.renderer.setSize( this.width, this.height ); // sets size of render to the screen size
       let canvas = document.getElementById('canvas');
       canvas.appendChild( this.renderer.domElement );
-
-      // Listen for resizing of window
-      window.addEventListener( 'resize', onWindowResize, false );
-      // Resize Three.js scene on window resize
-      function onWindowResize(){
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize( width, height );
-      }
 
       for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
         var star = new THREE.Vector3(); 
@@ -69,14 +62,24 @@ export default {
       this.starField.scale.z -= 0.006;
       this.renderer.render( this.scene, this.camera );
     },
+    onWindowResize: function() {
+      window.addEventListener( 'resize', this.onWindowResize, false );
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize( this.width, this.height );
+    },
     
   },
   mounted () {
     this.init();
     this.animate();
-    
+    this.$nextTick(function() {
+      this.onWindowResize()
+    })
   },
-
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onWindowResize);
+  },
   destroy: function () {
     // clear scene three js
     this.scene.dispose();
