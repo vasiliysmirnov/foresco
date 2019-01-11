@@ -1,7 +1,7 @@
 <template>
     <div class="parent">
         <h1>parent</h1>
-        <router-link to='qwe/1'>link</router-link>
+        <router-link to='/qwe/1'>link</router-link>
     </div>
 </template>
 <style lang="stylus" scoped>
