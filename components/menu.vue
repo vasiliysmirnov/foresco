@@ -1,10 +1,9 @@
 <template>
     <transition :duration="500">
         <div class="menu" v-show='showNav'>
+            
             <transition name="menuBgAn">
-                <div class="menuBg" v-show='showNav'>
-                    <app-stars/>
-                </div>
+                <div class="menuBg" v-show='showNav'></div>
             </transition>
 
             <transition name="fadeMenu">
@@ -25,6 +24,7 @@
                     </div>
                 </div>
             </transition>
+
         </div>
     </transition>
 </template>
@@ -32,17 +32,8 @@
 <script>
 import $ from 'jquery'
 import TweenMax from "gsap"
-import AppStars from '~/components/stars.vue'
 
 export default {
-    components: {
-        AppStars
-    },
-    data: function() {
-        return {
-            
-        }
-    },
     computed: {
         showNav () {
             return this.$store.state.showNav
