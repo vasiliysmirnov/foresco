@@ -1,7 +1,9 @@
 <template>
   <div class="mainPage">
     <div class="mainPage__inner">
-      <div class="background"></div>
+      <div class="background">
+        <app-stars ref="triggerAnimation"></app-stars>
+      </div>
       <div class="animateBlock">
         <div class="logo">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-50 0 1100 385" id="logoBig" >
@@ -33,11 +35,18 @@
 import $ from 'jquery'
 import TweenMax from "gsap"
 
+import AppStars from "~/components/stars.vue"
+
 export default {
-  
+  components: {
+    AppStars
+  },
   methods: {
     // start page transition animation
     letsfly: function(){
+      
+      this.$refs.triggerAnimation.render2();
+
       TweenLite.to("#logoBig", 3, {
         transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
       }, 0);

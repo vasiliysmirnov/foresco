@@ -32,7 +32,7 @@ export default {
       this.height = window.innerHeight;
       this.width = window.innerWidth;
 
-      this.camera = new THREE.PerspectiveCamera( 70, this.width / this.height, 1, 10000 );
+      this.camera = new THREE.PerspectiveCamera( 150, this.width / this.height, 1, 10000 );
       this.scene.add(this.camera);
 
       this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -40,7 +40,7 @@ export default {
       let canvas = document.getElementById('canvas');
       canvas.appendChild( this.renderer.domElement );
 
-      for ( var i = 0; i < 10000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
+      for ( var i = 0; i < 4000; i ++ ) {  // Adds a partilce on each loop i < 10000 = 9999 particles rendered
         var star = new THREE.Vector3(); 
         star.x = THREE.Math.randFloatSpread( 2000 );
         star.y = THREE.Math.randFloatSpread( 2000 );
@@ -53,12 +53,12 @@ export default {
     },
     animate: function() {
       requestAnimationFrame( this.animate ); // requestAnimationFrame will pause when the user navigates to a new tab
-      this.starField.rotation.z -= 0.0004;
+      this.camera.rotation.z += 0.0008;
       this.renderer.render( this.scene, this.camera );
     },
     render2: function() {
       requestAnimationFrame( this.render2 );
-      this.starField.rotation.y = 0;
+      // this.camera.position.z += 0.008;
       this.starField.scale.z -= 0.006;
       this.renderer.render( this.scene, this.camera );
     },
