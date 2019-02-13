@@ -10,8 +10,7 @@
                 </svg>
 
             </router-link>
-        </div>    
-        <!-- <div v-for="contact in contacts" :key="contact.id" class="phone">{{ contact.phone }}</div> -->
+        </div>
         <app-nav/>
     </div>
 </template>
