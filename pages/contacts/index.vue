@@ -6,7 +6,21 @@
             <div class="content">
                 <div class="contacts__inner">
                     <div class="map">
-                        <img src="~/static/img/map.png" alt="">
+                        <yandex-map 
+                            :coords="[59.829429, 30.378460]"
+                            zoom="16"
+                            style="width: 100%; height: 400px;"
+                        >
+                            <ymap-marker
+                                marker-id="1"
+                                marker-type="placemark"
+                                :coords="[59.829429, 30.378460]"
+                                hint-content="Foresco"
+                                :balloon="{header: 'ТЦ «Балканский 3»', body: 'офис 18', footer: 'тел. +7 812 567-45-23'}"
+                                :icon="{color: 'darkOrange', glyph: 'Dot'}"
+                                cluster-name="1"
+                                ></ymap-marker>
+                        </yandex-map>
                         <div class="address" v-for="contact in contacts" :key="contact.id">{{contact.address}}, тел. {{ contact.phone }}</div>
                     </div>
                     <div class="form">
@@ -76,7 +90,7 @@ export default {
     components: {
         AppHeader,
         AppMenu,
-        AppFooter
+        AppFooter,
     },
     head: {
         title: 'Контакты'
