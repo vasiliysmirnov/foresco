@@ -131,49 +131,47 @@ export default {
         overflow visible!important
         transform-box: fill-box
         #f
-          // animation f-letter 8s linear
-          // animation-fill-mode forwards
           fill transparent
           stroke-dasharray: 542
           stroke-dashoffset: 542
-          animation: f-letter 8s linear, lines1 2s linear
+          animation: f-letter 8s linear, lines1 2s linear, colorW .5s 2s ease
           animation-fill-mode forwards
         #o-1
           fill transparent
           stroke-dasharray: 629
           stroke-dashoffset: 629
-          animation o1-letter 8s linear, lines2 2s linear
+          animation o1-letter 8s linear, lines2 2s linear, colorW .5s 2s ease
           animation-fill-mode forwards
         #r
           fill transparent
           stroke-dasharray: 395
           stroke-dashoffset: 395
-          animation r-letter 8s linear, lines3 2s linear
+          animation r-letter 8s linear, lines3 2s linear, colorW .5s 2s ease
           animation-fill-mode forwards
         #e
           fill transparent
           stroke-dasharray: 807
           stroke-dashoffset: 807
-          animation lines4 2s linear
+          animation lines4 2s linear, colorW .5s 2s ease
           animation-fill-mode forwards
         #s
           fill transparent
           stroke-dasharray: 623
           stroke-dashoffset: 623
-          animation s-letter 8s linear, lines5 2s linear
+          animation s-letter 8s linear, lines5 2s linear, colorW .5s 2s ease
           animation-fill-mode forwards
         #c
           fill transparent
           stroke-dasharray: 570
           stroke-dashoffset: 570
-          animation c-letter 8s linear, lines6 2s linear
+          animation c-letter 8s linear, lines6 2s linear, colorW .5s 2s ease
           animation-fill-mode forwards
           transform-origin center
         #o
           fill transparent
           stroke-dasharray: 681
           stroke-dashoffset: 681
-          animation o-letter 8s linear, lines7 2s linear
+          animation o-letter 8s linear, lines7 2s linear, colorW .5s 2s ease
           animation-fill-mode forwards
           
 
@@ -253,7 +251,6 @@ export default {
   }
   100%{
     stroke-dashoffset: 0;
-    fill: #FFF;
   }
 }
 @keyframes lines5 {
@@ -284,72 +281,48 @@ export default {
   0% {
     transform: translate(0,0);
   }
-  90%{
-    fill: #FFF;
-  }
   100% {
     transform: translate(-105px,0);
-    fill: #FFF;
   }
 }
 @keyframes o1-letter {
   0%{
     transform: translate(0,0);
   }
-  90%{
-    fill: #FFF;
-  }
   100%{
     transform: translate(-65px,0);
-    fill: #FFF;
   }
 }
 @keyframes r-letter {
   0%{
     transform: translate(0,0);
   }
-  90%{
-    fill: #FFF;
-  }
   100%{
     transform: translate(-25px,0);
-    fill: #FFF;
   }
 }
 @keyframes s-letter {
   0%{
     transform: translate(0,0);
   }
-  90%{
-    fill: #FFF;
-  }
   100%{
     transform: translate(25px,0);
-    fill: #FFF;
   }
 }
 @keyframes c-letter {
   0%{
     transform: translate(0,0);
   }
-  90%{
-    fill: #FFF;
-  }
   100%{
     transform: translate(65px,0);
-    fill: #FFF;
   }
 }
 @keyframes o-letter {
   0%{
     transform: translate(0,0);
   }
-  90%{
-    fill: #FFF;
-  }
   100%{
     transform: translate(105px,0);
-    fill: #FFF;
   }
 }
 @keyframes text-text {
@@ -358,6 +331,15 @@ export default {
   }
   100%{
     opacity: 1;
+  }
+}
+
+@keyframes colorW {
+  0%{
+    fill: transparent;
+  }
+  100%{
+    fill: #FFF;
   }
 }
 </style>
