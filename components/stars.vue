@@ -63,7 +63,8 @@ export default {
       this.renderer.render( this.scene, this.camera );
     },
     onWindowResize: function() {
-      window.addEventListener( 'resize', this.onWindowResize, false );
+      this.width = document.documentElement.clientWidth;
+      this.height = document.documentElement.clientHeight;
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize( this.width, this.height );
@@ -74,6 +75,7 @@ export default {
     this.init();
     this.animate();
     this.$nextTick(function() {
+      window.addEventListener( 'resize', this.onWindowResize);
       this.onWindowResize()
     })
   },
