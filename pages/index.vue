@@ -2,7 +2,7 @@
   <div class="mainPage">
     <div class="mainPage__inner">
       <div class="background">
-        <app-stars ref="triggerAnimation"></app-stars>
+        <app-stars ref="triggerTheEnter"></app-stars>
       </div>
       <div class="animateBlock">
         <div class="logo">
@@ -21,10 +21,10 @@
         <div class="text">digital  design  studio</div>
       </div>
       
-      <div class="pressBtn" v-on:mousedown="letsfly()" v-on:mouseup="godeep()">
+      <div class="pressBtn" @mousedown="letsfly()" @mouseup="godeep()">
         зажми
       </div>
-      <div class="pressBtn pressBtn__mobile" v-on:click="godeep()">
+      <div class="pressBtn pressBtn__mobile" @click="godeep()">
         нажми
       </div>
     </div>
@@ -43,24 +43,29 @@ export default {
   methods: {
     // start page transition animation
     letsfly: function(){
-      // this.$refs.triggeranimation.enterTheSite();
-      TweenLite.to("#logoBig", 3, {
+      // trigger the child function
+      this.$refs.triggerTheEnter.enterTheSite();
+      
+      TweenMax.to("#logoBig", 3, {
         transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
       }, 0);
-      TweenLite.to(".text", 4.5, {
+      TweenMax.to(".text", 4.5, {
         transform:'scale(100) translate(0px, 100px)', ease: Power2.easeIn, force3D:false,
         opacity: 0
       }, 0);
+
       setTimeout(function() {
         $nuxt.$router.push('projects')
       }, 2000);
+
     },
+    
     // go to projects page
     godeep: function(){
       $nuxt.$router.push('projects');
     },
 
-  }
+  },
 }
 </script>
 

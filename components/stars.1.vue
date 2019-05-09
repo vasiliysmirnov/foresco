@@ -1,5 +1,6 @@
 <template>
     <div id="container">
+
       <script type="x-shader/x-vertex" id="vertexshader">
         attribute float size;
         varying vec3 vColor;
@@ -10,7 +11,6 @@
           gl_Position = projectionMatrix * mvPosition;
         }
       </script>
-
       <script type="x-shader/x-fragment" id="fragmentshader">
         uniform sampler2D texture;
         varying vec3 vColor;
@@ -19,6 +19,7 @@
           gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
         }
       </script>
+
     </div>
 </template>
 
@@ -103,11 +104,11 @@ export default {
 			this.render();
     },
     enterTheSite: function(){
+      // console.log('trigger'); TODO: fix this shiiiiit! trigger is working eternally
       requestAnimationFrame( this.enterTheSite );
-			this.particleSystem.rotation.z = 0;
-      this.particleSystem.scale.z -= 0.006;
+      this.particleSystem.scale.z += 0.006;
       this.geometry.attributes.size.needsUpdate = true;
-			this.renderer.render( this.scene, this.camera );
+      this.renderer.render( this.scene, this.camera );
     },
   },
   mounted () {
@@ -116,6 +117,9 @@ export default {
 		this.animate();
 
   },
+  beforeDestroy: function () {
+    
+  },
   destroy: function () {
     this.renderer.dispose();
     this.scene.dispose();
@@ -123,6 +127,7 @@ export default {
     this.particleSystem.dispose();
     this.uniforms.dispose();
     this.geometry.dispose();
+    this.enterTheSite.destroy();
   }
 }
 </script>
