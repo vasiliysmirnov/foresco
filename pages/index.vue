@@ -2,7 +2,7 @@
   <div class="mainPage">
     <div class="mainPage__inner">
       <div class="background">
-        
+        <app-stars ref="triggerAnimation"></app-stars>
       </div>
       <div class="animateBlock">
         <div class="logo">
@@ -34,24 +34,16 @@
 <script>
 import $ from 'jquery'
 import TweenMax from "gsap"
-
+import AppStars from '~/components/stars.1.vue'
 
 export default {
-  // mounted() {
-  //   var path = document.querySelector('path');
-    
-  //   for (let index = 0; index < $('#logoBig path').length; index++) {
-  //     const element = $('#logoBig path')[index];
-  //     console.log(element.getTotalLength())
-      
-      
-  //   }
-  //   var length = path.getTotalLength();
-  // },
+   components:{
+    AppStars
+  },
   methods: {
     // start page transition animation
     letsfly: function(){
-
+      // this.$refs.triggeranimation.enterTheSite();
       TweenLite.to("#logoBig", 3, {
         transform:'scale(100) translate(0px, -100px)', ease: Power4.easeIn, force3D:false,
       }, 0);

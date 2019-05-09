@@ -17,9 +17,13 @@ export default {
       starField: null,
       height: 0,
       width: 0,
+      retina: null,
+      retina_scale: null,
     }
   },
   beforeMount () {
+    this.retina = window.devicePixelRatio;
+    this.retina_scale = this.retina ? 2 : 1;
     this.renderer = new THREE.WebGLRenderer();
     this.scene = new THREE.Scene(); // Creates a new scene
     this.starsGeometry = new THREE.Geometry(); // creates new geometry
@@ -30,12 +34,14 @@ export default {
     init: function() {
       // three.js
       this.height = window.innerHeight;
+
       this.width = window.innerWidth;
 
       this.camera = new THREE.PerspectiveCamera( 150, this.width / this.height, 1, 10000 );
       this.scene.add(this.camera);
 
-      this.renderer.setPixelRatio( window.devicePixelRatio );
+      // this.renderer.setPixelRatio( window.devicePixelRatio );
+      this.renderer.setPixelRatio( this.retina );
       this.renderer.setSize( this.width, this.height ); // sets size of render to the screen size
       let canvas = document.getElementById('canvas');
       canvas.appendChild( this.renderer.domElement );
@@ -53,7 +59,7 @@ export default {
     },
     animate: function() {
       requestAnimationFrame( this.animate ); // requestAnimationFrame will pause when the user navigates to a new tab
-      this.camera.rotation.z += 0.0008;
+      this.camera.rotation.z += 0.0013;
       this.renderer.render( this.scene, this.camera );
     },
     render2: function() {

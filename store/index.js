@@ -8,7 +8,7 @@ Vue.use(Vuex, RemoteInstance)
 export const client = new RemoteInstance({
     url: 'http://u2859.green.elastictech.org/',
     version: '1.1',
-    accessToken: []
+    accessToken: ['OqhEJzWiaoGzVLhWlgfmuvR6ypwvd2ed']
 })
 
 
