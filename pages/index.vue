@@ -207,6 +207,7 @@ export default {
       animation-fill-mode forwards
       animation-delay 2.8s
       opacity 0
+      user-select none
       @media(max-width 1024px)
         display none
       a
