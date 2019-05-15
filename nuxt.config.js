@@ -7,7 +7,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: 'description', name: 'description', content: 'Foresco project' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -39,8 +39,8 @@ module.exports = {
     vendor: ['directus-sdk-javascript', 'axios', 'jquery', 'slick-carousel', 'vue-parallax-js', 'vue-in-viewport-directive', 'vue-yandex-maps']
   },
   plugins: [
-    '~/plugins/vue-in-viewport-directive.js',
     { src: '~plugins/directus-sdk-javascript' },
+    '~/plugins/vue-in-viewport-directive.js',
     { src: '~/plugins/vue-parallax-js.js', ssr: false },
     { src: '~/plugins/slick-carousel.js', ssr: false },
     '~/plugins/yandexMap.js'

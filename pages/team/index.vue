@@ -72,6 +72,13 @@
             let { data } = await client.getItems('team')
             store.commit('setTeam', data)
         },
+
+        computed: {
+            team() {
+                return this.$store.state.team
+            },
+            
+        },
         
         mounted() {
             // team carousel
@@ -125,12 +132,7 @@
             })
             
         },
-        computed: {
-            team() {
-                return this.$store.state.team
-            },
-            
-        },
+        
     }
 </script>
 

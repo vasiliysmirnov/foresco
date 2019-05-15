@@ -51,11 +51,11 @@ export default {
     },
     methods: {
         checkTheActiveLink: function(){
-            var navLinks = $('.nav-wrapper ul li');
-            var line = document.getElementById('menuLineItem');
-            var posY = 0;
+            let navLinks = $('.nav-wrapper ul li');
+            let line = document.getElementById('menuLineItem');
+            let posY = 0;
             for (let index = 0; index < navLinks.length; index++) {
-                var element = navLinks[index];
+                let element = navLinks[index];
                 if($nuxt.$route.name == $(element).data('link')){
                     // set position of the line
                     posY = $(element).position().top + $(element).outerHeight();
@@ -71,10 +71,10 @@ export default {
             }
         },
         onLinkHover: function(item) {
-            var line = document.getElementById('menuLineItem');
-            var color = $(item.target).data("color");
-            var posY = 0;
-            var navLinks = $('.nav-wrapper ul li');
+            let line = document.getElementById('menuLineItem');
+            let color = $(item.target).data("color");
+            let posY = 0;
+            let navLinks = $('.nav-wrapper ul li');
             // set color to all elements
             $(navLinks).css({'color': '#FFF'});
             // set position of the line
@@ -89,8 +89,8 @@ export default {
             }
         },
         onLinkLeave: function(item) {
-            var line = document.getElementById('menuLineItem');
-            var posY = 0;
+            let line = document.getElementById('menuLineItem');
+            let posY = 0;
             TweenMax.to(line, 0.1, {transform: 'translateY(0px)', background: 'transparent'});
             // set the color to white
             $(item.target).css({'color': '#FFF'});
@@ -99,8 +99,8 @@ export default {
         },
 
         animationClickToLinkMenu: function(event, link){
-            var line = document.getElementById('menuLineItem');
-            var target = event.currentTarget;
+            let line = document.getElementById('menuLineItem');
+            let target = event.currentTarget;
             TweenMax.to(line, 0.1, {
                 height: 0,
                 onComplete: function() {
@@ -244,6 +244,7 @@ export default {
                 text-transform uppercase
                 display: block
                 transition color .2s ease
+                outline none
                 @media(max-width 500px)
                     font-size: rem(35px)
                 @media(max-width 410px)

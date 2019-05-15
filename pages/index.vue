@@ -185,9 +185,6 @@ export default {
       animation-fill-mode forwards
       animation-delay 2s
       opacity 0
-      // transform: translateZ(120px)
-      // @media(max-width 600px)
-      //   transform: translateZ(10px)
     .pressBtn
       width: rem(80px)
       height: rem(80px)
