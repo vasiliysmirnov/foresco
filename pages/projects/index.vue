@@ -129,6 +129,7 @@
             opacity 1
 
 </style>
+
 <script>
 import AppHeader from '~/components/header.vue'
 import AppMenu from '~/components/menu.vue'
@@ -155,10 +156,10 @@ const transitionForProjects = {
     },
     enter(el, done){
         done()
-        TweenMax.to(el, 1, {
+        TweenMax.to(el, 0.75, {
             yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
             onComplete: function() {
-                TweenMax.to(el, 1, {
+                TweenMax.to(el, 0.75, {
                     yPercent: 0, scale: 1, ease: Power2.easeInOut,
                     onComplete: function() {}, clearProps: 'all'
                 })
@@ -166,10 +167,10 @@ const transitionForProjects = {
         })
     },
     leave(el, done){
-        TweenMax.to(el, 1, {
+        TweenMax.to(el, 0.75, {
             yPercent: -50, scale: 0.9, ease: Power2.easeInOut,
             onComplete: function() {
-                TweenMax.to(el, 1, {
+                TweenMax.to(el, 0.75, {
                     yPercent: -100, scale: 1, ease: Power2.easeInOut,
                     onComplete: function() { done() }
                 })
