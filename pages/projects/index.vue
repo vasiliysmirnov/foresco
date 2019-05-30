@@ -123,10 +123,7 @@
         margin-bottom rem(50px)
         @media(max-width 768px)
             margin-bottom rem(24px)
-    .swiper-slide-active
-        .project__img,
-        .project__text
-            opacity 1
+
 
 </style>
 

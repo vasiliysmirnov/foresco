@@ -6,6 +6,8 @@
             <div class="content">
                 <div class="teamSlide">
                     <div class="team__inner">
+                        <no-ssr>
+                        <carousel :items="2" :margin="50" :center="true" :nav="false" :dots="false" :responsive="{0:{items:1,margin:0}, 900:{items:1,margin:50}, 1000:{margin: 100}}">
                         <div class="team__item" v-for="item in team" :key="item.id">
                             <div class="team__item-inner">
                                 <div class="img" ><img :src="`http://u2859.green.elastictech.org/${item.image.data.url}`" alt="item.name" draggable="false"></div>
@@ -16,6 +18,8 @@
                                 </div>
                             </div>
                         </div>
+                        </carousel>
+                        </no-ssr>
                     </div>
                     <div class="cursor" data-cursor>
                         <div class="cursor__fly" data-cursor-box>
@@ -45,6 +49,7 @@
     import AppHeader from '~/components/header.vue'
     import AppMenu from '~/components/menu.vue'
     import AppFooter from '~/components/footer.vue'
+    // import owlCarousel from 'owl.carousel'
 
     import $ from 'jquery'
 
@@ -54,7 +59,8 @@
         components: {
             AppHeader,
             AppMenu,
-            AppFooter
+            AppFooter,
+            // owlCarousel
         },
         head: {
             title: 'Команда'
@@ -82,22 +88,33 @@
         
         mounted() {
             // team carousel
-            $('.teamSlide .team__inner').slick({
-                infinite: false,
-                slidesToShow: 1,
-                dots: false,
-                arrows: false,
-                centerMode: true,
-                variableWidth: true,
-                responsive: [
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            variableWidth: false,
-                        }
-                    }
-                ]
-            });
+            // $('.teamSlide .team__inner').slick({
+            //     infinite: false,
+            //     slidesToShow: 1,
+            //     dots: false,
+            //     arrows: false,
+            //     centerMode: true,
+            //     variableWidth: true,
+            //     responsive: [
+            //         {
+            //             breakpoint: 600,
+            //             settings: {
+            //                 variableWidth: false,
+            //             }
+            //         }
+            //     ]
+            // });
+            // $('.teamSlide .team__inner').owlCarousel({
+            //     center: true,
+            //     items:2,
+            //     loop:false,
+            //     margin:10,
+            //     responsive:{
+            //         600:{
+            //             items:4
+            //         }
+            //     }
+            // });
             // animation for carousel
             $('.teamSlide').on("mousedown", function(e){
                 TweenMax.to($('.team__item'), 0.6, {
@@ -158,8 +175,10 @@
             width 100%
             max-width rem(900px)
             position relative
-            margin 0 rem(50px)
+            // margin 0 rem(50px)
             outline none
+            @media(max-width 12000px)
+                overflow hidden
             @media(max-width 600px)
                 margin 0
             .team__item-inner
@@ -174,23 +193,25 @@
             .img
                 width 20%
                 outline none
+                position relative
+                z-index 1
                 @media(max-width 910px)
                     width 100%
                     padding rem(0 15px 0 20px)
                     margin-bottom rem(50px)
                 img
                     max-width rem(620px)
+                    width initial
                     @media(max-width 910px)
                         margin 0 auto
-                    @media(max-width 768px)
-                        margin 0
-                    @media(max-width 650px)
                         width 100%
             .description
                 text-align right
                 width 50%
                 outline none
                 cursor none
+                position relative
+                z-index 2
                 @media(max-width 600px)
                     width 100%
                     padding-right rem(15px)

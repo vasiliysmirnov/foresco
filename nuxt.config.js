@@ -43,10 +43,10 @@ module.exports = {
     '~/plugins/vue-in-viewport-directive.js',
     { src: '~/plugins/vue-parallax-js.js', ssr: false },
     { src: '~/plugins/slick-carousel.js', ssr: false },
+    { src: '~/plugins/owl-carousel.js', ssr: false },
     '~/plugins/yandexMap.js'
   ],
   css: [
-    'swiper/dist/css/swiper.css',
     'node_modules/slick-carousel/slick/slick.css',
     'assets/main.styl'
   ]
