@@ -65,7 +65,7 @@
                             </div>
                             
                             <div class="form__item">
-                                <textarea name="comment" rows="3" id="form-comment" v-model="comment" :class="{active: comment !== ''}"></textarea>
+                                <textarea name="comment" rows="1" id="form-comment" v-model="comment" :class="{active: comment !== ''}"></textarea>
                                 <label for="form-comment">Ваш комментарий</label>
                             </div>
                             
@@ -200,21 +200,21 @@ export default {
                 margin rem(0 0 30px 0)
                 label
                     font-family: 'montserratregular'
-                    color rgba(255, 255, 255, .5)
+                    color rgb(255, 255, 255)
                     position absolute
                     top 0
                     left 0
                     font-size rem(14px)
                     transform: translateY(rem(7px));
                     pointer-events: none
-                    transition: all .1s
+                    transition: all .15s
                 .error
                     color red
                     font-size: rem(12px)
             input[type=text],
             input[type=phone]
                 font-family: 'montserratregular'
-                color rgba(255, 255, 255, .5)
+                color rgb(255, 255, 255)
                 background transparent
                 border 0
                 border-bottom: solid rem(1px) rgba(151, 151, 151, .4)
@@ -222,7 +222,7 @@ export default {
                 display block
                 padding rem(10px 0)
                 margin 0
-                transition: all .1s
+                transition: all .15s
                 outline none
                 &:focus,
                 &.active
@@ -238,7 +238,7 @@ export default {
                     color #e19d45
             textarea
                 font-family: 'montserratregular'
-                color rgba(255, 255, 255, .5)
+                color rgb(255, 255, 255)
                 background transparent
                 border 0
                 border-bottom: solid rem(1px) rgba(151, 151, 151, .4)
@@ -306,7 +306,7 @@ export default {
                         border-radius: rem(24px)
                         border: solid rem(1px) #ffffff
                         font-size: rem(16px)
-                        color: rgba(255, 255, 255, .5)
+                        color: rgb(255, 255, 255)
                         display block
                         line-height rem(48px)
                         cursor pointer
@@ -319,6 +319,7 @@ export default {
                         &:checked ~ label
                             background: rgba(255, 255, 255, 0.05)
                             border-color: #e19d45
+                            background #e19d45
                 .error
                     color red
                     font-size: rem(12px)
