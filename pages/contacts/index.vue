@@ -24,7 +24,7 @@
                         <div class="address" v-for="contact in contacts" :key="contact.id">{{contact.address}}, тел. {{ contact.phone }}</div>
                     </div>
                     <div class="form">
-                        <form @submit="checkForm">
+                        <form @submit="checkForm" autocomplete="off">
                             <div class="form__item">
                                 <input type="text" name="name" id="form-name" v-model="name" :class="{active: name !== ''}">
                                 <label for="form-name">Ваше имя</label>
