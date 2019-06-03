@@ -1,13 +1,16 @@
 <template>
-    <transition :duration="500">
-        <div class="menu" v-show='showNav'>
+    <!-- <transition :duration="500"> -->
+        <div class="menu" v-bind:class="{ active: showNav }">
             
             <transition name="menuBgAn">
-                <div class="menuBg" v-show='showNav'></div>
+                <div class="menuBg" v-if='showNav'>
+                    <app-stars v-bind:particles="20000"></app-stars>
+                </div>
+                
             </transition>
 
             <transition name="fadeMenu">
-                <div class="nav-wrapper" v-show='showNav'>
+                <div class="nav-wrapper" v-if='showNav'>
                     <ul>
                         <li data-color="#4597e1" @click="changeNavStateProjects" data-link="projects" @mouseenter="onLinkHover" @mouseleave="onLinkLeave">
                             <a><span>Проекты</span></a>
@@ -26,14 +29,18 @@
             </transition>
 
         </div>
-    </transition>
+    <!-- </transition> -->
 </template>
 
 <script>
 import $ from 'jquery'
 import TweenMax from "gsap"
+import AppStars from '~/components/stars.1.vue'
 
 export default {
+    components:{
+        AppStars
+    },
     computed: {
         showNav () {
             return this.$store.state.showNav
@@ -186,6 +193,9 @@ export default {
     justify-content flex-start
     overflow hidden
     padding rem(50px 0)
+    visibility hidden
+    &.active
+        visibility visible
     @media(max-width 500px)
         justify-content center
     @media (max-width 425px)

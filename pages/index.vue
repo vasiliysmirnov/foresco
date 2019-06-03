@@ -2,7 +2,7 @@
   <div class="mainPage">
     <div class="mainPage__inner">
       <div class="background">
-        <app-stars ref="triggerTheEnter"></app-stars>
+        <app-stars ref="triggerTheEnter" v-bind:particles="100000"></app-stars>
       </div>
       <div class="animateBlock">
         <div class="logo">

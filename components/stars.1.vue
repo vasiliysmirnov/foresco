@@ -28,6 +28,9 @@ import * as THREE from 'three'
 
 export default {
   name: 'foresco-stars',
+  props: {
+    particles: Number
+  },
   data: function () {
     return {
       renderer: null,
@@ -37,7 +40,7 @@ export default {
       particleSystem: null,
       uniforms: null,
       geometry: null,
-      particles: 100000,
+      localParticles: this.particles,
       radius: 200,
     }
   },
@@ -69,11 +72,11 @@ export default {
 			var colors = [];
 			var sizes = [];
 			var color = new THREE.Color();
-			for ( var i = 0; i < this.particles; i ++ ) {
+			for ( var i = 0; i < this.localParticles; i ++ ) {
 				positions.push( ( Math.random() * 2 - 1 ) * this.radius );
 				positions.push( ( Math.random() * 2 - 1 ) * this.radius );
 				positions.push( ( Math.random() * 2 - 1 ) * this.radius );
-				color.setHSL( i / this.particles, 1.0, 0.5 );
+				color.setHSL( i / this.localParticles, 1.0, 0.5 );
 				colors.push( color.r, color.g, color.b );
 				sizes.push( 20 );
 			}
@@ -96,7 +99,7 @@ export default {
 			var time = Date.now() * 0.005;
 			this.particleSystem.rotation.z = 0.01 * time;
 			var sizes = this.geometry.attributes.size.array;
-			for ( var i = 0; i < this.particles; i ++ ) {
+			for ( var i = 0; i < this.localParticles; i ++ ) {
 				sizes[ i ] = 10 * ( 1 + Math.sin( 0.1 * i + time ) );
 			}
 			this.geometry.attributes.size.needsUpdate = true;
@@ -124,7 +127,7 @@ export default {
     this.renderer.dispose();
     this.renderer.forceContextLoss();
     this.renderer.clear();
-    this.particles = 0;
+    this.localParticles = 0;
     cancelAnimationFrame(this.animate);
     cancelAnimationFrame(this.enterTheSite);
     this.renderer.domElement.addEventListener('dblclick', null, false);
