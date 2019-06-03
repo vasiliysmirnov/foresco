@@ -33,10 +33,12 @@ export default {
       renderer: null,
       scene: null,
       camera: null,
+      shaderMaterial: null,
       particleSystem: null,
       uniforms: null,
       geometry: null,
       particles: 100000,
+      radius: 200,
     }
   },
   methods: {
@@ -52,7 +54,7 @@ export default {
 			this.uniforms = {
 				texture: { value: new THREE.TextureLoader().load( require('~/static/img/spark1.png') ) }
 			};
-			var shaderMaterial = new THREE.ShaderMaterial( {
+			this.shaderMaterial = new THREE.ShaderMaterial( {
 				uniforms: this.uniforms,
 				vertexShader: document.getElementById( 'vertexshader' ).textContent,
 				fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
@@ -61,16 +63,16 @@ export default {
 				transparent: true,
 				vertexColors: true
 			} );
-			var radius = 200;
+			this.radius = 200;
 			this.geometry = new THREE.BufferGeometry();
 			var positions = [];
 			var colors = [];
 			var sizes = [];
 			var color = new THREE.Color();
 			for ( var i = 0; i < this.particles; i ++ ) {
-				positions.push( ( Math.random() * 2 - 1 ) * radius );
-				positions.push( ( Math.random() * 2 - 1 ) * radius );
-				positions.push( ( Math.random() * 2 - 1 ) * radius );
+				positions.push( ( Math.random() * 2 - 1 ) * this.radius );
+				positions.push( ( Math.random() * 2 - 1 ) * this.radius );
+				positions.push( ( Math.random() * 2 - 1 ) * this.radius );
 				color.setHSL( i / this.particles, 1.0, 0.5 );
 				colors.push( color.r, color.g, color.b );
 				sizes.push( 20 );
@@ -78,16 +80,17 @@ export default {
 			this.geometry.addAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
 			// geometry.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 			this.geometry.addAttribute( 'size', new THREE.Float32BufferAttribute( sizes, 1 ).setDynamic( true ) );
-			this.particleSystem = new THREE.Points( this.geometry, shaderMaterial );
+			this.particleSystem = new THREE.Points( this.geometry, this.shaderMaterial );
 			this.scene.add( this.particleSystem );
-			this.renderer = new THREE.WebGLRenderer();
+      this.renderer = new THREE.WebGLRenderer();
+      this.renderer.autoClear = true;
 			this.renderer.setPixelRatio( window.devicePixelRatio );
-			this.renderer.setSize( window.innerWidth, window.innerHeight );
+      this.renderer.setSize( window.innerWidth, window.innerHeight );
+      
 			var container = document.getElementById( 'container' );
 			container.appendChild( this.renderer.domElement );
 			
-			//
-			window.addEventListener( 'resize', this.onWindowResize, false );
+      window.addEventListener( 'resize', this.onWindowResize, false );
 		},
     render: function() {
 			var time = Date.now() * 0.005;
@@ -114,20 +117,22 @@ export default {
   mounted () {
 
 		this.init();
-		this.animate();
+    this.animate();
 
   },
   beforeDestroy: function () {
-    
+    this.renderer.dispose();
+    this.renderer.forceContextLoss();
+    this.renderer.clear();
+    this.particles = 0;
+    cancelAnimationFrame(this.animate);
+    cancelAnimationFrame(this.enterTheSite);
+    this.renderer.domElement.addEventListener('dblclick', null, false);
+    this.shaderMaterial.dispose();
+    this.geometry.dispose();
+    this.renderer.info.programs[0].destroy();
   },
   destroy: function () {
-    this.renderer.dispose();
-    this.scene.dispose();
-    this.camera.dispose();
-    this.particleSystem.dispose();
-    this.uniforms.dispose();
-    this.geometry.dispose();
-    this.enterTheSite.destroy();
   }
 }
 </script>
